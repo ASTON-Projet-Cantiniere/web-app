@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { MealComponent } from './views/meal/meal.component';
 import { OrderComponent } from './views/order/order.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,7 @@ import { OrderComponent } from './views/order/order.component';
     BrowserAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
