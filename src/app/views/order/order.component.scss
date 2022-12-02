@@ -1,0 +1,32 @@
+.row{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+}
+.column{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+form{
+    button{
+        padding: 5pt 10pt;
+        color: white;
+        background-color: salmon;
+        border: none;
+        border-radius: 15px;
+        
+    }
+    select{
+        border-radius: 15px;
+        padding: 2pt 10pt;
+        border: 1px solid lightgrey;
+    }
+    input{
+        border-radius: 15px;
+        padding: 2pt 10pt;
+        border: 1px solid lightgrey;
+    }
+}

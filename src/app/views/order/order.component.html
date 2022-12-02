@@ -1,5 +1,24 @@
 <h1>Orders</h1>
-
+<form [formGroup]="form" (ngSubmit)="searchByDate()">
+    <div class="row">
+        <select formControlName="status" required>
+            <option value="0">
+                CREATED
+            </option>
+            <option value="1">
+                DELIVERED
+            </option>
+            <option value="2">
+                CANCELED
+            </option>
+        </select>
+        <div class="column">
+            <input type="date" formControlName="beginDate">
+            <input type="date" formControlName="endDate">
+        </div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
 <div class="container">
     <ul>
         <li *ngFor="let order of orders">

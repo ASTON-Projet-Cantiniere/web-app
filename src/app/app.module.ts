@@ -9,12 +9,13 @@ import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
 import { MealComponent } from './views/meal/meal.component';
 import { OrderComponent } from './views/order/order.component';
+import { ReactiveFormsModule } from "@angular/forms";
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MealComponent
+    MealComponent,
     OrderComponent
   ],
   imports: [
@@ -23,6 +24,7 @@ import { OrderComponent } from './views/order/order.component';
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
