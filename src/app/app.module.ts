@@ -7,16 +7,19 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './shared/services/set-auth-header';
 import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
+import { OrderComponent } from './views/order/order.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    OrderComponent
   ],
   imports: [
     SharedModule,
     BrowserAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
+    HttpClientModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
