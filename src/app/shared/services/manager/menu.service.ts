@@ -86,8 +86,8 @@ export class MenuService {
    * Ajoute un menu
    * @return { Menu }
    */
-  addMenu() {
-    // TODO
+  addMenu(menu: Menu): Observable<Menu> {
+    return this.http.post<Menu>(environment.apiURL + '/menu/add', menu);
   }
 
   
