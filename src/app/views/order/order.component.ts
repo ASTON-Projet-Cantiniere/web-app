@@ -14,6 +14,8 @@ export class OrderComponent implements OnInit{
 
   }
 
+  //TODO: seule la méthode getAllOrders() est appelée, faire les autres
+
   ngOnInit(): void {
     this.orderService.getAllOrders().subscribe(r => {
 
