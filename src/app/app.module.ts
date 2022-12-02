@@ -14,7 +14,7 @@ import { OrderComponent } from './views/order/order.component';
 @NgModule({
   declarations: [
     AppComponent,
-    MealComponent
+    MealComponent,
     OrderComponent
   ],
   imports: [
