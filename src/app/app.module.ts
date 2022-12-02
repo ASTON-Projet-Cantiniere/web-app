@@ -7,11 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './shared/services/set-auth-header';
 import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
+import { MealComponent } from './views/meal/meal.component';
+import { OrderComponent } from './views/order/order.component';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MealComponent
+    OrderComponent
   ],
   imports: [
     SharedModule,
