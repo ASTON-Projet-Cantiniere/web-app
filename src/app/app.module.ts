@@ -8,6 +8,7 @@ import { AuthInterceptor } from './shared/services/set-auth-header';
 import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
 
+
 @NgModule({
   declarations: [
     AppComponent
@@ -17,6 +18,7 @@ import { environment } from '../environments/environment';
     BrowserAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
+    HttpClientModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
