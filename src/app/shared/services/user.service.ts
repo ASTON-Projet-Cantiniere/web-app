@@ -111,11 +111,11 @@ export class UserService {
   }
 
   /**
-   * Enregistrer un utilisateur via le putgit
+   * Enregistrer un utilisateur via le put
    * @param user utilisateur que l'on souhaite inscire
    * @returns Les informations de l'utilisateurs 
    */
-  public putregisterUser(user:UserIn):Observable< UserOut | ErrorModel > {
+  public putregisterUser(user:any):Observable< UserOut | ErrorModel > {
     return this.http.put< UserOut | ErrorModel >(environment.apiURL + 'user/register',user);
   }
 }

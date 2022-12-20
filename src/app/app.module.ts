@@ -9,13 +9,15 @@ import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
 import { MealComponent } from './views/meal/meal.component';
 import { OrderComponent } from './views/order/order.component';
-
+import { InscriptionComponent } from './shared/components/inscription/inscription.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MealComponent
-    OrderComponent
+    MealComponent,
+    OrderComponent,
+    InscriptionComponent,
   ],
   imports: [
     SharedModule,
@@ -23,6 +25,7 @@ import { OrderComponent } from './views/order/order.component';
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
