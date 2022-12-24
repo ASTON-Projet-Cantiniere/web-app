@@ -10,7 +10,8 @@ import { FormControl, FormGroup } from "@angular/forms";
 })
 export class OrderComponent implements OnInit{
   orders: OrderInterface[] = [];
-  public form!: FormGroup;
+  public formAdd!: FormGroup;
+  public formSearchByDate!: FormGroup;
   constructor(private orderService: OrderService){
 
   }
@@ -18,10 +19,15 @@ export class OrderComponent implements OnInit{
   //TODO: seule la méthode getAllOrders() est appelée, faire les autres
 
   ngOnInit(): void {
-    this.form = new FormGroup({
+    this.formSearchByDate = new FormGroup({
       status: new FormControl(),
       beginDate: new FormControl(),
       endDate: new FormControl()
+    });
+    this.formAdd = new FormGroup({
+      userId: new FormControl(),
+      constraintId: new FormControl(),
+      quantity: new FormControl()
     });
     this.orderService.getAllOrders().subscribe(r => {
 
@@ -32,9 +38,39 @@ export class OrderComponent implements OnInit{
 
   public searchByDate(){
     this.orders = [];
-    this.orderService.getOrdersByRangeDate(this.form.value.status, this.form.value.beginDate, this.form.value.endDate)
+    this.orderService.getOrdersByRangeDate(this.formSearchByDate.value.status, this.formSearchByDate.value.beginDate, this.formSearchByDate.value.endDate)
     .subscribe(r => {
       this.orders.push(...<[]>r);
     })
+  }
+
+  //TODO: Faire en sorte de pouvoir choisir plusieurs repas 'quantity'
+  public addOrder(){
+    this.orderService.createOrder(this.formAdd.value.userId, this.formAdd.value.constraintId, this.formAdd.value.quantity)
+    .subscribe
+  }
+
+  /**
+   * Récupère une commande selon son id
+   * @param orderId number - Id de la commande
+   */
+  public findOrder(orderId:number){
+    //Ne fonctionne pas, problème d'itération
+    this.orders = [];
+    console.log("j'ai cliqué");
+    console.log(orderId);
+    
+    this.orderService.findOrder(orderId).subscribe(
+      r => {
+        this.orders.push(r);
+        console.log(r);
+        
+      }
+    )
+  }
+
+  public log(){
+    console.log("j'ai cliqué");
+    
   }
 }

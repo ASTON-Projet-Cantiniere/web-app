@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ErrorModel } from '../../models/error.model';
-import { OrderInterface } from '../../models/order.model';
+import { OrderInterface, Quantity } from '../../models/order.model';
 
 
 @Injectable({providedIn: 'root'})
 export class OrderService {
 
-  
+  private authorization: string = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ3YWxsZXQiOjkuOTMsInJlZ2lzdHJhdGlvbkRhdGUiOlsyMDIyLDIsMTUsMTAsMzQsNTFdLCJlbWFpbCI6InRvdG9AZ21haWwuY29tIiwiaXNMdW5jaExhZHkiOnRydWUsIm5hbWUiOiJCcnVuZWwiLCJmaXJzdG5hbWUiOiJMb3VpcyIsInBob25lIjoiMjI3ODcyMDIxMCIsInNleCI6Miwic3RhdHVzIjowLCJpbWFnZUlkIjoxfSwicm9sZXMiOlsiUk9MRV9MVU5DSExBRFkiXSwiaXNzIjoic2VjdXJlLWFwaSIsImF1ZCI6InNlY3VyZS1hcHAiLCJzdWIiOiJ0b3RvQGdtYWlsLmNvbSIsImV4cCI6MTY3MTk2NTM0NH0.bWvSBQiyFsFEZQdfdKe_62OLj5BXdK2P3jo83uzZKUxiebkioP3of6cig4ivpfxrDFLEwSKAw943VVW-HNSpHA"
   private URL_ORDER: string = environment.apiURL + '/order'; 
   
   constructor(private http: HttpClient) {
@@ -22,7 +22,15 @@ export class OrderService {
   getAllOrders(): Observable<OrderInterface[] | ErrorModel>{
     return this.http.get<OrderInterface[] | ErrorModel >(this.URL_ORDER + '/findall', {
       headers: {
-        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ3YWxsZXQiOjkuOTMsInJlZ2lzdHJhdGlvbkRhdGUiOlsyMDIyLDIsMTUsMTAsMzQsNTFdLCJlbWFpbCI6InRvdG9AZ21haWwuY29tIiwiaXNMdW5jaExhZHkiOnRydWUsIm5hbWUiOiJCcnVuZWwiLCJmaXJzdG5hbWUiOiJMb3VpcyIsInBob25lIjoiMjI3ODcyMDIxMCIsInNleCI6Miwic3RhdHVzIjowLCJpbWFnZUlkIjoxfSwicm9sZXMiOlsiUk9MRV9MVU5DSExBRFkiXSwiaXNzIjoic2VjdXJlLWFwaSIsImF1ZCI6InNlY3VyZS1hcHAiLCJzdWIiOiJ0b3RvQGdtYWlsLmNvbSIsImV4cCI6MTY3MDA2MzE3MH0.0dYzdMWp1K6byp_OQSs1IKR1cCeg33kH_vx4yOSBk0nHMRoQOyjelFeUPYnBU4g63G09ThcNaWEVoIvnUsTa8A"}
+        "Authorization": this.authorization}
+    })
+  }
+
+  findOrder(orderId: number): Observable<OrderInterface> {
+    return this.http.get<OrderInterface>(this.URL_ORDER + '/find/' + orderId, {
+      headers: {
+        'Authorization': this.authorization
+      }
     })
   }
 
@@ -51,7 +59,7 @@ export class OrderService {
     }
     return this.http.get<OrderInterface[] | ErrorModel >(my_url, {
       headers: {
-        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ3YWxsZXQiOjkuOTMsInJlZ2lzdHJhdGlvbkRhdGUiOlsyMDIyLDIsMTUsMTAsMzQsNTFdLCJlbWFpbCI6InRvdG9AZ21haWwuY29tIiwiaXNMdW5jaExhZHkiOnRydWUsIm5hbWUiOiJCcnVuZWwiLCJmaXJzdG5hbWUiOiJMb3VpcyIsInBob25lIjoiMjI3ODcyMDIxMCIsInNleCI6Miwic3RhdHVzIjowLCJpbWFnZUlkIjoxfSwicm9sZXMiOlsiUk9MRV9MVU5DSExBRFkiXSwiaXNzIjoic2VjdXJlLWFwaSIsImF1ZCI6InNlY3VyZS1hcHAiLCJzdWIiOiJ0b3RvQGdtYWlsLmNvbSIsImV4cCI6MTY3MDA2MzE3MH0.0dYzdMWp1K6byp_OQSs1IKR1cCeg33kH_vx4yOSBk0nHMRoQOyjelFeUPYnBU4g63G09ThcNaWEVoIvnUsTa8A"}
+        "Authorization": this.authorization}
     })
   }
 
@@ -62,7 +70,7 @@ export class OrderService {
    * @param quantity Objet(s) de commandes
    * @returns Observable, exploitable en cas d'erreur etc
    */
-  createOrder(userId: number, constraintId: number = -1, ...quantity: any): Observable<OrderInterface | ErrorModel > {
+  createOrder(userId: number, constraintId: number = -1, ...quantity: Quantity[]): Observable<OrderInterface | ErrorModel > {
     return this.http.put<OrderInterface | ErrorModel >(
       this.URL_ORDER + '/add',
       {
