@@ -64,9 +64,13 @@ export class OrderComponent implements OnInit{
       r => {
         this.orders.push(r);
         console.log(r);
-        
       }
     )
+  }
+
+  public cancelOrder(id: number){
+    alert('Are you sure you want to delete this order ?')
+    // this.orderService.cancelOrder(id).subscribe;
   }
 
   public log(){

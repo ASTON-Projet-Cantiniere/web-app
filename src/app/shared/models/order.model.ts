@@ -1,3 +1,5 @@
+import { Meal } from "./meal.model";
+import { Menu } from "./menu.model";
 import { UserOut } from "./user.model";
 
 export interface OrderInterface {
@@ -10,7 +12,8 @@ export interface OrderInterface {
 }
 
 export interface Quantity {
-    quantity: number,
-    mealId: number,
-    menuId: number
+    id?: number,
+    meal?: Meal,
+    menu?: Menu,
+    quantity: number
 }
