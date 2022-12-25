@@ -1,0 +1,17 @@
+<nav>
+    <section class="links">
+       <a href="#">Mon lien</a> 
+       <a href="#">Mon lien</a> 
+       <a href="#">Mon lien</a> 
+       <a href="#">Mon lien</a> 
+    </section>
+    <section class="harmburger">
+        <a (click)="changeNav()">
+            <span>---</span>
+        </a>
+    </section>
+    <section class="hiddenMenu" [ngStyle]="navStatus">
+        <a (click)="changeNav()">X</a>
+        <p>HEEEEELOOOOOOOO</p>
+    </section>
+</nav>

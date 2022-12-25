@@ -10,13 +10,15 @@ import { environment } from '../environments/environment';
 import { MealComponent } from './views/meal/meal.component';
 import { OrderComponent } from './views/order/order.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { NavbarComponent } from './views/navbar/navbar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     MealComponent,
-    OrderComponent
+    OrderComponent,
+    NavbarComponent
   ],
   imports: [
     SharedModule,
