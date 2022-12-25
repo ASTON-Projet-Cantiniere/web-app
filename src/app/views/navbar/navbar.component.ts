@@ -8,23 +8,48 @@ import { Component } from '@angular/core';
 export class NavbarComponent {
   state: boolean = false;
   navStatus: any = {
-    'transform': 'translateX(110%)',
-    'display': 'unset'
+    'visibility': 'hidden',
+    // 'height.px': '0',
+    'width': '0%'
   }
 
+  
+  liens: Lien[] = [
+    {
+      'nom': 'Home',
+      'lien': '/'
+    },
+    {
+      'nom': 'Orders',
+      'lien': '/orders'
+    },
+    {
+      'nom': 'Meals',
+      'lien': '/meals'
+    }
+  ]
+    
+  
   public changeNav(){
     if (this.state == false) {
       this.navStatus = {
-        'transform': 'translateX(0%)',
-        'display': 'unset'
+        'visibility': 'visible',
+        // 'height.vh': '100',
+        'width': '60%'
       };
       this.state = true;
     } else {
       this.navStatus = {
-        'transform': 'translateX(110%)',
-        'display': 'unset'
+        'visibility': 'hidden',
+        // 'height.px': '0',
+        'width': '0%'
       };
       this.state = false;
     }
   }
+}
+
+interface Lien{
+  nom: string,
+  lien: string
 }

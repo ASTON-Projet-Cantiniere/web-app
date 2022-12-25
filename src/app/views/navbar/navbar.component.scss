@@ -1,7 +1,5 @@
-body{
-    overflow: hidden;
-}
 nav{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
@@ -10,29 +8,38 @@ nav{
     left: 0px;
     z-index: 99;
     background: white;
-    padding: 1rem;
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid lightgrey;
 }
 
 .links{
     display: flex;
     flex-direction: row;
     gap: 1rem;
+
+    a{
+        font-weight: 600;
+        text-decoration: none;
+        color: salmon;
+    }
 }
 
-.links > a{
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-weight: 600;
-    text-decoration: none;
-    color: salmon;
-}
+
 
 .harmburger{
     display: none;
+
 }
 
 .hiddenMenu{
-    display: none;
+    overflow: hidden;
+    visibility: hidden;
+    height: 0px;
+    padding: 0;
+    margin: 0;
+    
 }
+
 
 
 @media screen and (max-width: 540px) {
@@ -44,17 +51,38 @@ nav{
     }
     .hiddenMenu{
         position: absolute;
-        transition: all 500ms;
+        transition: all 500ms, height 0s;
+        transition-delay: visibility 1s;
         z-index: 100;
         height: 100vh;
-        width: 50%;
+        width: 60%;
         padding: 1rem;
         background-color: white;
+        border-left: 1px solid lightgrey;
+
+        a{
+            position: relative;
+            top: 5px;
+            left: 5px;
+        }
+        section{
+            display: flex;
+            flex-direction: column;
+            margin-top: 3rem;
+            gap: 1rem;
+            
+            a{
+                text-decoration: none;
+                color: salmon;
+                font-weight: 600;
+            }
+            a:hover {
+                text-decoration: underline;
+            }
+        }
+        
     }
-    .hiddenMenu > a{
-        position: relative;
-        top: 5px;
-        left: 5px;
-    }
+    
+    
 
 }

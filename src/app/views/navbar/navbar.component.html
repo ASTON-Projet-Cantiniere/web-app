@@ -1,9 +1,6 @@
 <nav>
     <section class="links">
-       <a href="#">Mon lien</a> 
-       <a href="#">Mon lien</a> 
-       <a href="#">Mon lien</a> 
-       <a href="#">Mon lien</a> 
+       <a *ngFor="let lien of liens" [href]="lien.lien">{{lien.nom}}</a>
     </section>
     <section class="harmburger">
         <a (click)="changeNav()">
@@ -12,6 +9,9 @@
     </section>
     <section class="hiddenMenu" [ngStyle]="navStatus">
         <a (click)="changeNav()">X</a>
-        <p>HEEEEELOOOOOOOO</p>
+        <section class="">
+            <a *ngFor="let lien of liens" [href]="lien.lien">{{lien.nom}}</a>
+        </section>
+        
     </section>
 </nav>
