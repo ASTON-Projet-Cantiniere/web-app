@@ -2,6 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { OrderInterface } from 'src/app/shared/models/order.model';
 import { OrderService } from 'src/app/shared/services/manager/order.service';
 import { FormControl, FormGroup } from "@angular/forms";
+import { Menu } from 'src/app/shared/models/menu.model';
+import { MenuService } from 'src/app/shared/services/manager/menu.service';
+import { Meal } from 'src/app/shared/models/meal.model';
+import { MealService } from 'src/app/shared/services/manager/meal.service';
+
 
 @Component({
   selector: 'app-order',
@@ -10,9 +15,13 @@ import { FormControl, FormGroup } from "@angular/forms";
 })
 export class OrderComponent implements OnInit{
   orders: OrderInterface[] = [];
+  meals: Meal[] = [];
+  menus: Menu[] = [];
+
   public formAdd!: FormGroup;
   public formSearchByDate!: FormGroup;
-  constructor(private orderService: OrderService){
+
+  constructor(private orderService: OrderService, private mealService: MealService, private menuService: MenuService){
 
   }
 
@@ -27,11 +36,22 @@ export class OrderComponent implements OnInit{
     this.formAdd = new FormGroup({
       userId: new FormControl(),
       constraintId: new FormControl(),
-      quantity: new FormControl()
+      quantity: new FormControl(),
+      mealId: new FormControl(),
+      menuId: new FormControl()
+
     });
     this.orderService.getAllOrders().subscribe(r => {
 
       this.orders.push(...<[]>r);
+    })
+    this.mealService.getAllMeal().subscribe(r => {
+
+      this.meals.push(...<[]>r);
+    })
+    this.menuService.getAllMenusForThisWeek().subscribe(r => {
+
+      this.menus.push(...<[]>r);
     })
     console.log(this.orders);
   }
