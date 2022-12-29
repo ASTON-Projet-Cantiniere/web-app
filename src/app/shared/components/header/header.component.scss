@@ -2,6 +2,7 @@
 
 .header {
 
+  // No chariot on click
   a {
     text-decoration: none;
     user-select: none;
@@ -46,7 +47,7 @@
       position: absolute;
       height: 3px;
       width: 30px;
-      transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+      transition: transform 100ms cubic-bezier(0.23, 1, 0.32, 1);
       border-radius: 2px;
     }
 
@@ -120,7 +121,7 @@
             align-items: center;
             justify-content: flex-start;
             height: 4rem;
-            transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+            transition: height 100ms cubic-bezier(0.23, 1, 0.32, 1);
           }
 
           a:not(:last-child) {
@@ -145,7 +146,7 @@
             display: flex;
             height: 0;
             overflow: clip;
-            transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+            transition: height 100ms cubic-bezier(0.23, 1, 0.32, 1);
           }
         }
       }
@@ -172,11 +173,17 @@
     box-shadow: none !important;
     padding: 0 !important;
     margin: 0 !important;
-
+    backdrop-filter: none!important;
+    -webkit-backdrop-filter: none!important;
+    background-color: transparent!important;
     a {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center!important;
+      border: none !important;
       height: 0;
       width: 100vw;
-      transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+      transition: height 100ms cubic-bezier(0.23, 1, 0.32, 1);
     }
   }
 
@@ -203,11 +210,12 @@
   }
 
   #user-toggle:checked ~ .user-menu a {
+    display: flex;
     height: 4rem;
     width: 100vw;
     justify-content: center;
     align-items: center;
-    transition: height 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: height 100ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   #menu-toggle ~ .menu > .menu-container li:not(.dropdown) {
@@ -221,7 +229,7 @@
     padding: 0;
     height: 0;
     overflow: clip;
-    transition: height 800ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: height 100ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   #menu-toggle:checked ~ .menu > .menu-container li:not(.dropdown) {
@@ -232,13 +240,20 @@
     display: flex;
     flex-direction: column;
     height: auto;
-    transition: height 800ms cubic-bezier(0.23, 1, 0.32, 1);
+    transition: height 100ms cubic-bezier(0.23, 1, 0.32, 1);
+    background-color: transparent!important;
 
     .user-button {
       display: flex;
       align-items: center;
       height: 4rem;
       width: 100vw;
+      // reset background color
+      background-color: transparent!important;
+
+      a {
+        display: flex!important;
+      }
     }
   }
 }
