@@ -1,4 +1,4 @@
-export interface UserInput{
+export interface UserOut{
   id                 : number;
   firstname          : string;
   name               : string;
