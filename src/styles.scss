@@ -1,1 +1,63 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: UniSansHeavy;
+  src: url("./assets/fonts/Uni_Sans_Heavy.otf") format("truetype");
+}
+
+@font-face {
+  font-family: UniSansHeavyItalic;
+  src: url("./assets/fonts/Uni_Sans_Heavy_Italic.otf") format("truetype");
+}
+
+@font-face {
+  font-family: UniSansBold;
+  src: url("./assets/fonts/Uni_Sans_Bold.otf") format("truetype");
+}
+
+@font-face {
+  font-family: UniSansBoldItalic;
+  src: url("./assets/fonts/Uni_Sans_Bold_Italic.otf") format("truetype");
+}
+
+// Angular SCSS Reset boilerplate
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; // to make 1rem = 10px
+  font-family: "Roboto", sans-serif;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: #2f1c07;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "UniSansHeavy", sans-serif;
+  font-weight: normal;
+}
+
+p {
+  font-family: "UniSansHeavy", sans-serif;
+  color: #2f1c07;
+}
+
+

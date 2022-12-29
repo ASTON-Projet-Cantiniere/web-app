@@ -1,17 +1,15 @@
 import {Component} from '@angular/core';
 import {Subscription} from "rxjs";
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'cantiniere';
+  title = 'La Cantinière';
   private req: Subscription;
   private location: string = '';
-  private screenSize: number = 1600;
 
   constructor(
     public router: Router,

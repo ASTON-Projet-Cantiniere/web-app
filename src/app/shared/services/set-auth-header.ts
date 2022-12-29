@@ -4,9 +4,16 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+    /*
+     * To simplify usage of token in the request, we can use the following code:
+     *  request = request.clone({ setHeaders:
+     *     {Authorization: `Bearer ${token}`}
+     * });
+     *
+    */
     constructor() { }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
         let token = localStorage.getItem("token");
 
         if (token) {

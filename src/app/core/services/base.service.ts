@@ -27,6 +27,13 @@ export class BaseService {
     return this.http.put(url, options);
   }
 
+  public patch<T>(url: string, body?: any, options?: any ) {
+    if (body) {
+      return this.http.patch(url, body, options);
+    }
+    return this.http.patch(url, options);
+  }
+
   public delete<T>(url: string, options?: any) {
     return this.http.delete(url, options);
   }
