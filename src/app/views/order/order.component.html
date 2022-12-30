@@ -44,9 +44,17 @@
     </h3>
     <form [formGroup]="formAdd" (ngSubmit)="addOrder()">
         <div class="formRow">
-            <div class="tiny-column">
-                <label for="userId">Id de l'utilisateur: </label>
-                <input id="userId" type="number" >  
+            <div class="column">
+                <div class="tiny-column">
+                    <label for="userId">Id de l'utilisateur: </label>
+                    <input id="userId" type="number" formControlName="userId">  
+                </div>
+                <div class="tiny-column">
+                    <label for="meal">Meal: </label>
+                    <select name="" id="meal" formControlName="mealId">
+                        <option *ngFor="let meal of meals" value="meal.id">{{meal.label}}</option>
+                    </select> 
+                </div>
             </div>
             
             <div class="column">
@@ -54,11 +62,21 @@
                     <label for="beginDate">
                         Id de la contrainte: 
                     </label>
-                    <input type="number">
+                    <input type="number" formControlName="constraintId">
                 </div>
                 <div class="tiny-column">
                     <!-- TODO: Faire en sorte qu'on puisse ajouter des repas 'quantity' , le nombre etc -->
-                    <label for="">TODO: quantity</label>  
+                    <label for="menu">Menu:</label>  
+                    <select name="" id="menu" formControlName="menuId">
+                        <option *ngFor="let menu of menus" value="menu.id">
+                            {{menu.label}}
+                        </option>
+                    </select>
+                </div>
+                <div class="tiny-column">
+                    <!-- TODO: Faire en sorte qu'on puisse ajouter des repas 'quantity' , le nombre etc -->
+                    <label for="menu">Quantity:</label>  
+                    <input type="number" formControlName="quantity">
                 </div>
             </div>
             <button type="submit">Submit</button>
