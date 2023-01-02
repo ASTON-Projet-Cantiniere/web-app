@@ -7,7 +7,10 @@ import { MenuService } from 'src/app/shared/services/manager/menu.service';
 import { Meal } from 'src/app/shared/models/meal.model';
 import { MealService } from 'src/app/shared/services/manager/meal.service';
 
-
+interface test {
+  menuId?: number,
+  mealdId?:number
+}
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -36,6 +39,7 @@ export class OrderComponent implements OnInit{
     console.log(message);
     
   }
+  
   ngOnInit(): void {
     this.formSearchByDate = new FormGroup({
       status: new FormControl(),
@@ -57,17 +61,19 @@ export class OrderComponent implements OnInit{
     console.log(this.orders);
   }
 
-  get qunatity() {
+  get quantity() {
     return this.formAdd.controls["quantity"] as FormArray;
   }
-  // addQuantity() {
-  //   const quantityForm = this.fb.group({
-  //     title: ['', Validators.required],
-  //     level: ['beginner', Validators.required]
-  //   });
+   addQuantity() {
+     const quantityForm = this.fb.group({
+      mealId: [''],
+      menuId: ['beginner'],
+      quantity: []
 
-  //   this.formAdd.controls["quantity"].push(quantityForm);
-  // }
+  });
+
+  this.formAdd.controls["quantity"].push(quantityForm as any);
+  }
 
   
   public searchByDate(){
