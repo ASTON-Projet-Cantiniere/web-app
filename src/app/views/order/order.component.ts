@@ -17,15 +17,19 @@ interface test {
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit{
+
+
+
   public selected: string = 'meals';
+  
   orders: OrderInterface[] = [];
   meals: Meal[] = [];
   menus: Menu[] = [];
 
   // public formAdd!: FormGroup;
   public formAdd = this.fb.group({
-    userId: new FormControl(),
-    constraintId: new FormControl(),
+    userId: [''],
+    constraintId: [''],
     quantity: this.fb.array([])
   })
   public formSearchByDate!: FormGroup;
@@ -64,11 +68,12 @@ export class OrderComponent implements OnInit{
   get quantity() {
     return this.formAdd.controls["quantity"] as FormArray;
   }
-   addQuantity() {
-     const quantityForm = this.fb.group({
-      mealId: [''],
-      menuId: ['beginner'],
-      quantity: []
+
+  addQuantity() {
+    const quantityForm = this.fb.group({
+      mealId:   [0],
+      menuId:   [0],
+      quantity: [0]
 
   });
 
@@ -113,8 +118,4 @@ export class OrderComponent implements OnInit{
     // this.orderService.cancelOrder(id).subscribe;
   }
 
-  public log(){
-    console.log("j'ai cliqué");
-    
-  }
 }
