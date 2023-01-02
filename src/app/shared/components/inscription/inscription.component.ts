@@ -17,7 +17,8 @@ export class InscriptionComponent implements OnInit {
     firstname: "",
     email: "",
     password: "",
-    sex: 10
+    sex: 0
+    
   }
   ngOnInit(): void {
   }

@@ -11,6 +11,7 @@ import { MealComponent } from './views/meal/meal.component';
 import { OrderComponent } from './views/order/order.component';
 import { InscriptionComponent } from './shared/components/inscription/inscription.component';
 import { FormsModule } from '@angular/forms';
+import { UserComponent } from './shared/components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FormsModule } from '@angular/forms';
     MealComponent,
     OrderComponent,
     InscriptionComponent,
+    UserComponent
   ],
   imports: [
     SharedModule,
