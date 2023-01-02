@@ -42,28 +42,42 @@
     <h3 class="subtitle">
         Création de commande:
     </h3>
-    <form [formGroup]="formAdd" (ngSubmit)="addOrder()">
+    <!-- <form [formGroup]="formAdd" (ngSubmit)="addOrder()"> -->
+    <form [formGroup]="formAdd" >
         <div class="formRow">
-            <div class="column">
+            
                 <div class="tiny-column">
                     <label for="userId">Id de l'utilisateur: </label>
                     <input id="userId" type="number" formControlName="userId">  
                 </div>
-                <div class="tiny-column">
-                    <label for="meal">Meal: </label>
-                    <select name="" id="meal" formControlName="mealId">
-                        <option *ngFor="let meal of meals" value="meal.id">{{meal.label}}</option>
-                    </select> 
-                </div>
+                
+            
+            <div class="tiny-column">
+                <label for="beginDate">
+                    Id de la contrainte: 
+                </label>
+                <input type="number" formControlName="constraintId">
+            </div>
+        </div>
+        <div class="formRow">
+            <button (click)="">ADD</button>
+            <div class="tiny-column">
+                <label for="type">Type: </label>
+                <!-- <button (click)="show()">Show</button> -->
+                <select name="" id="type" [(ngModel)]="selected">
+                    <option value="meals">Meals</option>
+                    <option value="menus">Menus</option>
+                </select>
             </div>
             
-            <div class="column">
-                <div class="tiny-column">
-                    <label for="beginDate">
-                        Id de la contrainte: 
-                    </label>
-                    <input type="number" formControlName="constraintId">
-                </div>
+            <div class="tiny-column">
+                <label for="meal">TT </label>
+                <select name="" id="meal" formControlName="mealId">
+                    <option *ngFor="let meal of meals" value="meal.id">{{meal.label}}</option>
+                </select> 
+            </div>
+            
+                
                 <div class="tiny-column">
                     <!-- TODO: Faire en sorte qu'on puisse ajouter des repas 'quantity' , le nombre etc -->
                     <label for="menu">Menu:</label>  
@@ -78,7 +92,7 @@
                     <label for="menu">Quantity:</label>  
                     <input type="number" formControlName="quantity">
                 </div>
-            </div>
+            
             <button type="submit">Submit</button>
         </div>
     </form>

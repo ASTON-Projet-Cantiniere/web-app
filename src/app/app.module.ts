@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 import { MealComponent } from './views/meal/meal.component';
 import { OrderComponent } from './views/order/order.component';
 import { ReactiveFormsModule } from "@angular/forms";
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ReactiveFormsModule } from "@angular/forms";
     OrderComponent
   ],
   imports: [
+    FormsModule,
     SharedModule,
     BrowserAnimationsModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
