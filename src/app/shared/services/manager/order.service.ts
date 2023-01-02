@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { OrderInterface } from '../../models/order.model';
+import { ErrorModel } from '../../models/error.model';
+import { OrderInterface, Quantity } from '../../models/order.model';
 
 
 @Injectable({providedIn: 'root'})
 export class OrderService {
 
-  
+  private authorization: string = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ3YWxsZXQiOjkuOTMsInJlZ2lzdHJhdGlvbkRhdGUiOlsyMDIyLDIsMTUsMTAsMzQsNTFdLCJlbWFpbCI6InRvdG9AZ21haWwuY29tIiwiaXNMdW5jaExhZHkiOnRydWUsIm5hbWUiOiJCcnVuZWwiLCJmaXJzdG5hbWUiOiJMb3VpcyIsInBob25lIjoiMjI3ODcyMDIxMCIsInNleCI6Miwic3RhdHVzIjowLCJpbWFnZUlkIjoxfSwicm9sZXMiOlsiUk9MRV9MVU5DSExBRFkiXSwiaXNzIjoic2VjdXJlLWFwaSIsImF1ZCI6InNlY3VyZS1hcHAiLCJzdWIiOiJ0b3RvQGdtYWlsLmNvbSIsImV4cCI6MTY3MjQzNDQyNX0.vNyrHzfnYYaNVaZZLJ-NH17m-zOisJ76DCXcXTvK4EbtV3tTUCVAspSuDgOyn8WdpbVrzYw0aV-ky7q5zueR6Q"
   private URL_ORDER: string = environment.apiURL + '/order'; 
   
   constructor(private http: HttpClient) {
@@ -18,10 +19,18 @@ export class OrderService {
    * Affiche toutes les commandes
    * @returns Observable
    */
-  getAllOrders(): Observable<OrderInterface[]>{
-    return this.http.get<OrderInterface[]>(this.URL_ORDER + '/findall', {
+  getAllOrders(): Observable<OrderInterface[] | ErrorModel>{
+    return this.http.get<OrderInterface[] | ErrorModel >(this.URL_ORDER + '/findall', {
       headers: {
-        "Authorization": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ3YWxsZXQiOjkuOTMsInJlZ2lzdHJhdGlvbkRhdGUiOlsyMDIyLDIsMTUsMTAsMzQsNTFdLCJlbWFpbCI6InRvdG9AZ21haWwuY29tIiwiaXNMdW5jaExhZHkiOnRydWUsIm5hbWUiOiJCcnVuZWwiLCJmaXJzdG5hbWUiOiJMb3VpcyIsInBob25lIjoiMjI3ODcyMDIxMCIsInNleCI6Miwic3RhdHVzIjowLCJpbWFnZUlkIjoxfSwicm9sZXMiOlsiUk9MRV9MVU5DSExBRFkiXSwiaXNzIjoic2VjdXJlLWFwaSIsImF1ZCI6InNlY3VyZS1hcHAiLCJzdWIiOiJ0b3RvQGdtYWlsLmNvbSIsImV4cCI6MTY3MDA2MzE3MH0.0dYzdMWp1K6byp_OQSs1IKR1cCeg33kH_vx4yOSBk0nHMRoQOyjelFeUPYnBU4g63G09ThcNaWEVoIvnUsTa8A"}
+        "Authorization": this.authorization}
+    })
+  }
+
+  findOrder(orderId: number): Observable<OrderInterface> {
+    return this.http.get<OrderInterface>(this.URL_ORDER + '/find/' + orderId, {
+      headers: {
+        'Authorization': this.authorization
+      }
     })
   }
 
@@ -32,17 +41,9 @@ export class OrderService {
    * @param status number || 0 => CREATED
    * @returns Observable
    */
-  getOrdersByRangeDate(status: number = 1 ,beginDate?: string, endDate?: string): Observable<OrderInterface[]>{
+  getOrdersByRangeDate(status: number = 1 ,beginDate?: string, endDate?: string): Observable<OrderInterface[] | ErrorModel>{
 
     let my_url = this.URL_ORDER + `/findallbetweendateinstatus?status=${status}`;
-
-
-
-      if (status) {
-        
-          my_url += `&status=${status}`;
-        
-      }
 
       if (beginDate) {
         
@@ -56,7 +57,10 @@ export class OrderService {
         
       
     }
-    return this.http.get<OrderInterface[]>(my_url)
+    return this.http.get<OrderInterface[] | ErrorModel >(my_url, {
+      headers: {
+        "Authorization": this.authorization}
+    })
   }
 
   /**
@@ -66,8 +70,8 @@ export class OrderService {
    * @param quantity Objet(s) de commandes
    * @returns Observable, exploitable en cas d'erreur etc
    */
-  createOrder(userId: number, constraintId: number = -1, ...quantity: any): Observable<OrderInterface> {
-    return this.http.put<OrderInterface>(
+  createOrder(userId: number, constraintId: number = -1, ...quantity: Quantity[]): Observable<OrderInterface | ErrorModel > {
+    return this.http.put<OrderInterface | ErrorModel >(
       this.URL_ORDER + '/add',
       {
         //TODO: Faire une interface du param quantity
@@ -86,8 +90,8 @@ export class OrderService {
    * @param constraintId number || -1
    * @returns Observable
    */
-  deliverOrder(orderId: number, constraintId: number = -1): Observable<any>{
-    return this.http.patch<any>(this.URL_ORDER + `/deliverandpay/${orderId}/${constraintId}`, null)
+  deliverOrder(orderId: number, constraintId: number = -1): Observable<any | ErrorModel>{
+    return this.http.patch<any | ErrorModel >(this.URL_ORDER + `/deliverandpay/${orderId}/${constraintId}`, null)
   }
 
   /**
@@ -98,7 +102,7 @@ export class OrderService {
    * @param endDate null || Date 
    * @returns Observable
    */
-  getOrdersUnconfirmedByUser(userId: number, status?: string, beginDate?: string, endDate?: string): Observable<any>{
+  getOrdersUnconfirmedByUser(userId: number, status?: string, beginDate?: string, endDate?: string): Observable<OrderInterface[] | ErrorModel>{
     let my_url: string = this.URL_ORDER + `/findallforuser/${userId}`;
 
     if (status || beginDate || endDate) {
@@ -128,7 +132,7 @@ export class OrderService {
         }
       }
     }
-    return this.http.get<OrderInterface[]>(my_url)
+    return this.http.get<OrderInterface[] | ErrorModel>(my_url)
   }
 
   
@@ -137,7 +141,7 @@ export class OrderService {
    * @param orderId number
    * @returns Observable
    */
-  cancelOrder(orderId: number): Observable<any>{
+  cancelOrder(orderId: number): Observable<any | ErrorModel >{
     return this.http.get<any>(this.URL_ORDER + `/cancel/${orderId}`)
   }
 }

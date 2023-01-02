@@ -13,16 +13,20 @@ export class MealService {
   // addMeal()
   // deleteMealByID()
   // getImageMenuByID()
-
+  private authorization: string = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ3YWxsZXQiOjkuOTMsInJlZ2lzdHJhdGlvbkRhdGUiOlsyMDIyLDIsMTUsMTAsMzQsNTFdLCJlbWFpbCI6InRvdG9AZ21haWwuY29tIiwiaXNMdW5jaExhZHkiOnRydWUsIm5hbWUiOiJCcnVuZWwiLCJmaXJzdG5hbWUiOiJMb3VpcyIsInBob25lIjoiMjI3ODcyMDIxMCIsInNleCI6Miwic3RhdHVzIjowLCJpbWFnZUlkIjoxfSwicm9sZXMiOlsiUk9MRV9MVU5DSExBRFkiXSwiaXNzIjoic2VjdXJlLWFwaSIsImF1ZCI6InNlY3VyZS1hcHAiLCJzdWIiOiJ0b3RvQGdtYWlsLmNvbSIsImV4cCI6MTY3MjQzNDQyNX0.vNyrHzfnYYaNVaZZLJ-NH17m-zOisJ76DCXcXTvK4EbtV3tTUCVAspSuDgOyn8WdpbVrzYw0aV-ky7q5zueR6Q"
   constructor(private http: HttpClient) {
   }
+
 
   /**
    * Récupérer tout les plats
    * @return { Meal[] }
    */
   getAllMeal(): Observable<Meal[]> {
-    return this.http.get<Meal[]>(environment.apiURL + '/meal/findall');
+    return this.http.get<Meal[]>(environment.apiURL + '/meal/findall', {
+      headers: {
+        "Authorization": this.authorization}
+    })
   }
 
   /**

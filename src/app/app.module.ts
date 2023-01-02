@@ -9,6 +9,8 @@ import { SharedModule } from './shared/shared.module';
 import { environment } from '../environments/environment';
 import { MealComponent } from './views/meal/meal.component';
 import { OrderComponent } from './views/order/order.component';
+import { ReactiveFormsModule } from "@angular/forms";
+
 import { InscriptionComponent } from './shared/components/inscription/inscription.component';
 import { FormsModule } from '@angular/forms';
 import { UserComponent } from './shared/components/user/user.component';
@@ -27,6 +29,7 @@ import { UserComponent } from './shared/components/user/user.component';
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     AppRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule
     FormsModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
