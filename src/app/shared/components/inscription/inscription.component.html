@@ -1,0 +1,21 @@
+<h1>Inscription</h1>
+<form class="register">
+    <label for="fname">Prenom:</label><br>
+    <input [(ngModel)]="inscription.firstname" type="text" id="fname" name="fname"><br>
+    
+    <label for="lname">Nom:</label><br>
+    <input [(ngModel)]="inscription.name" type="text" id="lname" name="lname"><br>
+
+   
+    <label for="mail">Email:</label><br>
+    <input [(ngModel)]="inscription.email" type="text" id="mail" name="mail"><br>
+
+    <label for="password">Mot de passe:</label><br>
+    <input [(ngModel)]="inscription.password" type="password" id="lname" name="lname"><br>
+    //buttons pour le sexe de l'utilisateur
+    <label for="sexe">Sexe:</label><br>
+    <input [(ngModel)]="inscription.sex" type="radio" id="sexe" name="sexe" value="homme">Homme<br>
+    <input [(ngModel)]="inscription.sex" type="radio" id="sexe" name="sexe" value="femme">Femme<br>
+
+    <button (click)="inscription_methode()" type="submit">S'inscire</button><br>
+</form>

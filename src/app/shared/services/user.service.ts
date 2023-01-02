@@ -8,6 +8,7 @@ import {ErrorModel} from 'src/app/shared/models/error.model'
 import { ImageModel } from '../models/image.model';
 import { UserIn } from '../models/user-in.model';
 import { ImgUser } from '../models/imguser.model';
+import { HeaderService } from './header.service';
 
 
 @Injectable({
@@ -15,22 +16,31 @@ import { ImgUser } from '../models/imguser.model';
 })
 export class UserService {
 
+
+  private authorization: string = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ3YWxsZXQiOjkuOTMsInJlZ2lzdHJhdGlvbkRhdGUiOlsyMDIyLDIsMTUsMTEsMzQsNTFdLCJlbWFpbCI6InRvdG9AZ21haWwuY29tIiwiaXNMdW5jaExhZHkiOnRydWUsIm5hbWUiOiJCcnVuZWwiLCJmaXJzdG5hbWUiOiJMb3VpcyIsInBob25lIjoiMjI3ODcyMDIxMCIsInNleCI6Miwic3RhdHVzIjowLCJpbWFnZUlkIjoxfSwicm9sZXMiOlsiUk9MRV9MVU5DSExBRFkiXSwiaXNzIjoic2VjdXJlLWFwaSIsImF1ZCI6InNlY3VyZS1hcHAiLCJzdWIiOiJ0b3RvQGdtYWlsLmNvbSIsImV4cCI6MTY3Mjc3NjMxOH0.Lz1xJR7hveTyCRaFCS06cE6JkzBjXb79weLgZOlY57sMP4-eATXvzB3OAbknCV8k9SIXrZqq5HbkAYYvWmZ5Ag";
   constructor(private http: HttpClient) { }
+
 
   /**
    * Permet de chercher tous les utilisateurs
    * @returns tous les utilisateurs ou error
    */
-  public getUsers(): Observable< UserOut | ErrorModel> {
-    return this.http.get<UserOut |ErrorModel>(environment.apiURL + 'user/findall');
+  public getUsers(): Observable<any> {
+    return this.http.get<UserOut |ErrorModel>(environment.apiURL + '/user/findall',{
+      headers: {
+        "Authorization": this.authorization}
+    });
   }
   /**
    * Permet de chercher un utilisateur via son id
    * @param id number, id de l'utilisateurs
    * @returns l'utilisateurs associé à l'id  ou error
    */
-  public getUserByID(id:number): Observable<UserOut | ErrorModel > {
-    return this.http.get<UserOut | ErrorModel >(environment.apiURL + 'user/find/'+id);
+  public getUserByID(id:number):Observable<any> {
+    return this.http.get<UserOut |ErrorModel>(environment.apiURL + '/user/find/'+id,{
+      headers: {
+        "Authorization": this.authorization}
+    });
   }
   /**
    * Permet de chercher l'image d'un utilisateurs via son id
@@ -38,7 +48,7 @@ export class UserService {
    * @returns l'image de l'utilisateurs associé à l'id ou error
    */
   public getImgUserByID(id:number): Observable<ImgUser | ErrorModel > {
-    return this.http.get<ImgUser | ErrorModel >(environment.apiURL + 'user/findimg/'+id);
+    return this.http.get<ImgUser | ErrorModel >(environment.apiURL + '/user/findimg/'+id);
   }
   /**
    * Permet de supprimer l'utilisateur
@@ -46,7 +56,10 @@ export class UserService {
    * @returns Les données l'utilisateurs associé à l'id ou error
    */
   public deleteUserByID(id:number): Observable< UserOut | ErrorModel > {
-    return this.http.delete< UserOut | ErrorModel >(environment.apiURL + 'user/delete/'+id);
+    return this.http.delete< UserOut | ErrorModel >(environment.apiURL + '/user/delete/'+id,{
+      headers: {
+        "Authorization": this.authorization}
+    });
   }
   /**
    * Permet d'activer l'utilisateur
@@ -54,7 +67,7 @@ export class UserService {
    * @returns Les données l'utilisateurs associé à l'id ou error
    */
   public patchActivateUser(id:number): Observable< UserIn | ErrorModel > {
-    return this.http.patch< UserIn | ErrorModel >(environment.apiURL + 'user/activate/'+id,null);
+    return this.http.patch< UserIn | ErrorModel >(environment.apiURL + '/user/activate/'+id,null);
   }
   /**
    * Permet désactiver l'utilisateur
@@ -62,7 +75,7 @@ export class UserService {
    * @returns Les données l'utilisateurs associé à l'id ou error
    */
   public patchDesactivateUser(id:number): Observable< UserIn | ErrorModel > {
-    return this.http.patch< UserIn | ErrorModel >(environment.apiURL + 'user/desactivate/'+id,null);
+    return this.http.patch< UserIn | ErrorModel >(environment.apiURL + '/user/desactivate/'+id,null);
   }
   /**
    * Permet de mettre à jour l'utilisateur
@@ -70,7 +83,7 @@ export class UserService {
    * @returns Les données l'utilisateurs associé à l'id ou error
    */
   public patchUpdateUser(id:number): Observable< UserIn | ErrorModel > {
-    return this.http.patch< UserIn | ErrorModel >(environment.apiURL + 'user/upadate/'+id,null);
+    return this.http.patch< UserIn | ErrorModel >(environment.apiURL + '/user/upadate/'+id,null);
   }
   /**
    * Permet de mettre à jour l'img l'utilisateur
@@ -78,9 +91,8 @@ export class UserService {
    * @returns Limg de l 'utilisateur associé à l'id ou error
    */
   public patchUpdateImgUser(id:number): Observable< ImageModel | ErrorModel > {
-    return this.http.patch< ImageModel | ErrorModel >(environment.apiURL + 'user/upadateimg/'+id,null);
+    return this.http.patch< ImageModel | ErrorModel >(environment.apiURL + '/user/upadateimg/'+id,null);
   }
-
   /**
    * Permet de créditer le wallet de l'utilisateur via son id
    * @param id number, id de l'utilisateur
@@ -88,7 +100,7 @@ export class UserService {
    * @returns Les informations de l'utilisateurs 
    */
   public postUserCredit(id:number, amount:number):Observable< UserOut | ErrorModel > {
-    return this.http.post< UserOut | ErrorModel >(environment.apiURL + 'user/credit/'+id,null);
+    return this.http.post< UserOut | ErrorModel >(environment.apiURL + '/user/credit/'+id,null);
   }
 
   /**
@@ -98,7 +110,7 @@ export class UserService {
    * @returns Les informations de l'utilisateurs 
    */
   public postUserDebit(id:number, amount:number):Observable< UserOut | ErrorModel > {
-    return this.http.post< UserOut | ErrorModel >(environment.apiURL + 'user/debit/'+id,null);
+    return this.http.post< UserOut | ErrorModel >(environment.apiURL + '/user/debit/'+id,null);
   }
 
   /**
@@ -107,15 +119,15 @@ export class UserService {
    * @returns Les informations de l'utilisateurs 
    */
   public postregisterUser(user:UserIn):Observable< UserOut | ErrorModel > {
-    return this.http.post< UserOut | ErrorModel >(environment.apiURL + 'user/register',user);
+    return this.http.post< UserOut | ErrorModel >(environment.apiURL + '/user/register',user);
   }
 
   /**
-   * Enregistrer un utilisateur via le putgit
+   * Enregistrer un utilisateur via le put
    * @param user utilisateur que l'on souhaite inscire
    * @returns Les informations de l'utilisateurs 
    */
-  public putregisterUser(user:UserIn):Observable< UserOut | ErrorModel > {
-    return this.http.put< UserOut | ErrorModel >(environment.apiURL + 'user/register',user);
+  public putregisterUser(user:any):Observable<any> {
+    return this.http.put<any>(environment.apiURL + '/user/register',user);
   }
 }
