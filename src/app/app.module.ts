@@ -1,33 +1,31 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app-routing.module';
-import { AuthInterceptor } from './shared/services/set-auth-header';
-import { SharedModule } from './shared/shared.module';
-import { MealComponent } from './views/meal/meal.component';
-import { OrderComponent } from './views/order/order.component';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {AppComponent} from './app.component';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {AppRoutingModule} from './app-routing.module';
+import {SharedModule} from '@shared/shared.module';
+import {WeekMealsComponent} from '@views/week-meals/week-meals.component';
+import {MenusComponent} from '@views/menus/menus.component';
+import {CoreModule} from '@core/core.module';
+import {environment} from '@env';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    MealComponent,
-    OrderComponent
+    WeekMealsComponent,
+    MenusComponent,
   ],
   imports: [
     SharedModule,
     BrowserAnimationsModule,
-    BrowserModule.withServerTransition({ appId: 'serverApp' }),
+    BrowserModule.withServerTransition({appId: 'serverApp'}),
     AppRoutingModule,
-    HttpClientModule,
+    CoreModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
-
-  ],
+  providers: [{provide: 'API_URL', useValue: environment.apiURL}],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

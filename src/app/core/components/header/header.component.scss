@@ -1,0 +1,374 @@
+@import 'src/assets/styles/colors';
+
+$navbar-blur: blur(10px);
+$badge-color: rgba(246, 97, 97, 1);
+$badge-shadow-color: rgba(246, 97, 97, .2);
+$badge-shadow-color-faded: rgba(246, 97, 97, 0);
+$navbar-shadow-color: rgba(0, 0, 0, .07);
+$navbar-brand-color: #301d09;
+$navbar-menu-text-color: #301d09;
+$navbar-menu-text-hover: rgba(48, 29, 9, 0.75);
+$menu-button-color: #301d09;
+$border-color: #dddddd;
+
+@mixin navbar-blur {
+  backdrop-filter: $navbar-blur;
+  -webkit-backdrop-filter: $navbar-blur;
+  background-color: #fff;
+}
+
+@keyframes badge-shadow-pulse {
+  0% {
+    box-shadow: 0 0 0 0 $badge-shadow-color;
+  }
+  70% {
+    box-shadow: 0 0 0 10px $badge-shadow-color-faded;
+  }
+  100% {
+    box-shadow: 0 0 0 0 $badge-shadow-color-faded;
+  }
+}
+
+svg {
+  align-items: center;
+  display: flex;
+  height: 2rem;
+  justify-content: center;
+  width: 2rem;
+}
+
+.cart {
+  display: flex;
+
+  .cart-icon {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+
+    svg {
+      position: absolute;
+    }
+
+    .badge {
+      align-items: center;
+      animation: badge-shadow-pulse 1s infinite;
+      background-color: $badge-color;
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      font-size: 1rem;
+      height: 1.6rem;
+      justify-content: center;
+      transform: translate(8px, -10px);
+      width: 1.6rem;
+    }
+  }
+
+  .cart-label {
+    display: none;
+  }
+
+
+}
+
+.navbar {
+  @include navbar-blur;
+  box-shadow: 0 1px 10px 0 $navbar-shadow-color;
+  caret-color: transparent;
+  display: flex;
+  min-height: 56px;
+
+  a {
+    color: $navbar-menu-text-color;
+    text-decoration: none;
+    user-select: none;
+  }
+
+  a:hover {
+    color: $navbar-menu-text-hover;
+    transition: color .2s ease-in-out;
+  }
+
+  .navbar-brand {
+    align-items: center;
+    display: flex;
+    text-decoration: none;
+
+    .logo {
+      height: 5rem;
+      width: 5rem;
+    }
+
+
+    .navbar-brand-text {
+      color: $navbar-brand-color;
+      font-family: "UniSansHeavy", sans-serif;
+      font-size: 2.3rem;
+      font-weight: normal;
+      margin-left: 1rem;
+      text-transform: uppercase;
+    }
+  }
+
+  .menu-button-container {
+    display: none;
+  }
+
+  @mixin hamburger {
+    background-color: $menu-button-color;
+    border-radius: 2px;
+    display: flex;
+    height: 3px;
+    position: absolute;
+    transition: transform 400ms cubic-bezier(.23, 1, .32, 1);
+  }
+
+  .menu-button::before {
+    @include hamburger;
+    width: 25px;
+  }
+
+  .menu-button {
+    @include hamburger;
+    width: 25px;
+  }
+
+  .menu-button::after {
+    @include hamburger;
+    width: 20px;
+  }
+
+  .menu-button::before {
+    content: '';
+    margin-top: -8px;
+  }
+
+  .menu-container ul {
+    display: flex;
+    list-style-type: none;
+
+    li {
+      display: flex;
+      font-family: "Roboto Medium", sans-serif;
+      font-size: 1.6rem;
+      justify-content: center;
+      padding: 0 1.2rem;
+    }
+  }
+
+  #account-toggle {
+    display: none;
+  }
+
+  #account-toggle:checked ~ .account-menu {
+    @include navbar-blur;
+    border: 3px solid $border-color;
+    border-radius: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-top: .5rem;
+
+    a {
+      align-items: center;
+      display: flex;
+      height: 4rem;
+      justify-content: flex-start;
+
+      &:not(:last-child) {
+        border-bottom: 2px solid $border-color;
+      }
+    }
+  }
+
+  .account-button {
+    align-items: center;
+    cursor: pointer;
+    display: flex;
+    gap: .5rem;
+    justify-content: center;
+  }
+
+  .account-menu {
+    height: 0;
+    padding: .5rem 1rem;
+    position: absolute;
+    top: 56px;
+
+    a {
+      display: flex;
+      height: 0;
+      overflow: clip;
+      transition: height 400ms cubic-bezier(.23, 1, .32, 1);
+    }
+  }
+
+  .menu-button::after {
+    content: '';
+    margin-top: 8px;
+  }
+
+  #menu-toggle {
+    display: none;
+  }
+
+
+  #menu-toggle:checked ~ .menu-button-container .menu-button {
+    transform: rotate(45deg);
+  }
+
+  #menu-toggle:checked ~ .menu-button-container .menu-button::before {
+    margin-top: 0;
+    transform: rotate(90deg);
+  }
+
+  #menu-toggle:checked ~ .menu-button-container .menu-button::after {
+    display: none;
+  }
+
+  .menu {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    overflow: clip;
+    padding: 0 1rem;
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .menu {
+    align-items: normal !important;
+  }
+
+  .cart-label {
+    display: block !important;
+  }
+
+  #navbar-mobile {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .navbar {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .menu-button-container {
+    align-items: center;
+    cursor: pointer;
+    display: flex !important;
+    height: 56px;
+    justify-content: center;
+    margin-left: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 56px;
+  }
+
+  .dropdown {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #account-toggle:checked ~ .account-menu {
+    margin-bottom: 1rem !important;
+
+  }
+
+  .account-menu {
+    // Force to remove background styles
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    // Reset margin & padding
+    margin: 0 !important;
+    padding: 0 !important;
+    // Force position to inherit
+    position: inherit !important;
+    flex-direction: column !important;
+
+    a {
+      height: 0;
+      transition: height 400ms cubic-bezier(.23, 1, .32, 1);
+    }
+  }
+
+  .menu {
+    @include navbar-blur;
+    flex-direction: column;
+    position: inherit;
+
+    .menu-container ul {
+      flex-direction: column;
+
+      li {
+        display: flex;
+        flex-direction: column;
+        padding: .5rem 0;
+      }
+
+      a {
+        align-items: center;
+        display: flex;
+        height: 4rem;
+        justify-content: space-between;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        transition: height 100ms cubic-bezier(.23, 1, .32, 1);
+      }
+    }
+  }
+
+  .dropdown {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  #account-toggle:checked ~ .user-menu a {
+    display: flex;
+    height: 4rem;
+    transition: height 100ms cubic-bezier(.23, 1, .32, 1);
+  }
+
+  #account-toggle ~ .user-menu {
+    display: flex;
+    height: 0;
+    transition: height 100ms cubic-bezier(.23, 1, .32, 1);
+  }
+
+  #menu-toggle ~ .menu > .menu-container li:not(.dropdown) {
+    height: 0;
+    overflow: clip;
+    padding: 0;
+    transition: height 400ms cubic-bezier(.23, 1, .32, 1);
+  }
+
+  #menu-toggle:checked ~ .menu > .menu-container li:not(.dropdown) {
+    border-top: 2px solid $border-color;
+    height: 4rem;
+    justify-content: flex-start;
+    transition: height 100ms cubic-bezier(.23, 1, .32, 1);
+  }
+
+  #menu-toggle ~ .menu > .menu-container li.dropdown {
+    height: 0;
+    overflow: clip;
+    padding: 0;
+    transition: height 100ms cubic-bezier(.23, 1, .32, 1);
+  }
+
+  #menu-toggle:checked ~ .menu > .menu-container li.dropdown {
+    height: auto;
+
+    .account-button {
+      display: flex;
+      height: 4rem;
+    }
+  }
+}

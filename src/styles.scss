@@ -35,6 +35,26 @@ html, body {
   height: 100%;
 }
 
+// change highlight color in Chrome
+::selection {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+// change highlight color in Firefox
+::-moz-selection {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+// change the default cursor
+a {
+  cursor: pointer;
+}
+
+// remove <a> highlight on mobile click
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   font-size: 1.6rem;
   line-height: 1.5;
@@ -51,13 +71,6 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "UniSansHeavy", sans-serif;
+  font-family: "Myriad Pro", sans-serif;
   font-weight: normal;
 }
-
-p {
-  font-family: "UniSansHeavy", sans-serif;
-  color: #2f1c07;
-}
-
-

@@ -1,0 +1,66 @@
+<header>
+  <nav class="navbar">
+    <a class="navbar-brand" [routerLink]="['/']">
+      <img src="/assets/images/placeholder/logo.png" class="navbar-brand-logo" alt="Logo" width="52">
+      <span class="navbar-brand-text">cantinière</span>
+    </a>
+    <input id="menu-toggle" type="checkbox"/>
+    <label class='menu-button-container' for="menu-toggle">
+      <div class='menu-button'></div>
+    </label>
+    <div class="menu">
+      <div class="menu-container">
+        <ul>
+          <li *ngIf="user" class="dropdown">
+            <input id="account-toggle" type="checkbox"/>
+            <label class='account-dropdown-container' for="account-toggle">
+              <a class='account-button'>
+                {{user.firstname}} {{user.name}}
+                <div class="account-button-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+              </a>
+            </label>
+            <div class="account-menu">
+              <a [routerLink]="['profile']">Mon profil</a>
+              <a [routerLink]="['profile/orders']">Mes commandes</a>
+              <a [routerLink]="['account/signout']">Déconnexion</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div><!-- Spacer --></div>
+      <div class="menu-container">
+        <ul>
+          <li *ngIf="!user">
+            <a [routerLink]="['account/signin']">Connexion</a>
+          </li>
+          <li *ngIf="user?.isLunchLady && user">
+            <a [routerLink]="['dashboard']">Dashboard</a>
+          </li>
+          <li>
+            <a [routerLink]="['menus']">Menus</a>
+          </li>
+          <li>
+            <a [routerLink]="['week-meals']">A la carte</a>
+          </li>
+          <li>
+            <a class="cart" [routerLink]="['cart']">
+              <span class="cart-label">Panier</span>
+              <div class="cart-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+                </svg>
+                <span *ngIf="hasItem()" class="badge">{{itemsCount}}</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
