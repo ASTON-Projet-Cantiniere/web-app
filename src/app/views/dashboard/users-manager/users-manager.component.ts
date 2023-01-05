@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {UserService} from "@shared/services/user.service";
+import {User} from "@shared/models/user.model";
 
 @Component({
   selector: 'app-users-manager',
@@ -16,8 +17,7 @@ export class UsersManagerComponent implements OnInit {
     this.userService.deleteUserByID(id).subscribe((resp:any) => console.log(resp));
   }
 
-  //tableau de user de type UserOut
-  users: any[]= [];
+  users: User[]= [];
   getUsers(){
     this.userService.getUsers().subscribe((resp:any) => this.users = resp);
   }
