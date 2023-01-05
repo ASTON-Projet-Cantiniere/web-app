@@ -29,6 +29,18 @@ const rootRouterConfig: Routes = [
   {
     path: '',
     children: [
+      {path: '', loadChildren: () => import('./views/cart/cart.module').then(m => m.CartModule)}
+    ]
+  },
+  {
+    path: '',
+    children: [
+      {path: '', loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)}
+    ]
+  },
+  {
+    path: '',
+    children: [
       {path: 'error', loadChildren: () => import('./views/error-page/error-page.module').then(m => m.ErrorPageModule)}
     ]
   },

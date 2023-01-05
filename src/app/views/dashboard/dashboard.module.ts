@@ -5,11 +5,10 @@ import {DashboardRoutes} from "@views/dashboard/dashboard.routing";
 
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule,
     RouterModule.forChild(DashboardRoutes),
-  ]
+  ],
 })
 export class DashboardModule {
 }
