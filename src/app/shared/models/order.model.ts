@@ -12,7 +12,6 @@ export interface OrderInterface {
 }
 
 export interface Quantity {
-    id?: number,
     meal?: Meal,
     menu?: Menu,
     quantity: number

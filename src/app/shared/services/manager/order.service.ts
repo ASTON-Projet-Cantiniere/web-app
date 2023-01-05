@@ -9,7 +9,7 @@ import { OrderInterface, Quantity } from '../../models/order.model';
 @Injectable({providedIn: 'root'})
 export class OrderService {
 
-  private authorization: string = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ3YWxsZXQiOjkuOTMsInJlZ2lzdHJhdGlvbkRhdGUiOlsyMDIyLDIsMTUsMTAsMzQsNTFdLCJlbWFpbCI6InRvdG9AZ21haWwuY29tIiwiaXNMdW5jaExhZHkiOnRydWUsIm5hbWUiOiJCcnVuZWwiLCJmaXJzdG5hbWUiOiJMb3VpcyIsInBob25lIjoiMjI3ODcyMDIxMCIsInNleCI6Miwic3RhdHVzIjowLCJpbWFnZUlkIjoxfSwicm9sZXMiOlsiUk9MRV9MVU5DSExBRFkiXSwiaXNzIjoic2VjdXJlLWFwaSIsImF1ZCI6InNlY3VyZS1hcHAiLCJzdWIiOiJ0b3RvQGdtYWlsLmNvbSIsImV4cCI6MTY3Mjc3NTIxOH0.t3DoHaFrU2dSi8hMc8Z1v9KH9Z1y8TedReBZGAqiSoBwhuRdwGh3l5dxZyl-2auj6XZFuGCFNB5k_A7DkoGA6g"
+  private authorization: string = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJ1c2VyIjp7ImlkIjoxLCJ3YWxsZXQiOjkuOTMsInJlZ2lzdHJhdGlvbkRhdGUiOlsyMDIyLDIsMTUsMTAsMzQsNTFdLCJlbWFpbCI6InRvdG9AZ21haWwuY29tIiwiaXNMdW5jaExhZHkiOnRydWUsIm5hbWUiOiJCcnVuZWwiLCJmaXJzdG5hbWUiOiJMb3VpcyIsInBob25lIjoiMjI3ODcyMDIxMCIsInNleCI6Miwic3RhdHVzIjowLCJpbWFnZUlkIjoxfSwicm9sZXMiOlsiUk9MRV9MVU5DSExBRFkiXSwiaXNzIjoic2VjdXJlLWFwaSIsImF1ZCI6InNlY3VyZS1hcHAiLCJzdWIiOiJ0b3RvQGdtYWlsLmNvbSIsImV4cCI6MTY3MzAzMjM1MX0.OLWoc_gw10b6AoPbqZrjomvxdS8UrNxkazFHMJ3_WON3Evaoc3xHedWpxuF3eMSvs5lKAGDNuqTgxY9eFpLd3w"
   private URL_ORDER: string = environment.apiURL + '/order'; 
   
   constructor(private http: HttpClient) {
@@ -74,12 +74,14 @@ export class OrderService {
     return this.http.put<OrderInterface | ErrorModel >(
       this.URL_ORDER + '/add',
       {
-        //TODO: Faire une interface du param quantity
         "userId": userId,
         "constraintId": constraintId,
         "quantity": [
           quantity
         ]
+      },{
+        headers: {
+          "Authorization": this.authorization}
       }
       )
   }

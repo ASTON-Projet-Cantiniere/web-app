@@ -27,12 +27,9 @@ export class OrderComponent implements OnInit{
   menus: Menu[] = [];
 
   // public formAdd!: FormGroup;
-  public formAdd = this.fb.group({
-    userId: [''],
-    constraintId: [''],
-    quantity: this.fb.array([])
-  })
+
   public formSearchByDate!: FormGroup;
+  public formAdd!: FormGroup;
 
   constructor(private orderService: OrderService, private mealService: MealService, private menuService: MenuService, private fb: FormBuilder){
 
@@ -50,6 +47,11 @@ export class OrderComponent implements OnInit{
       beginDate: new FormControl(),
       endDate: new FormControl()
     });
+    this.formAdd = this.fb.group({
+      userId: [1],
+      constraintId: [-1],
+      quantity: this.fb.array([])
+    })
     this.orderService.getAllOrders().subscribe(r => {
 
       this.orders.push(...<[]>r);
@@ -66,18 +68,31 @@ export class OrderComponent implements OnInit{
   }
 
   get quantity() {
-    return this.formAdd.controls["quantity"] as FormArray;
+    return this.formAdd.get("quantity") as FormArray;
   }
 
   addQuantity() {
     const quantityForm = this.fb.group({
-      mealId:   [0],
-      menuId:   [0],
-      quantity: [0]
+      quantity: [0],
+      mealId: [0],
+      menuId: [0],
+      
+    });
+    this.quantity.push(quantityForm);
+    console.log(quantityForm);
+  }
 
-  });
-
-  this.formAdd.controls["quantity"].push(quantityForm as any);
+  public addOrder(){
+    console.log(this.formAdd);
+    this.orderService.createOrder(this.formAdd.value.userId, this.formAdd.value.constraintId, ...this.formAdd.value.quantity).subscribe();
+    console.log({
+      "userId": this.formAdd.value.userId,
+      "constraintId": this.formAdd.value.constraintId,
+      "quantity": [
+        ...this.formAdd.value.quantity
+      ]
+    });
+    
   }
 
   

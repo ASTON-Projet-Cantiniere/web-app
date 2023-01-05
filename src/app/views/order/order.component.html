@@ -61,7 +61,7 @@
         </div>
         <div class="formRow">
             <button (click)="addQuantity()">ADD</button>
-        <button type="submit">Submit</button>
+        <button type="submit" (click)="addOrder()">Submit</button>
         <div class="tiny-column">
             <label for="type">Type: </label>
             <select name="" id="type" [(ngModel)]="selected" [ngModelOptions]="{standalone: true}">
@@ -72,25 +72,25 @@
         </div>
         
         <div formArrayName="quantity">
-            <div class="column" *ngFor="let quantity of quantity.controls">
+            <div class="column" *ngFor="let quantity of quantity.controls; let i=index" [formGroupName]="i">
                 <div class="formRow">
                     <div *ngIf="selected == 'meals'" class="tiny-column">
                         <label for="meal">Meals </label>
                         <select name="" id="meal" formControlName="mealId">
-                            <option *ngFor="let meal of meals" value="meal.id">{{meal.label}}</option>
+                            <option *ngFor="let meal of meals" value="{{meal.id}}">{{meal.label}}</option>
                         </select> 
                     </div>
                     
                         
                     <div *ngIf="selected == 'menus'" class="tiny-column">
-                        <!-- TODO: Faire en sorte qu'on puisse ajouter des repas 'quantity' , le nombre etc -->
+                        
                         <label for="menu">Menus:</label>  
                         <select name="" id="menu" formControlName="menuId">
-                            <option *ngFor="let menu of menus" value="menu.id">{{menu.label}}</option>
+                            <option *ngFor="let menu of menus" value="{{menu.id}}">{{menu.label}}</option>
                         </select>
                     </div>
                         <div class="tiny-column">
-                            <!-- TODO: Faire en sorte qu'on puisse ajouter des repas 'quantity' , le nombre etc -->
+                            
                             <label for="menu">Quantity:</label>  
                             <input type="number" formControlName="quantity">
                         </div>
