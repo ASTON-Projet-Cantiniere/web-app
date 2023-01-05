@@ -5,10 +5,10 @@ import {Image} from "@shared/models/image.model";
 
 @Component({
   selector: 'app-week-meals',
-  templateUrl: './week-meals.component.html',
-  styleUrls: ['./week-meals.component.scss']
+  templateUrl: './meals-of-the-week.component.html',
+  styleUrls: ['./meals-of-the-week.component.scss']
 })
-export class WeekMealsComponent implements OnInit {
+export class MealsOfTheWeekComponent implements OnInit {
   meals: Meal[] = [];
 
   constructor(private mealService: MealService) {
