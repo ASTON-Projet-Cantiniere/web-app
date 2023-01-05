@@ -1,21 +1,14 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
-import { HeaderComponent } from './components/header/header.component';
-import {FooterComponent} from "./components/footer/footer.component";
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
-const classesToInclude: any[] = [
-  HeaderComponent,
-  FooterComponent,
-];
+const classesToInclude: any[] = [];
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule,
     HttpClientModule,
     ReactiveFormsModule,
   ],
@@ -24,4 +17,5 @@ const classesToInclude: any[] = [
   declarations: classesToInclude,
   exports: classesToInclude
 })
-export class SharedModule { }
+export class SharedModule {
+}

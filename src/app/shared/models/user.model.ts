@@ -1,16 +1,17 @@
-export interface UserOut{
-  id                 : number;
-  firstname          : string;
-  name               : string;
-  email              : string;
-  phone              : string;
-  sex                : number;
-  address            : string;
-  postalCode         : string;
-  town               : string;
-  isLunchLady        : number;
-  wallet             : number;
-  imageId            : number;
-  registrationDate   : string;
-  status             : string;
+import {Image} from "./image.model";
+
+export interface User {
+  id: number;
+  wallet: number;
+  registrationDate: number[];
+  email: string;
+  isLunchLady: boolean;
+  name: string;
+  firstname: string;
+  phone: string;
+  sex: number;
+  status: number;
+  imageId: number;
+  token?: string;
+  image?: Image;
 }
