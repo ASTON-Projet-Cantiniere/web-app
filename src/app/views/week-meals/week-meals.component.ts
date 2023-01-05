@@ -1,17 +1,22 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Meal} from "@shared/models/meal.model";
 import {MealService} from "@shared/services/manager/meal.service";
-import {Img} from "@shared/models/img.model";
+import {Image} from "@shared/models/image.model";
 
 @Component({
   selector: 'app-week-meals',
   templateUrl: './week-meals.component.html',
   styleUrls: ['./week-meals.component.scss']
 })
-export class WeekMealsComponent {
-  meals: Meal[] =[];
+export class WeekMealsComponent implements OnInit {
+  meals: Meal[] = [];
 
   constructor(private mealService: MealService) {
+    this.mealService.getAllMealAvailableForToday().subscribe((data) =>
+      this.meals.push(...data));
+  }
+
+  ngOnInit(): void {
   }
 
   getAllMeal() {
@@ -29,14 +34,12 @@ export class WeekMealsComponent {
   deleteMealByID(id: number) {
     this.mealService.deleteMealByID(id).subscribe((data: Meal) => {
       console.log(data);
-
     })
   }
 
   getMealImageByID(id: number) {
-    this.mealService.getMealImageByID(id).subscribe((data: Img) => {
+    this.mealService.getMealImageByID(id).subscribe((data: Image) => {
       console.log(data);
-
     })
   }
 
@@ -46,4 +49,6 @@ export class WeekMealsComponent {
 
     })
   }
+
+
 }

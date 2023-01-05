@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {AuthService} from '@core/services/auth.service';
-import Credentials from "@core/models/credentials.model";
+import Credentials from "@shared/models/credentials.model";
 
 @Component({
   selector: 'app-signin',
@@ -9,12 +9,12 @@ import Credentials from "@core/models/credentials.model";
 })
 export class SigninComponent {
 
+  constructor(private authService: AuthService) {
+  }
+
   private credentials: Credentials = {
     email: 'toto@gmail.com',
     password: 'bonjour'
-  }
-
-  constructor(private authService: AuthService) {
   }
 
   pocLogin() {

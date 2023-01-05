@@ -1,12 +1,12 @@
 import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
-import Credential from "../models/credentials.model";
-import RegisterCredentials from "../models/register-credentials.model";
+import Credential from "@shared/models/credentials.model";
+import {RegisterCredentials} from "@shared/models/register-credentials.model";
 import {catchError, Observable, Subject, Subscription, takeUntil, tap} from 'rxjs';
 import {TokenService} from "./token.service";
 import {BroadcasterService} from "@core/services/broadcaster.service";
 import {CONSTANTS} from "@core/constants";
-import {User} from "@core/models/user.model";
+import {User} from "@shared/models/user.model";
 import {Router} from "@angular/router";
 
 @Injectable({providedIn: 'root'})
@@ -32,8 +32,12 @@ export class AuthService implements OnDestroy {
    * @param registerCredential
    * @return {Observable<HttpResponse<Object>>}
    */
-  register(registerCredential: RegisterCredentials): Observable<RegisterCredentials> {
-    return this.http.post<RegisterCredentials>('/register', registerCredential);
+  signUp(registerCredential: RegisterCredentials): Subscription {
+    return this.http.post<RegisterCredentials>('/register', registerCredential).pipe(
+      catchError((error) => {
+          throw new Error('Error while signing up ' + error);
+        },
+      )).subscribe();
   }
 
   /**

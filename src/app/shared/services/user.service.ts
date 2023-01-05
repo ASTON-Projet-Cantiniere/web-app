@@ -1,14 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {environment} from 'src/environments/environment';
-
-import {UserOut} from 'src/app/shared/models/user.model'
-import {ErrorModel} from 'src/app/shared/models/error.model'
-import {ImageModel} from '../models/image.model';
-import {UserIn} from '../models/user-in.model';
-import {ImgUser} from '../models/imguser.model';
-
+import {User} from '@shared/models/user.model'
+import {HttpError} from '@shared/models/error.model'
+import {Image} from '@shared/models/image.model'
 
 @Injectable({
   providedIn: 'root'
@@ -22,8 +17,8 @@ export class UserService {
    * Permet de chercher tous les utilisateurs
    * @returns tous les utilisateurs ou error
    */
-  public getUsers(): Observable<UserOut | ErrorModel> {
-    return this.http.get<UserOut | ErrorModel>(environment.apiURL + 'user/findall');
+  public getUsers(): Observable<User | HttpError> {
+    return this.http.get<User | HttpError>('/user/findall')
   }
 
   /**
@@ -31,8 +26,8 @@ export class UserService {
    * @param id number, id de l'utilisateurs
    * @returns l'utilisateurs associé à l'id  ou error
    */
-  public getUserByID(id: number): Observable<UserOut | ErrorModel> {
-    return this.http.get<UserOut | ErrorModel>(environment.apiURL + 'user/find/' + id);
+  public getUserByID(id: number): Observable<any> {
+    return this.http.get<User | HttpError>('/user/find/' + id);
   }
 
   /**
@@ -40,8 +35,8 @@ export class UserService {
    * @param id number, id de l'utilisateurs
    * @returns l'image de l'utilisateurs associé à l'id ou error
    */
-  public getImgUserByID(id: number): Observable<ImgUser | ErrorModel> {
-    return this.http.get<ImgUser | ErrorModel>(environment.apiURL + 'user/findimg/' + id);
+  public getImgUserByID(id: number): Observable<Image | HttpError> {
+    return this.http.get<Image | HttpError>('/user/findimg/' + id);
   }
 
   /**
@@ -49,8 +44,8 @@ export class UserService {
    * @param id number, id de l'utilisateurs
    * @returns Les données l'utilisateurs associé à l'id ou error
    */
-  public deleteUserByID(id: number): Observable<UserOut | ErrorModel> {
-    return this.http.delete<UserOut | ErrorModel>(environment.apiURL + 'user/delete/' + id);
+  public deleteUserByID(id: number): Observable<User | HttpError> {
+    return this.http.delete<User | HttpError>('/user/delete/' + id);
   }
 
   /**
@@ -58,8 +53,8 @@ export class UserService {
    * @param id number, id de l'utilisateurs
    * @returns Les données l'utilisateurs associé à l'id ou error
    */
-  public patchActivateUser(id: number): Observable<UserIn | ErrorModel> {
-    return this.http.patch<UserIn | ErrorModel>(environment.apiURL + 'user/activate/' + id, null);
+  public patchActivateUser(id: number): Observable<User | HttpError> {
+    return this.http.patch<User | HttpError>('/user/activate/' + id, null);
   }
 
   /**
@@ -67,8 +62,8 @@ export class UserService {
    * @param id number, id de l'utilisateurs
    * @returns Les données l'utilisateurs associé à l'id ou error
    */
-  public patchDesactivateUser(id: number): Observable<UserIn | ErrorModel> {
-    return this.http.patch<UserIn | ErrorModel>(environment.apiURL + 'user/desactivate/' + id, null);
+  public patchDesactivateUser(id: number): Observable<User | HttpError> {
+    return this.http.patch<User | HttpError>('/user/desactivate/' + id, null);
   }
 
   /**
@@ -76,8 +71,8 @@ export class UserService {
    * @param id number, id de l'utilisateurs
    * @returns Les données l'utilisateurs associé à l'id ou error
    */
-  public patchUpdateUser(id: number): Observable<UserIn | ErrorModel> {
-    return this.http.patch<UserIn | ErrorModel>(environment.apiURL + 'user/upadate/' + id, null);
+  public patchUpdateUser(id: number): Observable<User | HttpError> {
+    return this.http.patch<User | HttpError>('/user/upadate/' + id, null);
   }
 
   /**
@@ -85,8 +80,8 @@ export class UserService {
    * @param id number, id de l'utilisateurs
    * @returns Limg de l 'utilisateur associé à l'id ou error
    */
-  public patchUpdateImgUser(id: number): Observable<ImageModel | ErrorModel> {
-    return this.http.patch<ImageModel | ErrorModel>(environment.apiURL + 'user/upadateimg/' + id, null);
+  public patchUpdateImgUser(id: number): Observable<Image | HttpError> {
+    return this.http.patch<Image | HttpError>('/user/upadateimg/' + id, null);
   }
 
   /**
@@ -95,8 +90,8 @@ export class UserService {
    * @param amount number, la somme que l'on souhaite créditer
    * @returns Les informations de l'utilisateurs
    */
-  public postUserCredit(id: number, amount: number): Observable<UserOut | ErrorModel> {
-    return this.http.post<UserOut | ErrorModel>(environment.apiURL + 'user/credit/' + id, null);
+  public postUserCredit(id: number, amount: number): Observable<User | HttpError> {
+    return this.http.post<User | HttpError>('/user/credit/' + id, null);
   }
 
   /**
@@ -105,8 +100,8 @@ export class UserService {
    * @param amount number, la somme que l'on souhaite debiter
    * @returns Les informations de l'utilisateurs
    */
-  public postUserDebit(id: number, amount: number): Observable<UserOut | ErrorModel> {
-    return this.http.post<UserOut | ErrorModel>(environment.apiURL + 'user/debit/' + id, null);
+  public postUserDebit(id: number, amount: number): Observable<User | HttpError> {
+    return this.http.post<User | HttpError>('/user/debit/' + id, null);
   }
 
   /**
@@ -114,16 +109,16 @@ export class UserService {
    * @param user utilisateur que l'on souhaite inscire
    * @returns Les informations de l'utilisateurs
    */
-  public postregisterUser(user: UserIn): Observable<UserOut | ErrorModel> {
-    return this.http.post<UserOut | ErrorModel>(environment.apiURL + 'user/register', user);
+  public postregisterUser(user: User): Observable<User | HttpError> {
+    return this.http.post<User | HttpError>('/user/register', user);
   }
 
   /**
-   * Enregistrer un utilisateur via le putgit
+   * Enregistrer un utilisateur via le put
    * @param user utilisateur que l'on souhaite inscire
    * @returns Les informations de l'utilisateurs
    */
-  public putregisterUser(user: UserIn): Observable<UserOut | ErrorModel> {
-    return this.http.put<UserOut | ErrorModel>(environment.apiURL + 'user/register', user);
+  public putregisterUser(user: any): Observable<any> {
+    return this.http.put<any>('/user/register', user);
   }
 }

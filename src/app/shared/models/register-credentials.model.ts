@@ -1,4 +1,4 @@
-export default interface RegisterCredentials {
+export interface RegisterCredentials {
   firstname: string,
   name: string,
   email: string,
