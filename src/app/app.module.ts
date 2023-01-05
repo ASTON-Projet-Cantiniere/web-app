@@ -4,8 +4,6 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
 import {SharedModule} from '@shared/shared.module';
-import {WeekMealsComponent} from '@views/week-meals/week-meals.component';
-import {MenusComponent} from '@views/menus/menus.component';
 import {CoreModule} from '@core/core.module';
 import {environment} from '@env';
 
@@ -13,8 +11,6 @@ import {environment} from '@env';
 @NgModule({
   declarations: [
     AppComponent,
-    WeekMealsComponent,
-    MenusComponent,
   ],
   imports: [
     SharedModule,
