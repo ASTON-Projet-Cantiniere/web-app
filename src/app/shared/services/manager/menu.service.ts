@@ -78,7 +78,7 @@ export class MenuService {
    * Récupère tout les menus disponible pour cette semaine
    * @returns { Menu[] }
    */
-  getAllMenusForThisWeek(): Observable<Menu[]> {
+  getAllMenusForThisWeek(category?: number): Observable<Menu[]> {
     return this.http.get<Menu[]>(environment.apiURL + '/menu/findallavailableforthisweek');
   }
 
