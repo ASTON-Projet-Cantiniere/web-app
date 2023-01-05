@@ -17,7 +17,7 @@ const rootRouterConfig: Routes = [
   {
     path: '',
     children: [
-      {path: '', loadChildren: () => import('@views/meals-of-the-day/meals-of-the-week.module').then(m => m.MealsOfTheWeekModule)}
+      {path: '', loadChildren: () => import('@views/day-meals/day-meals.module').then(m => m.DayMealsModule)}
     ]
   },
   {

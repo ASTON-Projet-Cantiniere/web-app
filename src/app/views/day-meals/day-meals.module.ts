@@ -1,17 +1,17 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from '@angular/router';
-import {MealsOfTheWeekRoutes} from './meals-of-the-week.routing';
-import {MealsOfTheWeekComponent} from './meals-of-the-week.component';
+import {MealsOfTheWeekRoutes} from './day-meals.routing';
+import {DayMealsComponent} from './day-meals.component';
 
 @NgModule({
   declarations: [
-    MealsOfTheWeekComponent,
+    DayMealsComponent,
   ],
   imports: [
     CommonModule,
     RouterModule.forChild(MealsOfTheWeekRoutes),
   ]
 })
-export class MealsOfTheWeekModule {
+export class DayMealsModule {
 }

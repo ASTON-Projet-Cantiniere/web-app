@@ -4,11 +4,11 @@ import {MealService} from "@shared/services/manager/meal.service";
 import {Image} from "@shared/models/image.model";
 
 @Component({
-  selector: 'app-week-meals',
-  templateUrl: './meals-of-the-week.component.html',
-  styleUrls: ['./meals-of-the-week.component.scss']
+  selector: 'app-day-meals',
+  templateUrl: './day-meals.component.html',
+  styleUrls: ['./day-meals.component.scss']
 })
-export class MealsOfTheWeekComponent implements OnInit {
+export class DayMealsComponent implements OnInit {
   meals: Meal[] = [];
 
   constructor(private mealService: MealService) {

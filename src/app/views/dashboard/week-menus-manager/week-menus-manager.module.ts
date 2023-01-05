@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WeekMealsManagerComponent } from './week-meals-manager.component';
+import { WeekMenusManagerComponent } from './week-menus-manager.component';
 
 
 
 @NgModule({
   declarations: [
-    WeekMealsManagerComponent
+    WeekMenusManagerComponent
   ],
   imports: [
     CommonModule
   ]
 })
-export class WeekMealsManagerModule { }
+export class WeekMenusManagerModule { }
