@@ -6,15 +6,17 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AppRoutingModule} from './app-routing.module';
 import {SharedModule} from '@shared/shared.module';
 import {CoreModule} from '@core/core.module';
+import {HeaderComponent} from "@shared/components/header/header.component";
+import {FooterComponent} from "@shared/components/footer/footer.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent],
   imports: [
     SharedModule,
     BrowserAnimationsModule,
     BrowserModule.withServerTransition({appId: 'serverApp'}),
     AppRoutingModule,
-    CoreModule,
+    CoreModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{provide: 'API_URL', useValue: environment.apiURL}],
