@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import {MatDialogModule} from "@angular/material/dialog";
 import { UserComponent } from './shared/components/user/user.component';
 import { MealModalComponent } from './views/meal/meal-modal/meal-modal.component';
+import { WeekMealsManagerComponent } from './views/week-meals-manager/week-meals-manager.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,9 @@ import { MealModalComponent } from './views/meal/meal-modal/meal-modal.component
     InscriptionComponent,
     UserComponent,
     OrderComponent,
+    MealComponent,
+    MealModalComponent,
+    WeekMealsManagerComponent,
   ],
   imports: [
     SharedModule,

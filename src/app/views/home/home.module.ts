@@ -16,9 +16,7 @@ import { MealModalComponent } from '../meal/meal-modal/meal-modal.component';
     RouterModule.forChild(HomeRoutes)
   ],
   declarations: [
-  	HomeComponent,
-    MealComponent,
-    MealModalComponent
+  	HomeComponent
   ]
 })
 export class HomeModule{ }
