@@ -19,7 +19,19 @@ export class AuthService implements OnDestroy {
               private broadcaster: BroadcasterService,
               private router: Router) {
     this.$userState.subscribe((user: User) => this.user = user);
-    this.emitUserState(TokenService.getToken());
+    this.initUserState();
+  }
+
+  private initUserState() {
+    const token = TokenService.getToken();
+    if (token) {
+      if (this.tokenIsExpired(token)) {
+        this.signOut();
+      }
+      else {
+        this.emitUserState(token);
+      }
+    }
   }
 
   ngOnDestroy(): void {
@@ -32,7 +44,7 @@ export class AuthService implements OnDestroy {
    * @param registerCredential
    * @return {Observable<HttpResponse<Object>>}
    */
-  signUp(registerCredential: RegisterCredentials): Subscription {
+  public signUp(registerCredential: RegisterCredentials): Subscription {
     return this.http.post<RegisterCredentials>('/register', registerCredential).pipe(
       catchError((error) => {
           throw new Error('Error while signing up ' + error);
@@ -45,7 +57,7 @@ export class AuthService implements OnDestroy {
    * @param loginCredential
    * @return {Observable<HttpResponse<Object>>}
    */
-  signIn(loginCredential: Credential): Subscription {
+  public signIn(loginCredential: Credential): Subscription {
     // call the API with the get method after executed get bearer token from header of response
     return this.http.post<HttpResponse<any>>("/login", JSON.stringify(loginCredential),
       {observe: 'response'}).pipe(
@@ -136,5 +148,18 @@ export class AuthService implements OnDestroy {
    */
   private clearUserState() {
     this.broadcaster.broadcast(CONSTANTS.USER_STATE, undefined);
+  }
+
+  /**
+   * Method to check if the token is not expired
+   * @param token
+   * @return {string | null}
+   */
+  public tokenIsExpired(token: string): boolean | null {
+    const decodedToken = TokenService.decodeToken(token);
+    if (decodedToken?.exp) {
+      return null;
+    }
+    return decodedToken.exp! < Date.now() / 1000; // convert to seconds
   }
 }
