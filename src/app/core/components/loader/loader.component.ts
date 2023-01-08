@@ -12,7 +12,7 @@ import { Component } from '@angular/core';
 
     </div>
   `,
-  styleUrls: ['./loader.component.scss']
+  styleUrls: ['./loader.component.scss'],
 })
 export class LoaderComponent {
 

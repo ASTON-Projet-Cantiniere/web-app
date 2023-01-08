@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {FadeInOut} from '@shared/animations/fade-in-out.animation';
 import {
   ActivatedRoute,
   NavigationCancel,
@@ -11,7 +12,8 @@ import {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [FadeInOut]
 })
 export class AppComponent {
   title = 'La Cantinière';
