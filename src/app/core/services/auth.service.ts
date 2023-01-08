@@ -118,6 +118,7 @@ export class AuthService implements OnDestroy {
   public signOut() {
     TokenService.clearToken();
     this.clearUserState();
+    this.router.navigate(['/']);
   }
 
   /**
