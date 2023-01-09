@@ -1,0 +1,35 @@
+<!-- <select>
+    <option></option>
+    <option >ID   NOM   PRENOM </option>
+  <option *ngFor="let user of users" [value]="user.id">{{user.id}}  {{user.firstname}}  {{user.name}}</option>
+</select> -->
+<button (click)="getUsers()">Afficher tous les utilisateurs</button>
+
+<!-- formulaire pour chercher un utilisateur par son id -->
+<form (ngSubmit)="getUserById(id)">
+  <input type="text" name="id" [(ngModel)]="id" placeholder="id">
+  <button type="submit" >Chercher</button>
+</form>
+
+<!-- tableau qui affiche les utilisateurs avec leurs informations td1 = id td2 = nom td3 = prenom td3 = action-->
+<table class="array_crud">
+  <tr>
+    <th>id</th>
+    <th>nom</th>
+    <th>prenom</th>
+    <th>action</th>
+  </tr>
+
+<!-- TODO : AFFICHER QUE LES USER QUI ONT UN STATUT N'ETANT PAS = 2 -->
+  <tr *ngFor="let user of users">
+    <td>{{user.id}}</td>
+    <td>{{user.name}}</td>
+    <td>{{user.firstname}}</td>
+    <td>{{user.status}}</td>
+    <td>
+      <button >modifier</button>
+      <button (click)="deleteUser(user.id)">supprimer</button>
+    </td>
+  </tr>
+</table>
+

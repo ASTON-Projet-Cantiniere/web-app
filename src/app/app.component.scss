@@ -1,0 +1,16 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  font-size: 1.5rem;
+  font-weight: 500;
+  justify-content: center;
+  width: 100%;
+}

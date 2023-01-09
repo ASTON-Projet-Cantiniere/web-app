@@ -1,18 +1,11 @@
-import { HttpClient } from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { environment } from 'src/environments/environment';
-import { Img } from '../../models/img.model';
-import { Meal } from '../../models/meal.model';
+import {Observable} from 'rxjs/internal/Observable';
+import {Image} from '../../models/image.model';
+import {Meal} from '../../models/meal.model';
 
 @Injectable({providedIn: 'root'})
 export class MealService {
-  // TODO
-  // getAllMeals()
-  // getMealByID()
-  // addMeal()
-  // deleteMealByID()
-  // getImageMenuByID()
 
   constructor(private http: HttpClient) {
   }
@@ -22,7 +15,7 @@ export class MealService {
    * @return { Meal[] }
    */
   getAllMeal(): Observable<Meal[]> {
-    return this.http.get<Meal[]>(environment.apiURL + '/meal/findall');
+    return this.http.get<Meal[]>('/meal/findall');
   }
 
   /**
@@ -31,7 +24,7 @@ export class MealService {
    * @return { Meal }
    */
   getMealByID(id: number): Observable<Meal> {
-    return this.http.get<Meal>(environment.apiURL + `/meal/find/${id}`);
+    return this.http.get<Meal>(`/meal/find/${id}`);
   }
 
   /**
@@ -40,24 +33,32 @@ export class MealService {
    * @return { Meal } le plat ajouté
    */
   addMeal(meal: Meal): Observable<Meal> {
-    return this.http.post<Meal>(environment.apiURL + `/meal/add`, meal);
+    return this.http.post<Meal>(`/meal/add`, meal);
   }
 
   /**
    * Supprime un plat
-   * @param { numer } id l'id du plat
+   * @param { number } id l'id du plat
    * @return { Meal }
    */
   deleteMealByID(id: number): Observable<Meal> {
-    return this.http.delete<Meal>(environment.apiURL + `/meal/delete/${id}`);
+    return this.http.delete<Meal>(`/meal/delete/${id}`);
   }
 
   /**
    * Récupère l'image du plat correspondant grâce à l'id du plat
    * @param { Meal } id l'id du plat
-   * @return { Img }
+   * @return { Image }
    */
-  getMealImageByID(id: number): Observable<Img> {
-    return this.http.get<Img>(environment.apiURL + `/meal/findimg/${id}`);
+  getMealImageByID(id: number): Observable<Image> {
+    return this.http.get<Image>(`/meal/findimg/${id}`);
+  }
+
+  /**
+   * Récupère tout les plats disponible pour le jour même
+   * @return{ Observable<Meal[]> }
+   */
+  getAllMealAvailableForToday(): Observable<Meal[]> {
+    return this.http.get<Meal[]>('/meal/findallavailablefortoday');
   }
 }
