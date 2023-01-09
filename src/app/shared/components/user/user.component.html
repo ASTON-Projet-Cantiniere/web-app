@@ -18,10 +18,13 @@
     <th>prenom</th>
     <th>action</th>
   </tr>
+
+<!-- TODO : AFFICHER QUE LES USER QUI ONT UN STATUT N'ETANT PAS = 2 -->
   <tr *ngFor="let user of users">
     <td>{{user.id}}</td>
     <td>{{user.name}}</td>
     <td>{{user.firstname}}</td>
+    <td>{{user.status}}</td>
     <td>
       <button href="">modifier</button>
       <button (click)="deleteUser(user.id)">supprimer</button>
@@ -29,4 +32,3 @@
   </tr>
 </table>
 
- 

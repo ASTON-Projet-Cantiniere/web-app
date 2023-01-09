@@ -18,7 +18,7 @@ export class UserComponent implements OnInit {
     this.userService.deleteUserByID(id).subscribe((resp) => console.log(resp));
   }
 
-  //tableau de user de type UserOut
+
   users: any[]= [];
   getUsers(){
     this.userService.getUsers().subscribe((resp) => this.users = resp);
@@ -27,10 +27,18 @@ export class UserComponent implements OnInit {
   getUserById(id: number){
     this.userService.getUserByID(id).subscribe(
       (resp) => {
-        this.users = [];
-        this.users.push(resp);
+        // pour chaque user dans la reponse de l'api si user.status == 2 alors ne pas push dans le tableau
+        for (let user of resp) {
+          if (user.status == 2) {
+            console.log("user.status == 2");
+          } else {
+            this.users = [];
+            this.users.push(resp);
+          }
+        }
       }
-    )}
+    )
+  }
 
   ngOnInit(): void {
   }
