@@ -4,9 +4,11 @@ import {UsersManagerComponent} from './users-manager.component';
 import {FormsModule} from "@angular/forms";
 import {RouterModule} from "@angular/router";
 import {UsersManagerRoutes} from "./users-manager.routing";
+import { EditUserComponent } from './edit-user/edit-user.component';
 @NgModule({
   declarations: [
     UsersManagerComponent,
+    EditUserComponent,
   ],
   imports: [
     CommonModule,
