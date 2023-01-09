@@ -53,11 +53,8 @@ export class OrderService {
       'order/add',
       {"userId" : myuserId,
         "constraintId": myconstraintId,
-        "quantity": [
-          {
+        "quantity":
             myquantity
-          }
-        ]
       }
     )
   }
