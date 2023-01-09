@@ -10,7 +10,6 @@ export class OrderService {
 
   constructor(private http: HttpClient) {
   }
-
   /**
    * Affiche toutes les commandes
    * @returns Observable
@@ -49,15 +48,15 @@ export class OrderService {
    * @param quantity Objet(s) de commandes
    * @returns Observable, exploitable en cas d'erreur etc
    */
-  createOrder(userId: number, constraintId: number = -1, ...quantity: Quantity[]): Observable<OrderInterface | HttpError> {
+  createOrder(myuserId: number, myconstraintId: number = -1, ...myquantity: Quantity[]): Observable<OrderInterface | HttpError> {
     return this.http.put<OrderInterface | HttpError>(
       'order/add',
-      {
-        //TODO: Faire une interface du param quantity
-        "userId": userId,
-        "constraintId": constraintId,
+      {"userId" : myuserId,
+        "constraintId": myconstraintId,
         "quantity": [
-          quantity
+          {
+            myquantity
+          }
         ]
       }
     )
@@ -119,6 +118,6 @@ export class OrderService {
    * @returns Observable
    */
   cancelOrder(orderId: number): Observable<any | HttpError> {
-    return this.http.get<any>(`order/cancel/${orderId}`)
+    return this.http.patch<any>(`order/cancel/${orderId}`, {orderId})
   }
 }
