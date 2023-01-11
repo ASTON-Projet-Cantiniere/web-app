@@ -1,0 +1,31 @@
+<div class="dashboard-content">
+  <div class="title-container">
+    <h1 class="title">Dashboard</h1>
+    <h2 class="subtitle">Welcome to your dashboard</h2>
+  </div>
+  <div class="dashboard-items-container">
+    <div class="dashboard-items-wrapper">
+      <app-dashboard-card
+        [label]="'Menus'"
+        [imageUrl]="'./assets/images/dashboard/menus.jpg'"
+        [routerLink]="['/dashboard/menus']"></app-dashboard-card>
+      <app-dashboard-card
+        [label]="'Ingredients'"
+        [imageUrl]="'./assets/images/dashboard/ingredients.jpg'"
+        [routerLink]="['/dashboard/ingredients']"></app-dashboard-card>
+      <app-dashboard-card
+        [label]="'Commandes'"
+        [imageUrl]="'./assets/images/dashboard/orders.png'"
+        [routerLink]="['/dashboard/orders']"></app-dashboard-card>
+      <app-dashboard-card
+        [label]="'Utilisateurs'"
+        [imageUrl]="'./assets/images/dashboard/users.png'"
+        [routerLink]="['/dashboard/users']"></app-dashboard-card>
+      <app-dashboard-card
+        [label]="'Menus hebdomadaires'"
+        [imageUrl]="'./assets/images/dashboard/weekly-menus.png'"
+        [routerLink]="['/dashboard/week-menus']"></app-dashboard-card>
+    </div>
+  </div>
+</div>
+

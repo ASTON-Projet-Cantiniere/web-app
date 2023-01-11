@@ -1,32 +1,43 @@
 import {Component} from '@angular/core';
-import {Subscription} from "rxjs";
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {FadeInOut} from '@shared/animations/fade-in-out.animation';
+import {
+  ActivatedRoute,
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router
+} from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [FadeInOut]
 })
 export class AppComponent {
-  title = 'cantiniere';
-  private req: Subscription;
+  title = 'La Cantinière';
   private location: string = '';
-  private screenSize: number = 1600;
+  public isLoading: boolean = false;
 
-  constructor(
-    public router: Router,
-    public route: ActivatedRoute,
-  ) {
+  constructor(public router: Router, public route: ActivatedRoute) {
     this.location = this.router.url;
-    this.req = this.router.events.subscribe((event: any) => {
-      if (event) {
-        if (router.url !== this.location) {
-          this.location = router.url;
-          window.scrollTo({
-            top: 0,
-            left: 0,
-            behavior: 'smooth'
-          });
+
+    this.router.events.subscribe(event => {
+
+      switch (true) {
+        case event instanceof NavigationStart: {
+          this.isLoading = true;
+          break;
+        }
+        case event instanceof NavigationEnd:
+        case event instanceof NavigationCancel:
+        case event instanceof NavigationError: {
+          this.isLoading = false;
+          break;
+        }
+        default: {
+          break;
         }
       }
     });

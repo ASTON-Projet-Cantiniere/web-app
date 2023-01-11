@@ -1,6 +1,13 @@
-$color-primary-bg: linear-gradient(180deg, #06113c 0%, #0a1c5e 100%);
-$color-primary: #ff8c32;
-$color-primary-light: #f8a56d;
-$color-grey-dark: #999;
-$color-grey: #ddd;
-$color-grey-light: #eee;
+$navbar-blur: blur(10px);
+$badge-color: rgba(246, 97, 97, 1);
+$badge-shadow-color: rgba(246, 97, 97, .2);
+$badge-shadow-color-faded: rgba(246, 97, 97, 0);
+$navbar-shadow-color: rgba(0, 0, 0, .07);
+$navbar-brand-color: #301d09;
+$navbar-menu-text-color: #301d09;
+$navbar-menu-text-hover: rgba(48, 29, 9, 0.75);
+$menu-button-color: #301d09;
+$border-color: #dddddd;
+
+$text: #301d09;
+$text-gray: #383838;

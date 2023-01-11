@@ -1,0 +1,14 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.app-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  font-size: 1.5rem;
+  font-weight: 500;
+  width: 100%;
+}

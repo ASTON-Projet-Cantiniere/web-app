@@ -1,50 +1,22 @@
-import { Component, OnInit} from '@angular/core';
-import { Router,  ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import {Component} from '@angular/core';
+import {AuthService} from "@core/services/auth.service";
+import {User} from "@shared/models/user.model";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
-  private req?: Subscription;
+export class HeaderComponent {
+  public user: User | undefined;
+  public itemsCount: string = '1';
 
-  public headerItems: any = [
-    { title: 'About', id: 'about', route: '/about' },
-    {
-      title: 'Profile',
-      id: 'profile',
-      route: '/profile',
-      sub_routes: [
-        {
-          title: "Account Settings",
-          id: 'account-settings',
-          route: '/profile'
-        },
-      ]
-
-    },
-  ];
-
-  public loggedInCustomer: any;
-  public loggedInClient: any;
-  public location: any;
-
-  constructor(private router:Router,
-    private activatedRoute: ActivatedRoute) {
-
-    this.location = this.router.url;
-
-    this.req = this.router.events.subscribe((event: any) => {
-      this.location = this.router.url;
-    });
+  constructor(private authService: AuthService) {
+    this.authService.listenUserState().subscribe((user: User) => this.user = user);
+    this.authService.emitUserState();
   }
 
-  ngOnInit(): void  {
-  }
-
-  ngOnDestroy(): void {
-    if(this.req) this.req.unsubscribe();
+  hasItem() {
+    return true;
   }
 }

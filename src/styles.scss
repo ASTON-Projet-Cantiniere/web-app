@@ -1,1 +1,82 @@
-/* You can add global styles to this file, and also import other style files */
+@font-face {
+  font-family: UniSansHeavy;
+  src: url("./assets/fonts/Uni_Sans_Heavy.otf") format("truetype");
+}
+
+@font-face {
+  font-family: UniSansHeavyItalic;
+  src: url("./assets/fonts/Uni_Sans_Heavy_Italic.otf") format("truetype");
+}
+
+@font-face {
+  font-family: UniSansBold;
+  src: url("./assets/fonts/Uni_Sans_Bold.otf") format("truetype");
+}
+
+@font-face {
+  font-family: UniSansBoldItalic;
+  src: url("./assets/fonts/Uni_Sans_Bold_Italic.otf") format("truetype");
+}
+
+// Angular SCSS Reset boilerplate
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%; // to make 1rem = 10px
+  font-family: "Roboto", sans-serif;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+// change highlight color in Chrome
+::selection {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+// change highlight color in Firefox
+::-moz-selection {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+// change the default cursor
+a {
+  cursor: pointer;
+}
+
+// remove <a> highlight on mobile click
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: #2f1c07;
+}
+
+// Maximum width of the content
+.max-width {
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Myriad Pro", sans-serif;
+  font-weight: normal;
+}
