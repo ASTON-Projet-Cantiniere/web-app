@@ -1,6 +1,6 @@
 <div class="app">
   <app-header></app-header>
-  <div class="app-content">
+  <div class="app-content max-width">
     <router-outlet></router-outlet>
     <app-loader [@fadeInOut]="isLoading ? 'in' : 'out'"></app-loader>
   </div>

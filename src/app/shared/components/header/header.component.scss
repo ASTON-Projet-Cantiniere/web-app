@@ -71,12 +71,15 @@ svg {
 
 }
 
-.navbar {
+header {
   @include navbar-blur;
   box-shadow: 0 1px 10px 0 $navbar-shadow-color;
   caret-color: transparent;
-  display: flex;
   min-height: 56px;
+}
+
+.navbar {
+  display: flex;
 
   a {
     color: $navbar-menu-text-color;
