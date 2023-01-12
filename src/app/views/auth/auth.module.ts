@@ -8,8 +8,7 @@ import {SignupComponent} from './signup/signup.component';
 import {ProfileComponent} from './profile/profile.component';
 import {OrdersComponent} from './profile/orders/orders.component';
 import {EditComponent} from './profile/edit/edit.component';
-import {NgForOf} from "@angular/common";
-import {DashboardComponent} from '../dashboard/dashboard.component';
+import {NgForOf, NgIf} from "@angular/common";
 import {SignoutComponent} from './signout/signout.component';
 
 @NgModule({
@@ -18,7 +17,8 @@ import {SignoutComponent} from './signout/signout.component';
     ReactiveFormsModule,
     SharedModule,
     RouterModule.forChild(AuthRoutes),
-    NgForOf
+    NgForOf,
+    NgIf,
   ],
   declarations: [
     SigninComponent,
@@ -26,9 +26,9 @@ import {SignoutComponent} from './signout/signout.component';
     ProfileComponent,
     OrdersComponent,
     EditComponent,
-    DashboardComponent,
     SignoutComponent,
-  ]
+  ],
+  providers: [],
 })
 export class AuthModule {
 }
