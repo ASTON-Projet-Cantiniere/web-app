@@ -15,26 +15,17 @@ import {FormControl} from "@angular/forms";
   styleUrls: ['./orders-manager.component.scss']
 })
 export class OrdersManagerComponent implements OnInit {
+  
   public selected: string = 'meals';
   
   orders: OrderInterface[] = [];
   meals: Meal[] = [];
   menus: Menu[] = [];
 
-  // public formAdd!: FormGroup;
-
   public formSearchByDate!: FormGroup;
   public formAdd!: FormGroup;
 
-  constructor(private orderService: OrderService, private mealService: MealService, private menuService: MenuService, private fb: FormBuilder){
-
-  }
-
-  //TODO: seule la méthode getAllOrders() est appelée, faire les autres
-  public show(message: any): void{
-    console.log(message);
-    
-  }
+  constructor(private orderService: OrderService, private mealService: MealService, private menuService: MenuService, private fb: FormBuilder){}
   
   ngOnInit(): void {
     this.formSearchByDate = new FormGroup({
@@ -65,7 +56,9 @@ export class OrdersManagerComponent implements OnInit {
   get quantity() {
     return this.formAdd.get("quantity") as FormArray;
   }
-
+  /**
+   * Ajoute un plat ou un menu à la commande en cours de création
+   */
   addQuantity() {
     const quantityForm = this.fb.group({
       quantity: [null],
@@ -75,7 +68,20 @@ export class OrdersManagerComponent implements OnInit {
     this.quantity.push(quantityForm);
     console.log(quantityForm);
   }
-
+  /**
+   * Reset les champs du formulaire d'ajout afin de changer de type: Plat/Menu
+   */
+  public myReset(){
+    const control = <FormArray>this.formAdd.controls['quantity'];
+    while (control.length > 0) {
+      control.removeAt(0)
+    }
+    console.log(this.quantity);
+    
+  }
+  /**
+   * Créer une commande
+   */
   public addOrder(){
     console.log(this.formAdd);
     this.orderService.createOrder(this.formAdd.value.userId, this.formAdd.value.constraintId, ...this.formAdd.value.quantity).subscribe();
@@ -89,7 +95,9 @@ export class OrdersManagerComponent implements OnInit {
     
   }
 
-  
+  /**
+   * Recherche une commande selon une période donnée
+   */
   public searchByDate(){
     this.orders = [];
     this.orderService.getOrdersByRangeDate(this.formSearchByDate.value.status, this.formSearchByDate.value.beginDate, this.formSearchByDate.value.endDate)
@@ -115,7 +123,10 @@ export class OrdersManagerComponent implements OnInit {
       }
     )
   }
-
+  /**
+   * Annule une commande => Fait passer son status à CANCELED
+   * @param id number
+   */
   public cancelOrder(id: number){
     this.orderService.cancelOrder(id).subscribe();
     console.log(id);

@@ -64,7 +64,7 @@
       <button type="submit" (click)="addOrder()">Submit</button>
       <div class="tiny-column">
           <label for="type">Type: </label>
-          <select name="" id="type" [(ngModel)]="selected" [ngModelOptions]="{standalone: true}">
+          <select name="" id="type" [(ngModel)]="selected" (ngModelChange)="myReset()" [ngModelOptions]="{standalone: true}">
               <option value="meals">Meals</option>
               <option value="menus">Menus</option>
           </select>
