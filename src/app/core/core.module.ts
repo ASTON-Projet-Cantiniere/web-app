@@ -4,15 +4,23 @@ import {AuthInterceptorProvider} from './interceptors/auth.interceptor';
 import {CoreComponentsModule} from "./components/components.module";
 import {CoreGuardsModule} from "./guards/guards.module";
 import {CoreServicesModule} from "./services/services.module";
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ToastrModule} from "ngx-toastr";
 
 @NgModule({
   imports: [
     CommonModule,
+    CoreComponentsModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      timeOut: 2000,
+      positionClass: 'toast-bottom-full-width',
+    }),
   ],
   exports: [
     CoreComponentsModule,
     CoreGuardsModule,
-    CoreServicesModule
+    CoreServicesModule,
   ],
   providers: [
     AuthInterceptorProvider,

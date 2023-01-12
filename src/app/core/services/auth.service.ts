@@ -8,6 +8,7 @@ import {BroadcasterService} from "@core/services/broadcaster.service";
 import {CONSTANTS} from "@core/constants";
 import {User} from "@shared/models/user.model";
 import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({providedIn: 'root'})
 export class AuthService implements OnDestroy {
@@ -17,21 +18,10 @@ export class AuthService implements OnDestroy {
 
   constructor(private http: HttpClient,
               private broadcaster: BroadcasterService,
-              private router: Router) {
+              private router: Router,
+              private toastr: ToastrService) {
     this.$userState.subscribe((user: User) => this.user = user);
     this.initUserState();
-  }
-
-  private initUserState() {
-    const token = TokenService.getToken();
-    if (token) {
-      if (this.tokenIsExpired(token)) {
-        this.signOut();
-      }
-      else {
-        this.emitUserState(token);
-      }
-    }
   }
 
   ngOnDestroy(): void {
@@ -72,6 +62,7 @@ export class AuthService implements OnDestroy {
           this.emitUserState(token);
           // We redirect the user to the home page
           this.router.navigate(['/']);
+          this.toastr.success('Vous-êtes connecté');
         }
       }),
       catchError((error) => {
@@ -119,6 +110,7 @@ export class AuthService implements OnDestroy {
     TokenService.clearToken();
     this.clearUserState();
     this.router.navigate(['/']);
+    this.toastr.info('Vous-êtes déconnecté');
   }
 
   /**
@@ -144,14 +136,6 @@ export class AuthService implements OnDestroy {
   }
 
   /**
-   * This method is used to clear the user state
-   * @private
-   */
-  private clearUserState() {
-    this.broadcaster.broadcast(CONSTANTS.USER_STATE, undefined);
-  }
-
-  /**
    * Method to check if the token is not expired
    * @param token
    * @return {string | null}
@@ -162,5 +146,24 @@ export class AuthService implements OnDestroy {
       return null;
     }
     return decodedToken.exp! < Date.now() / 1000; // convert to seconds
+  }
+
+  private initUserState() {
+    const token = TokenService.getToken();
+    if (token) {
+      if (this.tokenIsExpired(token)) {
+        this.signOut();
+      } else {
+        this.emitUserState(token);
+      }
+    }
+  }
+
+  /**
+   * This method is used to clear the user state
+   * @private
+   */
+  private clearUserState() {
+    this.broadcaster.broadcast(CONSTANTS.USER_STATE, undefined);
   }
 }
