@@ -65,19 +65,19 @@ export class OrderService {
    * @param constraintId number || -1
    * @returns Observable
    */
-  deliverOrder(orderId: number, constraintId: number = -1): Observable<any | HttpError> {
-    return this.http.patch<any | HttpError>(`order/deliverandpay/${orderId}/${constraintId}`, null)
+  deliverOrder(orderId: number, constraintId: number = -1): Observable<Quantity | HttpError> {
+    return this.http.patch<Quantity | HttpError>(`order/deliverandpay/${orderId}/${constraintId}`, null)
   }
 
   /**
    * Affiche toutes les commandes faites par un utilisateur selon les critères
    * @param userId number
-   * @param status  null || string('CREATED(0)' | 'DELIVERED(1)' | 'CANCELED(2)')
-   * @param beginDate null || Date
-   * @param endDate null || Date
+   * @param status  null || Number ('CREATED(0)' | 'DELIVERED(1)' | 'CANCELED(2)')
+   * @param beginDate null || String
+   * @param endDate null || String
    * @returns Observable
    */
-  getOrdersUnconfirmedByUser(userId: number, status?: string, beginDate?: string, endDate?: string): Observable<OrderInterface[] | HttpError> {
+  getOrdersUnconfirmedByUser(userId: number, status?: number, beginDate?: string, endDate?: string): Observable<OrderInterface[] | HttpError> {
     let my_url: string = `order/findallforuser/${userId}`;
     if (status || beginDate || endDate) {
       my_url += "?";
