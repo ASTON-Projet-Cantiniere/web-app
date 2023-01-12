@@ -1,0 +1,46 @@
+@import 'src/assets/styles/colors';
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem;
+  padding: 1rem;
+  overflow: auto;
+  border: 1px dashed $border-color;
+  border-radius: 2rem;
+
+  .title-container {
+    padding-left: 1rem;
+    .title {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: $text;
+    }
+    .subtitle {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: $text-gray;
+    }
+  }
+
+  .dashboard-items-container {
+  }
+
+  @media (min-width: 768px) {
+    .dashboard-items-wrapper {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-items-wrapper {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+

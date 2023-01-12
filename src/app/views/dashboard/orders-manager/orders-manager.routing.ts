@@ -5,8 +5,8 @@ import {OrdersManagerComponent} from './orders-manager.component';
 export const OrdersManagerRoutes: Routes = [
   {
     path: '',
-    component: OrdersManagerComponent,
     children: [
+      {path: '', component: OrdersManagerComponent},
       {path: 'update-constraints', component: UpdateConstraintsComponent}
     ]
   }

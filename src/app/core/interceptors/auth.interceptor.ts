@@ -9,7 +9,7 @@ import {
 } from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
 import {AuthService} from "@core/services/auth.service";
-import {Router} from "@angular/router";
+import {ToastrService} from "ngx-toastr";
 
 /**
  * This interceptor is used to add the token to the request.
@@ -23,11 +23,10 @@ class AuthInterceptor implements HttpInterceptor {
   constructor(
     @Inject('API_URL') private baseUrl: string,
     private authService: AuthService,
-    private router: Router) {
+    private toastr: ToastrService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('req.url--->>>', req.url);
     // Check if the request not contain protocol (only relative path is provided for API calls)
     if (this._protocols.every(p => !req.url.startsWith(p))) {
       req = req.url.startsWith('/')
@@ -35,26 +34,47 @@ class AuthInterceptor implements HttpInterceptor {
         : req.clone({url: this.baseUrl + '/' + req.url});
     }
     if (this.authService.isAuthentified()) {
-      // Clone the request to add the new header.
-      const newReq = req.headers.has('Authorization')
+      // Clone the request to add the new header if current request do not have Authorization set
+      req = req.headers.has('Authorization')
         ? req : req.clone({
           headers: req.headers.set('Authorization', this.authService.getToken() ?? '')
         });
-      // Pass on the cloned request instead of the original request.
-      return next.handle(newReq).pipe(
-        catchError((err) => this.handleError(newReq, next, err)),
-      );
     }
-    return next.handle(req);
+    return next.handle(req).pipe(
+      catchError((err) => this.handleError(req, next, err)),
+    );
   }
 
-  handleError(req: HttpRequest<any>, next: HttpHandler, error: any) {
-    if (error instanceof HttpErrorResponse && error.status === 401) {
-      this.authService.signOut();
-      this.router.navigate(['account/signin']);
-      return next.handle(req);
+  private handleError(req: HttpRequest<any>, next: HttpHandler, error: any) {
+    if (error instanceof HttpErrorResponse) {
+      if (error.error instanceof ErrorEvent) {
+        console.log('Error Event');
+      } else {
+        switch (error.status) {
+          case 401: // Unautorized
+            this.toastr.error('Authorization Error');
+            this.authService.signOut();
+            break;
+          case 403: // Forbidden
+            this.toastr.error('Erreur. Vous n\'avez pas les droits pour accéder à cette ressource');
+            break;
+          case 404: // Not found
+            this.toastr.error('Erreur. La ressource demandée n\'existe pas');
+            break;
+          case 503: // Server error
+            this.toastr.error('Erreur. Le serveur est indisponible');
+            break;
+          case 408: // Timeout handling
+            this.toastr.error('Erreur. Le serveur ne répond pas');
+            break;
+          default: // Other errors
+            break;
+        }
+      }
+    } else {
+      console.log('An error occurred');
     }
-    return throwError(error);
+    return throwError(() => new Error(error.statusText));
   }
 }
 
