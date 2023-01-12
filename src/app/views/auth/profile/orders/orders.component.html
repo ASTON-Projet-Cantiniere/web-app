@@ -1,14 +1,77 @@
+<main class="justify-center">
 <h1>Orders</h1>
 
-<div class="container">
-  <ul>
-    <li *ngFor="let order of orders">
-      <a routerLink="/{{ order.id }}">
-        <p>
-          Id: {{ order.id }}
-        </p>
-      </a>
-    </li>
-  </ul>
+<!-- ------------- Liste des commandes --------------- -->
+<div class="myContainer">
+  <!-- <input #id type="text" value="{{order.id}}" hidden> -->
+  <section *ngFor="let order of orders">
+      <div *ngIf="order.id">
+        <!-- (click)="findOrder(order.id)" -->
+          <div class="myOrder">
+              
+              <section class="topInfos">
+                  <span>
+                      ID: <b>{{ order.id }}</b>
+                  </span>
+              </section>
+
+
+              <section *ngIf="order.quantity; else pasDeCommande" class="orderMain">
+
+                  <section *ngFor="let plat of order.quantity" class="row">
+                      
+                      <section *ngIf="plat.meal">
+                          
+                          <section class="space-between">
+                              <p class="platMenu">
+                                  - {{plat.quantity}}x {{plat.meal.label}}
+                              </p>
+                              <p *ngIf="plat.meal.priceDF">
+                                  {{plat.meal.priceDF}} €
+                              </p>
+                          </section>
+                      </section>
+
+                      <section *ngIf="plat.menu">
+                           
+                          <h3 >
+                              {{plat.quantity}}x {{plat.menu.label}}
+                          </h3>
+                          <section class="space-between" *ngFor="let menuPlat of plat.menu.meals">
+                              <p class="platMenu" >
+                                  - {{menuPlat.label}}
+                              </p>
+                              <p *ngIf="menuPlat.priceDF">
+                                  {{menuPlat.priceDF}} €
+                              </p>
+                          </section>
+                          
+                      </section>
+
+
+                  </section>
+              </section>
+              <ng-template #pasDeCommande>
+                  <section class="orderMain">
+
+                      <p>Aucun plat commandé</p>
+                  </section>
+                  
+              </ng-template>
+
+
+              <section class="bottomInfos">
+                  <span>
+                      Created by: {{ order.user.firstname }} {{ order.user.name }} 
+                  </span> 
+                  <span>
+                      At: {{ order.creationTime }} // {{ order.creationDate }}
+                  </span>
+              </section>
+          </div>
+        </div>
+  </section>
+
 </div>
 
+</main>
