@@ -8,7 +8,7 @@ import {SignupComponent} from './signup/signup.component';
 import {ProfileComponent} from './profile/profile.component';
 import {OrdersComponent} from './profile/orders/orders.component';
 import {EditComponent} from './profile/edit/edit.component';
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {SignoutComponent} from './signout/signout.component';
 
 @NgModule({
@@ -18,6 +18,7 @@ import {SignoutComponent} from './signout/signout.component';
     SharedModule,
     RouterModule.forChild(AuthRoutes),
     NgForOf,
+    NgIf,
   ],
   declarations: [
     SigninComponent,
@@ -26,7 +27,8 @@ import {SignoutComponent} from './signout/signout.component';
     OrdersComponent,
     EditComponent,
     SignoutComponent,
-  ]
+  ],
+  providers: [],
 })
 export class AuthModule {
 }

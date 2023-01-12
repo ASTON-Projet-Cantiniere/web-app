@@ -1,4 +1,21 @@
-<p>signin works!</p>
-<button (click)="pocLogin()">POC Login</button>
-<a [routerLink]="['/account/signup']">Sign Up</a>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="email">Email</label>
+    <input type="email" id="email" formControlName="email">
+    <div *ngIf="(email!.invalid) && (email!.dirty || email!.touched)">
+      <div *ngIf="email!.errors!['required']">L'email est requis</div>
+      <div *ngIf="email!.errors!['email']">L'email doit être une adresse e-mail valide</div>
+    </div>
+  </div>
+  <div>
+    <label for="password">Password</label>
+    <input type="password" id="password" formControlName="password">
+    <div *ngIf="(password!.invalid) && (password!.dirty || password!.touched)">
+      <div *ngIf="password!.errors!['required'] ?? false">Mot de passe requis</div>
+    </div>
+  </div>
+  <button type="submit" [disabled]="(loginForm.invalid)">Se connecter</button>
+</form>
+<a [routerLink]="['/account/signup']">S'inscrire</a>
+
 
