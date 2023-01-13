@@ -2,21 +2,18 @@ import {Component, OnInit} from '@angular/core';
 import {Gradient} from './gradient';
 @Component({
   selector: 'app-background',
-  template: `<div id="container"><canvas id="gradient-canvas"></canvas></div>`,
+  template: `<canvas id="gradient-canvas"></canvas>`,
   styles: [`
-    #container {
-      clip-path: polygon(0 0, 60% 0, 0 80%);
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      overflow: hidden;
-    }
     #gradient-canvas {
       --gradient-color-1: #fafafa;
       --gradient-color-2: #ffffff;
       --gradient-color-3: #efdfcf;
       --gradient-color-4: #fcf6f3;
+      clip-path: polygon(0 0, 60% 0, 0 80%);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
       width: 100vw;
       height: 100vh;
     }
