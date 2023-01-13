@@ -6,7 +6,9 @@
   margin: 2rem;
   padding: 1rem;
   overflow: auto;
-  border: 1px dashed $border-color;
+  background-color: rgba(255, 255, 255, 0.3);
+  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
   border-radius: 2rem;
 
   .title-container {
