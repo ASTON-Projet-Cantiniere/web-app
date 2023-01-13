@@ -1,5 +1,8 @@
-<router-outlet></router-outlet>
-<app-meal></app-meal>
-<app-week-meals-manager></app-week-meals-manager>
-<!-- <app-inscription></app-inscription> -->
-<app-user></app-user>
+<div class="app">
+  <app-header style="z-index: 1" ></app-header>
+  <div class="app-content max-width">
+    <router-outlet></router-outlet>
+    <app-loader [@fadeInOut]="isLoading ? 'in' : 'out'"></app-loader>
+  </div>
+  <app-footer></app-footer>
+</div>

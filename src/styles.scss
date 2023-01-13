@@ -1,3 +1,4 @@
+@import 'src/assets/styles/toastr.scss';
 @font-face {
   font-family: UniSansHeavy;
   src: url("./assets/fonts/Uni_Sans_Heavy.otf") format("truetype");
@@ -63,6 +64,12 @@ body {
 a {
   text-decoration: none;
   color: #2f1c07;
+}
+
+// Maximum width of the content
+.max-width {
+  max-width: 120rem;
+  margin: 0 auto;
 }
 
 h1,
