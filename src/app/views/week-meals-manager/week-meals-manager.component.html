@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="grid">
+        <div class="card">
+            <h3>Jour</h3>
+            <div class="mealChoice"> 
+                <!--
+                    TODO: *ngFor="let day of week"
+                    <h4>{{ day.name }}</h4>
+                -->
+                <h4>Jour</h4>
+                <mat-form-field appearance="fill">
+                    <mat-label>Plat 1</mat-label>
+                    <mat-select>
+                        <mat-option> <!--TODO: *ngFor="let meal of meals" [value]="meal.label"-->
+                            plats
+                        </mat-option>
+                    </mat-select>
+                    <mat-label>Plat 2</mat-label>
+                    <mat-select>
+                        <mat-option> <!--TODO: *ngFor="let meal of meals" [value]="meal.label"-->
+                            plats
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</div>
