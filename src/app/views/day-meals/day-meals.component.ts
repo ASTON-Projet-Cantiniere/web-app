@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DayMeal, Meal, WeekMeals } from 'src/app/shared/models/meal.model';
+import { Meal, WeekMeals } from 'src/app/shared/models/meal.model';
 import { Image } from '@shared/models/image.model';
 import { MealService } from 'src/app/shared/services/manager/meal.service';
 import { environment } from '@env';
@@ -13,8 +13,6 @@ export class DayMealsComponent {
 
   url = environment.apiURL;
   meals: Meal[] =[];
-  dayMeal!: DayMeal;
-  dayMeals: DayMeal[] = [];
   weekMeals: WeekMeals[] = [];
   weekDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 
@@ -25,6 +23,9 @@ export class DayMealsComponent {
     this.getAllMealForThisWeek();
   }
 
+  /**
+   * récupération des plats dispo pour la semaine et leur image correspondante
+   */
   getAllMealForThisWeek() {
     this.mealService.getAllMealForThisWeek(3).subscribe((meals: Meal[]) => {
       meals.forEach((meal: Meal, index: number) => {
@@ -33,12 +34,15 @@ export class DayMealsComponent {
         });
       });
       this.meals.push(...meals);
-      console.log(this.meals[0]);
       
       this.addTwoMealsPerDay(this.meals);
     });
   }
 
+  /**
+   * attribue 2 plats par jour
+   * @param meals un tableau contenant tous les plats de la semaine
+   */
   addTwoMealsPerDay(meals: Meal[]) {
     let j=0
     for(let i=0; i<this.weekDays.length - 2; i++) {
@@ -48,9 +52,13 @@ export class DayMealsComponent {
       })
       j+=2;
     }
-    console.log(this.weekMeals);
   }
 
+  /**
+   * ouvre le modal de selection permettant de choisir sa formule
+   * @param {string} day le nom du jour de la semaine
+   * @param {Meal[]} meals les 2 plats du jour de la semaine
+   */
   openDialog(day: string, meals: Meal[]) {
 
   }

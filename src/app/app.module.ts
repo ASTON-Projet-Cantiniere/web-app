@@ -14,9 +14,7 @@ import {FooterComponent} from "@shared/components/footer/footer.component";
     SharedModule,
     BrowserModule.withServerTransition({appId: 'serverApp'}),
     AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule
-    FormsModule,
+    CoreModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{provide: 'API_URL', useValue: environment.apiURL}],
