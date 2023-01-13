@@ -1,18 +1,34 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AdminsRoutes } from './auth.routing';
-import { SharedModule } from '../../shared/shared.module';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthRoutes} from './auth.routing';
+import {SharedModule} from '@shared/shared.module';
+import {SigninComponent} from './signin/signin.component';
+import {SignupComponent} from './signup/signup.component';
+import {ProfileComponent} from './profile/profile.component';
+import {OrdersComponent} from './profile/orders/orders.component';
+import {EditComponent} from './profile/edit/edit.component';
+import {NgForOf} from "@angular/common";
+import {DashboardComponent} from '../dashboard/dashboard.component';
+import {SignoutComponent} from './signout/signout.component';
 
 @NgModule({
   imports: [
-    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
-    RouterModule.forChild(AdminsRoutes)
+    RouterModule.forChild(AuthRoutes),
+    NgForOf
   ],
-  declarations: []
+  declarations: [
+    SigninComponent,
+    SignupComponent,
+    ProfileComponent,
+    OrdersComponent,
+    EditComponent,
+    DashboardComponent,
+    SignoutComponent,
+  ]
 })
-export class AdminsModule { }
+export class AuthModule {
+}

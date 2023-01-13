@@ -1,21 +1,31 @@
-import { Routes } from '@angular/router';
-import { AdminSigninComponent } from './admin-signin/admin-signin.component';
-import { AdminSignupComponent } from './admin-signup/admin-signup.component';
-import { AdminProfileComponent } from './admin-profile/admin-profile.component';
-import { AdminGuard } from '../../../shared/guard/auth/admin.guard';
+import {Routes} from '@angular/router';
+import {SigninComponent} from './signin/signin.component';
+import {SignupComponent} from './signup/signup.component';
+import {ProfileComponent} from './profile/profile.component';
+import {OrdersComponent} from "./profile/orders/orders.component";
+import {AuthGuard} from '@core/guards/auth.guard';
+import {EditComponent} from "@views/auth/profile/edit/edit.component";
+import {SignoutComponent} from "@views/auth/signout/signout.component";
 
-export const AdminsRoutes: Routes = [
-  { 
-    path: 'signin',
-    component: AdminSigninComponent
+export const AuthRoutes: Routes = [
+  {
+    path: 'account',
+    children: [
+      {path: 'signin',component: SigninComponent},
+      {path: 'signup',component: SignupComponent},
+      {path: 'signout',component: SignoutComponent},
+      {path: '**',redirectTo: 'signin'}
+    ],
+    canActivateChild: [AuthGuard]
   },
-  { 
-    path: 'signup', 
-    component: AdminSignupComponent 
-  },
-  { 
-    path: 'profile', 
-    component: AdminProfileComponent,
-    canActivate: [AdminGuard]
+  {
+    path: 'profile',
+    children: [
+      {path: '',component: ProfileComponent},
+      {path: 'edit',component: EditComponent},
+      {path: 'orders',component: OrdersComponent},
+      {path: '**', redirectTo: ''}
+    ],
+    canActivateChild: [AuthGuard]
   },
 ];

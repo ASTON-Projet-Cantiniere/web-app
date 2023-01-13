@@ -1,39 +1,79 @@
+@font-face {
+  font-family: UniSansHeavy;
+  src: url("./assets/fonts/Uni_Sans_Heavy.otf") format("truetype");
+}
 
-// Custom Theming for Angular Material
-// For more information: https://material.angular.io/guide/theming
-@use '@angular/material' as mat;
-// Plus imports for other components in your app.
+@font-face {
+  font-family: UniSansHeavyItalic;
+  src: url("./assets/fonts/Uni_Sans_Heavy_Italic.otf") format("truetype");
+}
 
-// Include the common styles for Angular Material. We include this here so that you only
-// have to load a single css file for Angular Material in your app.
-// Be sure that you only ever include this mixin once!
-@include mat.core();
+@font-face {
+  font-family: UniSansBold;
+  src: url("./assets/fonts/Uni_Sans_Bold.otf") format("truetype");
+}
 
-// Define the palettes for your theme using the Material Design palettes available in palette.scss
-// (imported above). For each palette, you can optionally specify a default, lighter, and darker
-// hue. Available color palettes: https://material.io/design/color/
-$cantiniere-primary: mat.define-palette(mat.$indigo-palette);
-$cantiniere-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+@font-face {
+  font-family: UniSansBoldItalic;
+  src: url("./assets/fonts/Uni_Sans_Bold_Italic.otf") format("truetype");
+}
 
-// The warn palette is optional (defaults to red).
-$cantiniere-warn: mat.define-palette(mat.$red-palette);
+// Angular SCSS Reset boilerplate
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-// Create the theme object. A theme consists of configurations for individual
-// theming systems such as "color" or "typography".
-$cantiniere-theme: mat.define-light-theme((
-  color: (
-    primary: $cantiniere-primary,
-    accent: $cantiniere-accent,
-    warn: $cantiniere-warn,
-  )
-));
+html {
+  font-size: 62.5%; // to make 1rem = 10px
+  font-family: "Roboto", sans-serif;
+}
 
-// Include theme styles for core and each component used in your app.
-// Alternatively, you can import and @include the theme mixins for each component
-// that you are using.
-@include mat.all-component-themes($cantiniere-theme);
+html, body {
+  margin: 0;
+  height: 100%;
+}
 
-/* You can add global styles to this file, and also import other style files */
+// change highlight color in Chrome
+::selection {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+// change highlight color in Firefox
+::-moz-selection {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+// change the default cursor
+a {
+  cursor: pointer;
+}
+
+// remove <a> highlight on mobile click
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+
+a {
+  text-decoration: none;
+  color: #2f1c07;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Myriad Pro", sans-serif;
+  font-weight: normal;
+}
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
