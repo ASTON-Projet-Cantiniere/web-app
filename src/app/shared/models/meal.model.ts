@@ -1,19 +1,20 @@
 export interface Meal {
-    id?: number;
-    label: string;
-    status: number;
-    imageId: number;
-    priceDF: number;
-    availableForWeeksAndDays: {
-        values: [
-            {
-                week: number,
-                day: number
-            }
-        ]
-    };
-    category: number;
-    ingredients: Ingredient[];
+  id?: number;
+  label: string;
+  status: number;
+  imageId: number;
+  imagePath: string;
+  priceDF: number;
+  availableForWeeksAndDays: {
+    values: [
+      {
+        week: number,
+        day: number
+      }
+    ]
+  };
+  category: number;
+  ingredients: Ingredient[];
 }
 
 export interface Ingredient {
@@ -25,37 +26,13 @@ export interface Ingredient {
 }
 
 export type DayMeal = {
-    day: string,
-    meal: Meal[]
+  meal: Meal,
+  imagePath: string
 }
 
-export const weekDay = [
-    {
-        id: 0,
-        day: 'Lundi'
-    },
-    {
-        id: 1,
-        day: 'Mardi'
-    },
-    {
-        id: 2,
-        day: 'Mercredi'
-    },
-    {
-        id: 3,
-        day: 'Jeudi'
-    },
-    {
-        id: 4,
-        day: 'Vendredi'
-    },
-    {
-        id: 5,
-        day: 'Samedi'
-    },
-    {
-        id: 6,
-        day: 'Dimanche'
-    }
-]
+export type WeekMeals = {
+  day: string,
+  meals: Meal[]
+}
+
+export const WeekDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];

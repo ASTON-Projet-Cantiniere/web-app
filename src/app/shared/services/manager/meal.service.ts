@@ -29,9 +29,9 @@ export class MealService {
 
   getAllMealForThisWeek(category?: number): Observable<Meal[]> {
     if(category) {
-      return this.http.get<Meal[]>(environment.apiURL + '/meal/findallavailableforthisweek?category=' + category);
+      return this.http.get<Meal[]>('/meal/findallavailableforthisweek?category=' + category);
     }
-    return this.http.get<Meal[]>(environment.apiURL + '/meal/findallavailableforthisweek');
+    return this.http.get<Meal[]>('/meal/findallavailableforthisweek');
   }
 
   /**
