@@ -148,6 +148,11 @@ export class AuthService implements OnDestroy {
     return decodedToken.exp! < Date.now() / 1000; // convert to seconds
   }
 
+  public updateUserInfo(user: User) {
+    this.user = user;
+    this.emitUserState();
+  }
+
   private initUserState() {
     const token = TokenService.getToken();
     if (token) {
