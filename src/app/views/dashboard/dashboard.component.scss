@@ -23,14 +23,13 @@
     }
   }
 
-  .dashboard-items-container {
-  }
 
   @media (min-width: 768px) {
     .dashboard-items-wrapper {
       display: flex;
-      flex-direction: row;
       flex-wrap: wrap;
+      justify-content: center;
+      align-items: center
     }
   }
 
