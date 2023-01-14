@@ -27,6 +27,13 @@ export class MealService {
     return this.http.get<Meal>(`/meal/find/${id}`);
   }
 
+  getAllMealForThisWeek(category?: number): Observable<Meal[]> {
+    if(category) {
+      return this.http.get<Meal[]>('/meal/findallavailableforthisweek?category=' + category);
+    }
+    return this.http.get<Meal[]>('/meal/findallavailableforthisweek');
+  }
+
   /**
    * Ajoute un plat
    * @param { Meal } meal le plat à ajouter
