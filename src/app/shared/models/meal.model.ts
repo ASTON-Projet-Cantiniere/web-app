@@ -3,6 +3,7 @@ export interface Meal {
   label: string;
   status: number;
   imageId: number;
+  imagePath: string;
   priceDF: number;
   availableForWeeksAndDays: {
     values: [
@@ -23,3 +24,15 @@ export interface Ingredient {
   status: number;
   imageId: number;
 }
+
+export type DayMeal = {
+  meal: Meal,
+  imagePath: string
+}
+
+export type WeekMeals = {
+  day: string,
+  meals: Meal[]
+}
+
+export const WeekDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
