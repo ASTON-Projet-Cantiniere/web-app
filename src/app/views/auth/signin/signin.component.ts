@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {AuthService} from '@core/services/auth.service';
 import Credentials from "@shared/models/credentials.model";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-signin',
@@ -14,8 +14,8 @@ export class SigninComponent {
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder) {
     this.loginForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
   }
 
