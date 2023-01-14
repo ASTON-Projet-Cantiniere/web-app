@@ -8,11 +8,9 @@
   <input [(ngModel)]="inscription.email" type="text" id="mail" name="mail"><br>
   <label for="password">Mot de passe:</label><br>
   <input [(ngModel)]="inscription.password" type="password" id="password" name="password"><br>
-  //buttons pour le sexe de l'utilisateur
   <label for="sexe">Sexe:</label><br>
-  <input [(ngModel)]="inscription.sex" type="radio" id="sexe" name="sexe" value="homme">Homme<br>
-  <input [(ngModel)]="inscription.sex" type="radio" id="sexe" name="sexe" value="femme">Femme<br>
+  <input [(ngModel)]="inscription.sex" type="radio" id="sexe" name="sexe" value="0">Homme<br>
+  <input [(ngModel)]="inscription.sex" type="radio" id="sexe" name="sexe" value="1">Femme<br>
   <button (click)="inscription_methode()" type="submit">S'inscire</button><br>
 </form>
-
 <a [routerLink]="['/account/signin']">Sign In</a>

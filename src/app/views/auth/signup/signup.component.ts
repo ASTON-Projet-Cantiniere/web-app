@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {RegisterCredentials} from "@shared/models/register-credentials.model";
 import {AuthService} from "@core/services/auth.service";
 
