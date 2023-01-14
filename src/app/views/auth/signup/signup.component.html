@@ -4,7 +4,7 @@
       <h1 class="auth-container-header-title">Inscrivez-vous</h1>
       <h3 class="header-subtitle">Créez votre compte afin de pouvoir profiter de notre service 🍽️</h3>
     </div>
-    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="auth-container">
         <input formControlName="firstname" type="text" placeholder="| &emsp;PRÉNOM" class="auth-container-input"
                [ngClass]="{ 'is-invalid': firstName!.invalid && (firstName!!.dirty || firstName!.touched) }">
@@ -12,14 +12,22 @@
                [ngClass]="{ 'is-invalid': name!.invalid && (name!.dirty || name!.touched) }">
         <input formControlName="email" type="text" placeholder="✉ &emsp;EMAIL" class="auth-container-input"
                [ngClass]="{ 'is-invalid': email!.invalid && (email!.dirty || email!.touched) }">
-        <input formControlName="password" type="password" placeholder="🗝 &emsp;MOT DE PASSE" class="auth-container-input"
+        <input formControlName="password" type="password" placeholder="🗝 &emsp;MOT DE PASSE"
+               class="auth-container-input"
                [ngClass]="{ 'is-invalid': password!.invalid && (password!.dirty || password!.touched) }">
         <div class="auth-container-radio-center">
           <div class="auth-container-radio">
-            <input type="radio" name="sex" id="homme" formControlName="sex" [value]="0">
-            <label for="homme">Homme</label>
-            <input type="radio" name="sex" id="femme" formControlName="sex" [value]="1">
-            <label for="femme">Femme</label>
+
+            <label for="homme">
+              <input type="radio" name="sex" id="homme" formControlName="sex" [value]="0">
+              <span class="design"></span>
+              <span>Homme</span>
+            </label>
+            <label for="femme">
+              <input type="radio" name="sex" id="femme" formControlName="sex">
+              <span class="design"></span>
+              <span>Femme</span>
+            </label>
           </div>
         </div>
         <div class="btn-container">

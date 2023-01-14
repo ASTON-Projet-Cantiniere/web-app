@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {AuthService} from "@core/services/auth.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {RegisterCredentials} from "@shared/models/register-credentials.model";
@@ -8,12 +8,12 @@ import {RegisterCredentials} from "@shared/models/register-credentials.model";
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.scss']
 })
-export class SignupComponent {
+export class SignupComponent implements OnDestroy {
 
-  public loginForm: FormGroup;
+  public registerForm: FormGroup;
 
   constructor(private authService: AuthService, private formBuilder: FormBuilder) {
-    this.loginForm = this.formBuilder.group({
+    this.registerForm = this.formBuilder.group({
       name: new FormControl('', [Validators.required, Validators.minLength(3)]),
       firstname: new FormControl('', [Validators.required, Validators.minLength(3)]),
       email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]),
@@ -23,23 +23,23 @@ export class SignupComponent {
   }
 
   public get name() {
-    return this.loginForm.get('name');
+    return this.registerForm.get('name');
   }
 
   public get firstName() {
-    return this.loginForm.get('firstname');
+    return this.registerForm.get('firstname');
   }
 
   public get email() {
-    return this.loginForm.get('email');
+    return this.registerForm.get('email');
   }
 
   public get password() {
-    return this.loginForm.get('password');
+    return this.registerForm.get('password');
   }
 
   public get sex() {
-    return this.loginForm.get('sex');
+    return this.registerForm.get('sex');
   }
 
   private getCredentials(): RegisterCredentials {
@@ -57,10 +57,15 @@ export class SignupComponent {
   }
 
   public onSubmit() {
-    if (this.loginForm.valid) {
+    if (this.registerForm.valid) {
       this.authService.signUp(this.getCredentials());
     } else {
-      this.loginForm.markAllAsTouched();
+      this.registerForm.markAllAsTouched();
     }
+  }
+
+  ngOnDestroy(): void {
+    // deconnect of the form
+    this.registerForm.reset();
   }
 }
