@@ -11,7 +11,9 @@ export interface User {
   phone: string;
   sex: number;
   status: number;
-  imageId: number;
+  imageId?: number;
   token?: string;
   image?: Image;
 }
+
+

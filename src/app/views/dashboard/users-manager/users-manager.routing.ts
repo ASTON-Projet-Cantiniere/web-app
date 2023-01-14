@@ -4,8 +4,10 @@ import {EditUserComponent} from './edit-user/edit-user.component';
 
 export const UsersManagerRoutes: Routes = [
   {
-    path: '',
-    component: UsersManagerComponent,
-    children: [{ path: 'edit-user', component: EditUserComponent }]
+    path : '',
+    children: [
+      { path: '', component: UsersManagerComponent },
+      { path: ':id', component: EditUserComponent }
+    ]
   },
 ];

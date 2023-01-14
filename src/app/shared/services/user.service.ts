@@ -27,8 +27,8 @@ export class UserService {
    * @returns l'utilisateurs associé à l'id  ou error
    */
   public getUserByID(id: number): Observable<any> {
-    return this.http.get<User | HttpError>('/user/find/' + id);
-  }
+    return this.http.get<User>('/user/find/' + id)
+}
 
   /**
    * Permet de chercher l'image d'un utilisateurs via son id
@@ -71,8 +71,8 @@ export class UserService {
    * @param id number, id de l'utilisateurs
    * @returns Les données l'utilisateurs associé à l'id ou error
    */
-  public patchUpdateUser(id: number): Observable<User | HttpError> {
-    return this.http.patch<User | HttpError>('/user/upadate/' + id, null);
+  public patchUpdateUser(id: number, user:User): Observable<User | HttpError> {
+    return this.http.patch<User | HttpError>('/user/update/' + id, user);
   }
 
   /**
@@ -91,7 +91,7 @@ export class UserService {
    * @returns Les informations de l'utilisateurs
    */
   public postUserCredit(id: number, amount: number): Observable<User | HttpError> {
-    return this.http.post<User | HttpError>('/user/credit/' + id, null);
+    return this.http.post<User | HttpError>('/user/credit/' + id, amount);
   }
 
   /**
@@ -101,7 +101,7 @@ export class UserService {
    * @returns Les informations de l'utilisateurs
    */
   public postUserDebit(id: number, amount: number): Observable<User | HttpError> {
-    return this.http.post<User | HttpError>('/user/debit/' + id, null);
+    return this.http.post<User | HttpError>('/user/debit/' + id, amount);
   }
 
   /**
