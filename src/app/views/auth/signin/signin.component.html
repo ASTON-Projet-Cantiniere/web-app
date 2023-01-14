@@ -4,8 +4,8 @@
       <h1 class="auth-container-header-title">Connectez-vous</h1>
       <h3 class="header-subtitle">Commandez vos produits en toute simplicité et dégustez nos délicieux plats! 🍪</h3>
     </div>
-    <div class="auth-container">
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div class="auth-container">
         <input class="auth-container-input" type="email" id="email" formControlName="email" placeholder="✉ &emsp;EMAIL"
                [ngClass]="{'is-invalid': email!.invalid && (email!.dirty || email!.touched)}">
         <input class="auth-container-input" type="password" id="password" placeholder="🗝 &emsp;MOT DE PASSE"
@@ -15,11 +15,11 @@
           <a href="#">Mot de passe oublié ?</a>
         </div>
         <div class="btn-container">
-          <button (click)="gotoSignup()" class="submit-btn">S'inscrire</button>
           <button type="submit" class="second-btn">Se connecter</button>
+          <button (click)="gotoSignup()" class="submit-btn">S'inscrire</button>
         </div>
-      </form>
     </div>
+      </form>
   </div>
 </div>
 
