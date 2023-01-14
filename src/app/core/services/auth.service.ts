@@ -158,6 +158,14 @@ export class AuthService implements OnDestroy {
     this.emitUserState();
   }
 
+  public gotoSignIn() {
+    this.router.navigate(['account/login']);
+  }
+
+  public gotoSignUp() {
+    this.router.navigate(['account/signup']);
+  }
+
   /**
    * This method is used to init the user state at the launch of the service
    * @private
