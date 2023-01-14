@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WeekMenusManagerComponent } from './week-menus-manager.component';
-
+import {RouterModule} from "@angular/router";
+import {WeekMenusManagerRoutes} from "@views/dashboard/week-menus-manager/week-menus-manager.routing";
 
 
 @NgModule({
@@ -9,7 +10,8 @@ import { WeekMenusManagerComponent } from './week-menus-manager.component';
     WeekMenusManagerComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule.forChild(WeekMenusManagerRoutes),
   ]
 })
 export class WeekMenusManagerModule { }
