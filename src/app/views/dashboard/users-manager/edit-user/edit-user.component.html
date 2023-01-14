@@ -1,0 +1,34 @@
+<div class="card">
+    <form [formGroup]="form_user" (ngSubmit)="onClickSubmit(form_user.value)">
+        <h2>Modifier mon profil</h2>
+        <div class="container">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="{{user.email}}" formControlName="email">
+
+            <br>
+            <label for="name">Nom</label>
+            <input type="text" class="form-control" id="name" placeholder="{{user.name}}" formControlName="nom">
+
+            <br>
+            <label for="firstname">Prénom</label>
+            <input type="text" class="form-control" id="firstname" placeholder="{{user.firstname}}" formControlName="prenom">
+
+            <br>
+            <label for="phone">Téléphone</label>
+            <input type="text" class="form-control" id="phone" placeholder="{{user.firstname}}" formControlName="phone">
+            <button class="submit" type="submit">Modifier</button><br>
+        </div>
+    </form>
+    <button class='retour' [routerLink]="['../']">Retour</button>
+</div>
+
+<div class="card-simple">
+    <h2>Wallet</h2>
+    <div class="container">
+        <p>Le wallet : {{user.wallet}}</p>
+        <input type="number" [(ngModel)]="montant" placeholder="Montant">
+        <button class="submit" (click)="addMoney(montant)">Ajouter</button>
+        <button class="submit" (click)="removeMoney(montant)">Retirer</button>
+    </div>
+
+</div>

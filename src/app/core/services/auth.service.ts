@@ -167,3 +167,4 @@ export class AuthService implements OnDestroy {
     this.broadcaster.broadcast(CONSTANTS.USER_STATE, undefined);
   }
 }
+
