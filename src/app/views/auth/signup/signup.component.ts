@@ -44,11 +44,11 @@ export class SignupComponent {
 
   private getCredentials(): RegisterCredentials {
     return {
-      name: this.loginForm.get('name')?.value,
-      firstname: this.loginForm.get('firstName')?.value,
-      email: this.loginForm.get('email')?.value,
-      password: this.loginForm.get('password')?.value,
-      sex: this.loginForm.get('sex')?.value,
+      name: this.name?.value,
+      firstname: this.firstName?.value,
+      email: this.email?.value,
+      password: this.password?.value,
+      sex: this.sex?.value,
     }
   }
 
