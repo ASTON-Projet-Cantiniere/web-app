@@ -1,5 +1,5 @@
 import {Component, OnDestroy} from '@angular/core';
-import {AuthService} from "@core/services/auth.service";
+import {AuthService} from "@shared/services/auth.service";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {RegisterCredentials} from "@shared/models/register-credentials.model";
 

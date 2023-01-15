@@ -8,7 +8,7 @@ import {
   HttpRequest
 } from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
-import {AuthService} from "@core/services/auth.service";
+import {AuthService} from "@shared/services/auth.service";
 import {ToastrService} from "ngx-toastr";
 
 /**
