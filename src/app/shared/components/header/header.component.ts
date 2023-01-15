@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {AuthService} from "@shared/services/auth.service";
 import {User} from "@shared/models/user.model";
+import {CartService} from "@shared/services/cart.service";
 
 @Component({
   selector: 'app-header',
@@ -9,14 +10,12 @@ import {User} from "@shared/models/user.model";
 })
 export class HeaderComponent {
   public user: User | undefined;
-  public itemsCount: string = '1';
+  public itemsCount: string = '';
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private cartService: CartService) {
     this.authService.listenUserState().subscribe((user: User) => this.user = user);
+    this.cartService.listenCartCount().subscribe((count: number) => this.itemsCount = count.toString());
     this.authService.emitUserState();
-  }
-
-  hasItem() {
-    return true;
+    this.cartService.emitCartCount();
   }
 }
