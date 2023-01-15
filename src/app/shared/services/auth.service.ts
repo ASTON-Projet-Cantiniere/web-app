@@ -3,7 +3,7 @@ import {HttpClient, HttpResponse} from "@angular/common/http";
 import Credential from "@shared/models/credentials.model";
 import {RegisterCredentials} from "@shared/models/register-credentials.model";
 import {Observable, Subject, Subscription, takeUntil, tap} from 'rxjs';
-import {TokenService} from "./token.service";
+import {TokenService} from "@core/services/token.service";
 import {BroadcasterService} from "@core/services/broadcaster.service";
 import {CONSTANTS} from "@core/constants";
 import {User} from "@shared/models/user.model";
