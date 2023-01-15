@@ -1,8 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
-import {Image} from '../../models/image.model';
-import {Meal} from '../../models/meal.model';
+import {Image} from '../models/image.model';
+import {Meal} from '../models/meal.model';
 
 @Injectable({providedIn: 'root'})
 export class MealService {

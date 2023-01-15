@@ -1,22 +1,22 @@
 <div class="container">
-    <h3>
-        {{ data.day }}
-    </h3>
-    <div class="plat" *ngFor="let meal of data.meal">
-        <input class="radio" type="radio" value="Plat 1" name="plat"> {{ meal.label }}
-        <div class="Formule">
-            <div class="platSeul">
-                <input type="radio" value="Plat seul" name="formule"> Plat seul
-            </div>
-            <div class="formule">
-                <input type="radio" value="Formule" name="formule"> Formule
-            </div>
-        </div>
-        <div class="quantite">
-            <input type="number" id="tentacles" name="tentacles" min="0" max="100">
-        </div>
-        <div class="panier">
-            <button>Ajouter au panier</button>
-        </div>
+  <h3>
+    {{ data.day }}
+  </h3>
+  <div class="plat" *ngFor="let meal of data.meal">
+    <input class="radio" type="radio" value="Plat 1" name="plat"> {{ meal.label }}
+    <div class="Formule">
+      <div class="platSeul">
+        <input type="radio" value="Plat seul" name="formule"> Plat seul
+      </div>
+      <div class="formule">
+        <input type="radio" value="Formule" name="formule"> Formule
+      </div>
     </div>
+    <div class="quantite">
+      <input type="number" id="tentacles" name="tentacles" min="0" max="100">
+    </div>
+    <div class="panier">
+      <button>Ajouter au panier</button>
+    </div>
+  </div>
 </div>

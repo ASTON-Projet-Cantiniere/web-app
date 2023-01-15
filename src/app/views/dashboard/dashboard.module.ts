@@ -8,7 +8,6 @@ import {DashboardComponent} from "@views/dashboard/dashboard.component";
 import {IngredientsManagerComponent} from "@views/dashboard/ingredients-manager/ingredients-manager.component";
 import {MenusManagerComponent} from "@views/dashboard/menus-manager/menus-manager.component";
 import {DashboardCardComponent} from "@views/dashboard/dashboard-card/dashboard-card.component";
-import{ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -16,7 +15,6 @@ import{ReactiveFormsModule} from "@angular/forms";
     CommonModule,
     FormsModule,
     SharedModule,
-    ReactiveFormsModule,
     RouterModule.forChild(DashboardRoutes),
   ],
   declarations: [

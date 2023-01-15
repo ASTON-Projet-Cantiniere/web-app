@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Meal, WeekMeals } from 'src/app/shared/models/meal.model';
 import { Image } from '@shared/models/image.model';
-import { MealService } from 'src/app/shared/services/manager/meal.service';
+import { MealService } from '@shared/services/meal.service';
 import { environment } from '@env';
 
 @Component({
@@ -34,7 +34,7 @@ export class DayMealsComponent {
         });
       });
       this.meals.push(...meals);
-      
+
       this.addTwoMealsPerDay(this.meals);
     });
   }

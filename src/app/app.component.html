@@ -2,7 +2,8 @@
   <app-header style="z-index: 1" ></app-header>
   <div class="app-content max-width">
     <router-outlet></router-outlet>
-    <app-loader [@fadeInOut]="isLoading ? 'in' : 'out'"></app-loader>
+    <app-loader style="z-index:999" [@fadeInOut]="isLoading ? 'in' : 'out'"></app-loader>
   </div>
   <app-footer></app-footer>
 </div>
+<app-background></app-background>

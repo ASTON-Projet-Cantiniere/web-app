@@ -4,7 +4,6 @@
 @mixin navbar-blur {
   backdrop-filter: $navbar-blur;
   -webkit-backdrop-filter: $navbar-blur;
-  background-color: #fff;
 }
 
 @keyframes badge-shadow-pulse {
@@ -63,7 +62,6 @@ svg {
 
 header {
   @include navbar-blur;
-  box-shadow: 0 1px 10px 0 $navbar-shadow-color;
   caret-color: transparent;
   min-height: 56px;
 }
@@ -161,6 +159,7 @@ header {
     flex-direction: column;
     height: auto;
     margin-top: .5rem;
+    padding: .5rem 1rem;
 
     a {
       align-items: center;
@@ -184,9 +183,9 @@ header {
 
   .account-menu {
     height: 0;
-    padding: .5rem 1rem;
     position: absolute;
     top: 56px;
+    background-color: rgba(255, 255, 255, .9);
 
     a {
       display: flex;
@@ -269,7 +268,7 @@ header {
 
   #account-toggle:checked ~ .account-menu {
     margin-bottom: 1rem !important;
-
+    padding: .5rem 1rem!important;
   }
 
   .account-menu {

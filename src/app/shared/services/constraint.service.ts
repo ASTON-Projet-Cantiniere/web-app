@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from 'rxjs';
-import {ConstraintInterface} from '../../models/constraint.model';
+import {ConstraintInterface} from '../models/constraint.model';
 
 @Injectable({providedIn: 'root'})
 export class ConstraintService {

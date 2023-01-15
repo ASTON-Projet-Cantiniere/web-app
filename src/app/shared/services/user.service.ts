@@ -27,8 +27,8 @@ export class UserService {
    * @returns l'utilisateurs associé à l'id  ou error
    */
   public getUserByID(id: number): Observable<any> {
-    return this.http.get<User>('/user/find/' + id)
-}
+    return this.http.get<User | HttpError>('/user/find/' + id);
+  }
 
   /**
    * Permet de chercher l'image d'un utilisateurs via son id
@@ -69,6 +69,7 @@ export class UserService {
   /**
    * Permet de mettre à jour l'utilisateur
    * @param id number, id de l'utilisateurs
+   * @param user User, les données de l'utilisateur
    * @returns Les données l'utilisateurs associé à l'id ou error
    */
   public patchUpdateUser(id: number, user:User): Observable<User | HttpError> {
@@ -102,23 +103,5 @@ export class UserService {
    */
   public postUserDebit(id: number, amount: number): Observable<User | HttpError> {
     return this.http.post<User | HttpError>('/user/debit/' + id, amount);
-  }
-
-  /**
-   * Enregistrer un utilisateur via le post
-   * @param user utilisateur que l'on souhaite inscire
-   * @returns Les informations de l'utilisateurs
-   */
-  public postregisterUser(user: User): Observable<User | HttpError> {
-    return this.http.post<User | HttpError>('/user/register', user);
-  }
-
-  /**
-   * Enregistrer un utilisateur via le put
-   * @param user utilisateur que l'on souhaite inscire
-   * @returns Les informations de l'utilisateurs
-   */
-  public putregisterUser(user: any): Observable<any> {
-    return this.http.put<any>('/user/register', user);
   }
 }
