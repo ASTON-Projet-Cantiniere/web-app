@@ -1,3 +1,4 @@
+@import 'src/assets/styles/toastr.scss';
 @font-face {
   font-family: UniSansHeavy;
   src: url("./assets/fonts/Uni_Sans_Heavy.otf") format("truetype");
@@ -65,6 +66,12 @@ a {
   color: #2f1c07;
 }
 
+// Maximum width of the content
+.max-width {
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
 h1,
 h2,
 h3,
@@ -74,3 +81,6 @@ h6 {
   font-family: "Myriad Pro", sans-serif;
   font-weight: normal;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

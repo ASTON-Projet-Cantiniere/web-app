@@ -8,7 +8,7 @@ import {SignupComponent} from './signup/signup.component';
 import {ProfileComponent} from './profile/profile.component';
 import {OrdersComponent} from './profile/orders/orders.component';
 import {EditComponent} from './profile/edit/edit.component';
-import {CommonModule, NgForOf} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {SignoutComponent} from './signout/signout.component';
 
@@ -26,9 +26,9 @@ import {SignoutComponent} from './signout/signout.component';
     ProfileComponent,
     OrdersComponent,
     EditComponent,
-    DashboardComponent,
     SignoutComponent,
-  ]
+  ],
+  providers: [],
 })
 export class AuthModule {
 }

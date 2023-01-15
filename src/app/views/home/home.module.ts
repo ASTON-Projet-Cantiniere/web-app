@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     RouterModule.forChild(HomeRoutes),
   ],
   declarations: [
-  	HomeComponent,
+  	HomeComponent
   ]
 })
 export class HomeModule{ }
