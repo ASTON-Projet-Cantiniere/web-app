@@ -7,7 +7,6 @@ import {SharedModule} from '@shared/shared.module';
 import {CoreModule} from '@core/core.module';
 import {HeaderComponent} from "@shared/components/header/header.component";
 import {FooterComponent} from "@shared/components/footer/footer.component";
-import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
