@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpError} from '../models/error.model';
-import {OrderInterface, Quantity} from '../models/order.model';
+import {newOrder, Order, Quantity} from '../models/order.model';
 
 
 @Injectable({providedIn: 'root'})
@@ -14,12 +14,12 @@ export class OrderService {
    * Affiche toutes les commandes
    * @returns Observable
    */
-  getAllOrders(): Observable<OrderInterface[] | HttpError> {
-    return this.http.get<OrderInterface[] | HttpError>('order/findall');
+  getAllOrders(): Observable<Order[] | HttpError> {
+    return this.http.get<Order[] | HttpError>('order/findall');
   }
 
-  findOrder(orderId: number): Observable<OrderInterface> {
-    return this.http.get<OrderInterface>('order/find/' + orderId)
+  findOrder(orderId: number): Observable<Order> {
+    return this.http.get<Order>('order/find/' + orderId)
   }
 
   /**
@@ -29,7 +29,7 @@ export class OrderService {
    * @param status number || 0 => CREATED
    * @returns Observable
    */
-  getOrdersByRangeDate(status: number = 1, beginDate?: string, endDate?: string): Observable<OrderInterface[] | HttpError> {
+  getOrdersByRangeDate(status: number = 1, beginDate?: string, endDate?: string): Observable<Order[] | HttpError> {
 
     let my_url = `order/findallbetweendateinstatus?status=${status}`;
     if (beginDate) {
@@ -38,25 +38,16 @@ export class OrderService {
     if (endDate) {
       my_url += `&endDate=${endDate}`;
     }
-    return this.http.get<OrderInterface[] | HttpError>(my_url);
+    return this.http.get<Order[] | HttpError>(my_url);
   }
 
   /**
    * Permet de créer une commande contenant un ou plusieurs plats
-   * @param userId Id de l'utilisateur: number
-   * @param constraintId number || -1
-   * @param quantity Objet(s) de commandes
    * @returns Observable, exploitable en cas d'erreur etc
+   * @param order
    */
-  createOrder(myuserId: number, myconstraintId: number = -1, ...myquantity: Quantity[]): Observable<OrderInterface | HttpError> {
-    return this.http.put<OrderInterface | HttpError>(
-      'order/add',
-      {"userId" : myuserId,
-        "constraintId": myconstraintId,
-        "quantity":
-            myquantity
-      }
-    )
+  createOrder(order: newOrder): Observable<Order | HttpError> {
+    return this.http.put<Order | HttpError>('order/add',order)
   }
 
   /**
@@ -77,7 +68,7 @@ export class OrderService {
    * @param endDate null || String
    * @returns Observable
    */
-  getOrdersUnconfirmedByUser(userId: number, status?: number, beginDate?: string, endDate?: string): Observable<OrderInterface[] | HttpError> {
+  getOrdersUnconfirmedByUser(userId: number, status?: number, beginDate?: string, endDate?: string): Observable<Order[] | HttpError> {
     let my_url: string = `order/findallforuser/${userId}`;
     if (status || beginDate || endDate) {
       my_url += "?";
@@ -106,7 +97,7 @@ export class OrderService {
         }
       }
     }
-    return this.http.get<OrderInterface[] | HttpError>(my_url)
+    return this.http.get<Order[] | HttpError>(my_url)
   }
 
   /**

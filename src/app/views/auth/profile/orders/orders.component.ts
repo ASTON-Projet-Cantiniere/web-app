@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {OrderInterface} from "@shared/models/order.model";
+import {Order} from "@shared/models/order.model";
 import {Meal} from "@shared/models/meal.model";
 import {Menu} from "@shared/models/menu.model";
 import {OrderService} from "@shared/services/order.service";
@@ -17,7 +17,7 @@ import { AuthService } from '@shared/services/auth.service';
 export class OrdersComponent implements OnInit {
   public selected: string = 'meals';
 
-  orders: OrderInterface[] = [];
+  orders: Order[] = [];
 
 
   public formSearchByDate!: FormGroup;
