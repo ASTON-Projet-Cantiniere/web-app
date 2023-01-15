@@ -12,7 +12,7 @@ export class DayMealsDialogComponent {
   
   constructor(
     public dialogRef: MatDialogRef<DayMealsComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {day: string, meal: Meal[]}
+    @Inject(MAT_DIALOG_DATA) public data: {day: string, meals: Meal[]}
   ) {
     
   }

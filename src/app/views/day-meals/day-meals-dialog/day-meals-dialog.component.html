@@ -1,9 +1,9 @@
-<div class="container">
-    <h3>
-        {{ data.day }}
-    </h3>
-    <div class="plat" *ngFor="let meal of data.meal">
-        <input class="radio" type="radio" value="Plat 1" name="plat"> {{ meal.label }}
+
+<h1 mat-dialog-title>{{ data.day }}</h1>
+<mat-dialog-content>
+    <div class="plat" *ngFor="let meal of data.meals">
+        <input class="radio" type="radio" value="Plat 1" name="plat">
+        <label class="radio">{{ meal.label }}</label>
         <div class="Formule">
             <div class="platSeul">
                 <input type="radio" value="Plat seul" name="formule"> Plat seul
@@ -19,4 +19,10 @@
             <button>Ajouter au panier</button>
         </div>
     </div>
-</div>
+</mat-dialog-content>
+<mat-dialog-actions class="bottomdialog">
+    <button>Fermer</button>
+    <button>Confimrer</button>
+</mat-dialog-actions>
+
+

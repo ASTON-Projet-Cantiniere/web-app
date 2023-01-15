@@ -4,6 +4,7 @@ import {RouterModule} from '@angular/router';
 import {MealsOfTheWeekRoutes} from './day-meals.routing';
 import {DayMealsComponent} from './day-meals.component';
 import { DayMealsDialogComponent } from './day-meals-dialog/day-meals-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { DayMealsDialogComponent } from './day-meals-dialog/day-meals-dialog.com
   imports: [
     CommonModule,
     RouterModule.forChild(MealsOfTheWeekRoutes),
+    MatDialogModule,
   ]
 })
 export class DayMealsModule {

@@ -1,0 +1,20 @@
+.plat {
+    display: flex;
+}
+
+label {
+  display: block;
+  font: 1rem 'Fira Sans', sans-serif;
+}
+
+input, label {
+  margin: 0.4rem 0;
+}
+
+.Formule, .quantite {
+  margin-left: 15px;
+}
+
+.radio {
+  vertical-align: center;
+}

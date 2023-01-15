@@ -1,4 +1,4 @@
-import {NgModule} from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {RouterModule} from "@angular/router";
 import {DashboardRoutes} from "@views/dashboard/dashboard.routing";
@@ -24,7 +24,7 @@ import{ReactiveFormsModule} from "@angular/forms";
     IngredientsManagerComponent,
     MenusManagerComponent,
     DashboardCardComponent,
-  ]
+  ],
 })
 export class DashboardModule {
 }

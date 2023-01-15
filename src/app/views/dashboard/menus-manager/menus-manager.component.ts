@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./menus-manager.component.scss']
 })
 export class MenusManagerComponent {
-
+  
 }

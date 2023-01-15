@@ -1,7 +1,6 @@
 <div class="container">
   <div class="grid">
       <div class="card" *ngFor="let dayMeal of weekMeals" (click)="openDialog(dayMeal.day,dayMeal.meals)">
-        <!--(click)="openDialog(dayMeal.day,dayMeal.meal)-->
           <h3>{{ dayMeal.day}}</h3>
           <div class="meals" *ngFor="let meal of dayMeal.meals">
               <p>{{ meal.label }}</p>

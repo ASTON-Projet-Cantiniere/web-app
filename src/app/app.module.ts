@@ -15,7 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     BrowserModule.withServerTransition({appId: 'serverApp'}),
     AppRoutingModule,
-    CoreModule
+    CoreModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{provide: 'API_URL', useValue: environment.apiURL}],
