@@ -1,1 +1,101 @@
-<p>menus-manager works!</p>
+<div class="myContainer">
+    <h2>
+        Ajouter un menu:
+    </h2>
+    <form [formGroup]="formAdd">
+        <div class="formRow">
+            <button (click)="addAvailability()">Add date</button>
+            <button (click)="addMeals()">Add meal</button>
+            <button type="submit" (click)="addMenu()">Submit</button>
+        </div>
+
+        <div class="formRow">
+            <div class="tiny-column">
+                <label for="imagePath">Chemin de l'image: </label>
+                <input id="imagePath" formControlName="imagePath" type="text" placeholder="/images/my-path">
+            </div>
+            <div class="tiny-column">
+                <label for="image64">Lien vers l'image: </label>
+                <input id="image64" formControlName="image64" type="text" placeholder="https://google.fr">
+            </div>
+        </div>
+
+        <div class="formRow">
+            <div class="tiny-column">
+                <label for="description">Description: </label>
+                <input id="description" type="text" formControlName="description">  
+            </div><div class="tiny-column">
+                <label for="label">
+                    Label:  
+                </label>
+                <input id="label" type="text" formControlName="label" placeholder="'Menu - 1'">
+            </div>
+        </div>
+        <div class="formRow">
+            <div class="tiny-column">
+                <label for="description">Price: </label>
+                <input id="description" type="text" formControlName="priceDF">  
+            </div>
+        </div>
+
+
+        
+        
+        <div formArrayName="availableForWeeksAndDays">
+            <div class="column" *ngFor="let availableForWeeksAndDays of availableForWeeksAndDays.controls; let i=index" [formGroupName]="i">
+                <div class="formRow">
+                    <div class="tiny-column">
+                        <label for="week">Week: </label>
+                        <input id="week" type="number" formControlName="week"> 
+                    </div>
+                    <div class="tiny-column">
+                        <label for="day">Day: </label>
+                        <input id="day" type="number" formControlName="day"> 
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div formArrayName="mealIds">
+            <div class="column" *ngFor="let mealIds of mealIds.controls; let i=index" [formGroupName]="i">
+                <div class="formRow">
+                    <div class="tiny-column">
+                        <label for="meal">Meal: </label>
+                        <select name="" id="meal">
+                            <option *ngFor="let meal of mealList" value="{{meal.id}}">{{meal.label}}</option>
+                        </select> 
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </form>
+    <h2>Menus:</h2>
+    <div class="list">
+        <div *ngFor="let menu of menus">
+            <div class="menu">
+                <div *ngIf="menu.id" class="remove" (click)="removeMenu(menu.id)">
+                    X
+                </div>
+                <h3 class="menuLabel">
+                    {{menu.label}}
+                </h3>
+                
+                <ul *ngIf="menu.meals; else noMeal">
+                    <li *ngFor="let meal of menu.meals">
+                        {{meal.label}}
+                    </li>
+                </ul>
+    
+                <p class="totalPrice">
+                    Total: {{menu.priceDF}} €
+                </p>
+                <ng-template #noMeal>
+                    <p>Aucun plat</p>
+                </ng-template>
+            </div>
+        </div>
+    
+    </div>
+</div>

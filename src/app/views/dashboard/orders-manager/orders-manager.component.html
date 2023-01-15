@@ -9,7 +9,7 @@
       <div class="formRow">
           <div class="tiny-column">
               <label for="status">Status de la commande:</label>
-              <select id="status" formControlName="status" required>
+              <select id="status" formControlName="status" required="true">
                   <option value="0">
                       CREATED
                   </option>
@@ -76,7 +76,7 @@
               <div class="formRow">
                   <div *ngIf="selected == 'meals'" class="tiny-column">
                       <label for="meal">Meals </label>
-                      <select name="" id="meal" formControlName="mealId">
+                      <select name="" id="meal" formControlName="mealId" required="true">
                           <option *ngFor="let meal of meals" value="{{meal.id}}">{{meal.label}}</option>
                       </select> 
                   </div>
@@ -85,14 +85,14 @@
                   <div *ngIf="selected == 'menus'" class="tiny-column">
                       
                       <label for="menu">Menus:</label>  
-                      <select name="" id="menu" formControlName="menuId">
+                      <select name="" id="menu" formControlName="menuId" required="true">
                           <option *ngFor="let menu of menus" value="{{menu.id}}">{{menu.label}}</option>
                       </select>
                   </div>
                       <div class="tiny-column">
                           
                           <label for="menu">Quantity:</label>  
-                          <input type="number" formControlName="quantity">
+                          <input type="number" formControlName="quantity" required="true">
                       </div>
               </div>
           </div>
