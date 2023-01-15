@@ -1,10 +1,38 @@
-import { Injectable } from '@angular/core';
+import {Injectable, OnDestroy} from '@angular/core';
 import {Menu} from "@shared/models/menu.model";
+import {BroadcasterService} from "@core/services/broadcaster.service";
+import {map, Observable, Subject, takeUntil} from "rxjs";
+import {CONSTANTS} from "@core/constants";
 
 @Injectable({providedIn: 'root'})
-export class CartService {
+export class CartService implements OnDestroy {
+  private $destroy = new Subject();
+  private $cartState = this.broadcaster.on<Menu[]>(CONSTANTS.CART_STATE).pipe(takeUntil(this.$destroy));
+  private cart: Menu[] | undefined;
+  private cartCount: number = 0;
 
-  constructor() {
+  constructor(private broadcaster: BroadcasterService) {
+    this.$cartState.subscribe((cart: Menu[]) => {
+      this.cart = cart;
+      this.cartCount = cart.length;
+    });
+    this.initCartState();
+  }
+
+  ngOnDestroy(): void {
+    this.$destroy.complete();
+  }
+
+  listenCartState(): Observable<Menu[]> {
+    return this.$cartState;
+  }
+
+  listenCartCount(): Observable<number> {
+    return this.$cartState.pipe(map(() => this.cartCount));
+  }
+
+  private initCartState() {
+    this.broadcaster.broadcast(CONSTANTS.CART_STATE, this.readCartInLocalStorage());
   }
 
   /**
@@ -33,6 +61,7 @@ export class CartService {
     const cart = this.readCartInLocalStorage();
     cart.push(menu);
     this.writeCartInLocalStorage(cart);
+    this.initCartState();
   }
 
   /**
@@ -52,6 +81,7 @@ export class CartService {
     const index = cart.findIndex((cartMenu) => cartMenu.id === menu.id);
     cart.splice(index, 1);
     this.writeCartInLocalStorage(cart);
+    this.initCartState();
   }
 
   /**
@@ -59,7 +89,6 @@ export class CartService {
    * @return {number}
    */
   getTotalPrice(): number {
-    const cart = this.readCartInLocalStorage();
-    return cart.reduce((total, menu) => total + menu.priceDF, 0);
+    return this.readCartInLocalStorage().reduce((total, menu) => total + menu.priceDF, 0);
   }
 }
