@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from '@shared/services/manager/menu.service';
+import { MenuService } from '@shared/services/menu.service';
 import { Menu } from '@shared/models/menu.model';
 import { Meal } from '@shared/models/meal.model';
-import { MealService } from '@shared/services/manager/meal.service';
+import { MealService } from '@shared/services/meal.service';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FormControl} from "@angular/forms";
 @Component({
