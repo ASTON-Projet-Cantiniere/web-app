@@ -47,7 +47,7 @@ export class MenusManagerComponent implements OnInit{
   /**
    * Ajoute une date de disponibilité à la création de menu en cours
    */
-  addAvailability() {
+  public addAvailability() {
     const availableForm = this.fb.group({
       week: [0],
       day: [0],
@@ -58,7 +58,7 @@ export class MenusManagerComponent implements OnInit{
   /**
    * Ajoute un plat au menu en cours de création
    */
-  addMeals() {
+  public addMeals() {
     const ids = this.fb.group([]);
     this.mealIds.push(ids);
     console.log(ids);
@@ -67,22 +67,20 @@ export class MenusManagerComponent implements OnInit{
   /**
    * Ajoute un menu à la base de données
    */
-  addMenu(){
+  public addMenu(){
     this.menuService.addMenu({
       "description": this.formAdd.value.description,
       "label": this.formAdd.value.label,
       "image":
         {
-          "imagePath": this.formAdd.value.imagePath,
-          "image64": this.formAdd.value.image64
+        "imagePath": this.formAdd.value.imagePath,
+        "image64": this.formAdd.value.image64
         },
-      "priceDF": this.formAdd.value.priceDF,
+      "priceDF": parseInt(this.formAdd.value.priceDF),
       "availableForWeeksAndDays": {
         "values": [...this.formAdd.value.availableForWeeksAndDays]
       },
-      "mealIds": [
-        ...this.formAdd.value.mealIds
-      ]
+      "mealIds": this.formAdd.value.mealIds.value
     }).subscribe();
   }
 

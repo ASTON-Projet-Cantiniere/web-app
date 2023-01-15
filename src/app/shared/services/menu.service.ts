@@ -78,7 +78,7 @@ export class MenuService {
   addMenu(menu: AddMenu): Observable<Menu> {
     console.log(menu);
     
-    return this.http.post<Menu>('/menu/add', menu);
+    return this.http.put<Menu>('/menu/add', menu);
   }
 
   /**
@@ -87,6 +87,6 @@ export class MenuService {
    * @returns 
    */
   deleteMenu(menuId: number){
-    return this.http.delete<Menu>(`/menu/delete${menuId}`);
+    return this.http.delete<Menu>(`/menu/delete/${menuId}`);
   }
 }
