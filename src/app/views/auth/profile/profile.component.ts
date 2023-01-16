@@ -12,23 +12,9 @@ export class ProfileComponent implements OnInit {
   public user: any;
   public userid:any;
 
-  constructor(
-    private authService : AuthService,
-    private UserService : UserService,
-    private toastr: ToastrService) { }
+  constructor(private authService : AuthService) { }
 
   ngOnInit(): void {
-    //récupère l'utilisateur connecté
-    this.userid = this.authService.getUser();
-    //récupère les données de l'utilisateur connecté
-    this.UserService.getUserByID(this.userid.id).subscribe
-      (
-        (data) => {
-          this.user = data;
-        },
-        (error) => {
-          this.toastr.error("Erreur lors de la récupération des données");
-        });
+    this.user = this.authService.getUser();
   }
-
 }
