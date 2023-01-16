@@ -7,6 +7,9 @@ import {MealService} from "@shared/services/meal.service";
 import {MenuService} from "@shared/services/menu.service";
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {FormControl} from "@angular/forms";
+import { Validators } from '@angular/forms';
+import { UserService } from '@shared/services/user.service';
+import { User } from '@shared/models/user.model';
 
 
 @Component({
@@ -21,11 +24,13 @@ export class OrdersManagerComponent implements OnInit {
   orders: Order[] = [];
   meals: Meal[] = [];
   menus: Menu[] = [];
+  users: User[] = []
 
   public formSearchByDate!: FormGroup;
   public formAdd!: FormGroup;
+  public formSearchByUser!: FormGroup;
 
-  constructor(private orderService: OrderService, private mealService: MealService, private menuService: MenuService, private fb: FormBuilder){}
+  constructor(private orderService: OrderService, private mealService: MealService, private menuService: MenuService, private fb: FormBuilder, private userService: UserService){}
 
   ngOnInit(): void {
     this.formSearchByDate = new FormGroup({
@@ -38,6 +43,20 @@ export class OrdersManagerComponent implements OnInit {
       constraintId: [-1],
       quantity: this.fb.array([])
     })
+    this.formSearchByUser = new FormGroup({
+      userId: new FormControl<number>(0, Validators.required),
+      status: new FormControl<number|null>(null),
+      beginDate: new FormControl<string|null>(null),
+      endDate: new FormControl<string|null>(null)
+    });
+    this.userService.getUsers().subscribe(
+      r => {
+
+        this.users.push(...<[]>r);
+        console.log(this.users);
+        
+      }
+    )
     this.orderService.getAllOrders().subscribe(r => {
 
       this.orders.push(...<[]>r);
@@ -131,5 +150,16 @@ export class OrdersManagerComponent implements OnInit {
 
   deliverOrder(id: number) {
     this.orderService.deliverOrder(id).subscribe();
+  }
+
+  public searchByUser(){
+    this.orders = [];
+    this.orderService.getOrdersUnconfirmedByUser(this.formSearchByUser.value.userId, this.formSearchByUser.value.status, this.formSearchByUser.value.beginDate, this.formSearchByUser.value.endDate)
+    .subscribe(
+      r => {
+        this.orders.push(...<[]>r);
+        console.log(r);
+      }
+    );
   }
 }
