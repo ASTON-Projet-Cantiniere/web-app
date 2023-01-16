@@ -17,8 +17,8 @@ export class UserService {
    * Permet de chercher tous les utilisateurs
    * @returns tous les utilisateurs ou error
    */
-  public getUsers(): Observable<User | HttpError> {
-    return this.http.get<User | HttpError>('/user/findall')
+  public getUsers(): Observable<User[] | HttpError> {
+    return this.http.get<User[] | HttpError>('/user/findall')
   }
 
   /**
