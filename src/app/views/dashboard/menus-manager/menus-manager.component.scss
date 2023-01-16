@@ -79,6 +79,9 @@ form{
             top: 10px;
             color: rgb(215, 175, 105);
         }
+        .remove:hover {
+            cursor: pointer;
+        }
     }
     ul, p{
         margin-top: 2rem;

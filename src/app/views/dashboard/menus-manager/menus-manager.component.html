@@ -15,7 +15,7 @@
                 <input id="imagePath" formControlName="imagePath" type="text" placeholder="/images/my-path">
             </div>
             <div class="tiny-column">
-                <label for="image64">Lien vers l'image: </label>
+                <label for="image64">Image: </label>
                 <input id="image64" formControlName="image64" type="text" placeholder="https://google.fr">
             </div>
         </div>
@@ -64,7 +64,7 @@
                         <label for="meal">Meal: </label>
                         <select name="" id="meal" formControlName="id">
                             <option *ngFor="let meal of mealList" value="{{meal.id}}">{{meal.label}}</option>
-                        </select> 
+                        </select>
                     </div>
                 </div>
             </div>

@@ -71,23 +71,22 @@ export class MenusManagerComponent implements OnInit{
   /**
    * Ajoute un menu à la base de données
    */
-  public addMenu(){
-    console.log(...this.formAdd.value.mealIds);
-    
+  public addMenu() {
+    const mealIds = this.formAdd.value.mealIds.map((meal: any) => parseInt(meal.id));
     this.menuService.addMenu({
       "description": this.formAdd.value.description,
       "label": this.formAdd.value.label,
       "image":
         {
-        "imagePath": this.formAdd.value.imagePath,
-        "image64": this.formAdd.value.image64
+          "imagePath": this.formAdd.value.imagePath,
+          "image64": this.formAdd.value.image64
         },
       "priceDF": parseInt(this.formAdd.value.priceDF),
       "availableForWeeksAndDays": {
         "values": [...this.formAdd.value.availableForWeeksAndDays]
       },
-      "mealIds": [...this.formAdd.value.mealIds]
-    }).subscribe();
+      "mealIds": mealIds
+    }).pipe(tap((r: Menu) => this.menus.push(r))).subscribe();
   }
 
   /**
