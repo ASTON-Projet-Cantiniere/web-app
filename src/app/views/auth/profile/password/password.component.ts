@@ -1,7 +1,7 @@
 import { User } from '@shared/models/user.model';
 import { UserService } from '@shared/services/user.service';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '@core/services/auth.service';
+import { AuthService } from '@shared/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -50,7 +50,7 @@ export class PasswordComponent implements OnInit {
 
 
 
-  
+
 
   ngOnInit(): void {
   this.user = this.authService.getUser();
