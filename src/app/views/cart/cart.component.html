@@ -3,14 +3,14 @@
     <div class="cart-items-container">
       <div class="day-container" *ngFor="let day of days()">
         <h2>{{day}}</h2>
-        <div class="cart-item" *ngFor="let item of cart">
+        <div class="cart-item" *ngFor="let item of getItemByDay(day)">
           <div class="cart-item-left">
-            <div class="cart-item-title">{{item.menu.label}}</div>
-            <div class="cart-item-quantity">{{item.quantity}}</div>
+            <span class="cart-item-title">{{item.menu?.label ?? item.meal!.label}}</span>
+            <span class="cart-item-quantity">{{item.quantity}}*</span>
+            <span class="cart-item-price">{{item.menu?.priceDF ?? item.meal!.priceDF}}€</span>
           </div>
           <div class="cart-item-right">
-            <div class="cart-item-price">{{item.menu.priceDF}}€</div>
-            <button (click)="removeItemFromCart(item)" class="button">supprimer</button>
+            <button (click)="removeItemFromCart(item)" class="remove-btn">supprimer</button>
           </div>
         </div>
       </div>

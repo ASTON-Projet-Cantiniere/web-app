@@ -1,3 +1,4 @@
+import { PasswordComponent } from './profile/password/password.component';
 import {Routes} from '@angular/router';
 import {SigninComponent} from './signin/signin.component';
 import {SignupComponent} from './signup/signup.component';
@@ -24,6 +25,7 @@ export const AuthRoutes: Routes = [
       {path: '',component: ProfileComponent},
       {path: 'edit',component: EditComponent},
       {path: 'orders',component: OrdersComponent},
+      {path: 'password',component: PasswordComponent},
       {path: '**', redirectTo: ''}
     ],
     canActivateChild: [AuthGuard]

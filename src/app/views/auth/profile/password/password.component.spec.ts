@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DayMealsDialogComponent } from './day-meals-dialog.component';
+import { PasswordComponent } from './password.component';
 
-describe('DayMealsDialogComponent', () => {
-  let component: DayMealsDialogComponent;
-  let fixture: ComponentFixture<DayMealsDialogComponent>;
+describe('PasswordComponent', () => {
+  let component: PasswordComponent;
+  let fixture: ComponentFixture<PasswordComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DayMealsDialogComponent ]
+      declarations: [ PasswordComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DayMealsDialogComponent);
+    fixture = TestBed.createComponent(PasswordComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

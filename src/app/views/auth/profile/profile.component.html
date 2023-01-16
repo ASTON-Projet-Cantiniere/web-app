@@ -1,1 +1,23 @@
-<p>profile works!</p>
+
+<div class="card">
+    <h1>Bienvenue {{user.firstname!}}</h1>
+    <h2>Voici vos informations personnelles</h2>
+    <div class="container">
+        <label>Email :</label>
+        <h3>{{user.email!}}</h3>
+        <br>
+        <label>Nom :</label>
+        <h3>{{user.name!}}</h3>
+        <br>
+        <label>Prénom :</label>
+        <h3>{{user.firstname!}}</h3>
+        <br>
+<!--        <label>Téléphone :</label>-->
+<!--        <h3>{{user.phone ??'Non renseigné'}}</h3>-->
+        <!-- <br>
+        <h3>Vous habitez à {{user.town}} </h3> -->
+
+    </div>
+    <button [routerLink]="['password']">Modifier mon mot de passe</button>
+    <button [routerLink]="['edit']">Modifier mon profil</button>
+</div>
