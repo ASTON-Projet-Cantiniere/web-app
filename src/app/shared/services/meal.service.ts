@@ -1,8 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
-import {Image} from '../../models/image.model';
-import {Meal} from '../../models/meal.model';
+import {Image} from '../models/image.model';
+import {Meal} from '../models/meal.model';
 
 @Injectable({providedIn: 'root'})
 export class MealService {
@@ -25,6 +25,13 @@ export class MealService {
    */
   getMealByID(id: number): Observable<Meal> {
     return this.http.get<Meal>(`/meal/find/${id}`);
+  }
+
+  getAllMealForThisWeek(category?: number): Observable<Meal[]> {
+    if(category) {
+      return this.http.get<Meal[]>('/meal/findallavailableforthisweek?category=' + category);
+    }
+    return this.http.get<Meal[]>('/meal/findallavailableforthisweek');
   }
 
   /**

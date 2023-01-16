@@ -2,8 +2,7 @@ import { Router } from '@angular/router';
 import { identifierName } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from '@core/services/auth.service';
-import { User } from '@shared/models/user.model';
+import { AuthService } from '@shared/services/auth.service';
 import { UserService } from '@shared/services/user.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -17,8 +16,8 @@ export class EditComponent implements OnInit {
   userProfileForm!: FormGroup;
 
   constructor(private userService : UserService, private authService: AuthService,private toaster : ToastrService, private router : Router) { 
-    
   }
+  
   id: any;
   user: any;
   myuser = this.authService.getUser();

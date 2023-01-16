@@ -7,7 +7,6 @@ import {SharedModule} from '@shared/shared.module';
 import {CoreModule} from '@core/core.module';
 import {HeaderComponent} from "@shared/components/header/header.component";
 import {FooterComponent} from "@shared/components/footer/footer.component";
-import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, FooterComponent],
@@ -15,7 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SharedModule,
     BrowserModule.withServerTransition({appId: 'serverApp'}),
     AppRoutingModule,
-    CoreModule,
+    CoreModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [{provide: 'API_URL', useValue: environment.apiURL}],

@@ -2,7 +2,7 @@ import {Meal} from "./meal.model";
 import {Menu} from "./menu.model";
 import {User} from "./user.model";
 
-export interface OrderInterface {
+export interface Order {
   id?: number,
   creationDate?: Date,
   creationTime?: Date,
@@ -16,4 +16,10 @@ export interface Quantity {
   meal?: Meal,
   menu?: Menu,
   quantity: number
+}
+
+export interface newOrder {
+  userId: number,
+  constraintId: number,
+  quantity: Quantity[]
 }
