@@ -18,11 +18,11 @@ export interface Meal {
 }
 
 export interface Ingredient {
-  id: number;
-  description: string;
+  id?: number;
+  description?: string;
   label: string;
-  status: number;
-  imageId: number;
+  status?: number;
+  imageId?: number;
 }
 
 export type DayMeal = {

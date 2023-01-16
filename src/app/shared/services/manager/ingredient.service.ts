@@ -63,7 +63,7 @@ export class IngredientService {
    * @returns l'ingrédient ajouté
    */
   addIngredient(ingredient: Ingredient): Observable<Ingredient> {
-    return this.http.post<Ingredient>('ingredient/add', ingredient);
+    return this.http.put<Ingredient>('ingredient/add', ingredient);
   }
 
   /**

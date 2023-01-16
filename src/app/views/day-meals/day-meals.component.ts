@@ -15,6 +15,8 @@ export class DayMealsComponent {
 
   url = environment.apiURL;
   meals: Meal[] =[];
+  dayMeals: Meal[] = [];
+  allDayMeals: Meal[] = [];
   weekMeals: WeekMeals[] = [];
   weekDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 
@@ -25,32 +27,43 @@ export class DayMealsComponent {
     this.getAllMealForThisWeek();
   }
 
+  getMealForWeekAndDay(week: number, day: number) {
+    this.mealService.getMealAvailableForWeekAndDay(week,day,3).subscribe((meals: Meal[]) => {
+      meals.forEach(meal => {
+        this.mealService.getMealImageByID(meal.id!).subscribe((image: Image) => {
+          if(meal.availableForWeeksAndDays.values != null) {
+            meal.imagePath = `${this.url}/${image.imagePath!}`;
+            this.dayMeals.push(meal);
+            console.log(meal);
+          }
+        })
+      });
+      this.allDayMeals.push(...this.dayMeals);
+      this.meals.push(...meals)
+      this.addTwoMealsPerDay(this.meals);
+    })
+  }
+
   /**
    * récupération des plats dispo pour la semaine et leur image correspondante
    */
   getAllMealForThisWeek() {
-    // for(let i=0; i<this.weekDays.length; i++) {
-    //   this.mealService.getMealAvailableForWeekAndDay(this.getWeekNumber(),i+1,3).subscribe((meals: Meal[]) => {
-    //     meals.forEach(meal => {
-    //       this.mealService.getMealImageByID(meal.id!).subscribe((image: Image) => {
-    //         meal.imagePath = `${this.url}/${image.imagePath!}`;
-    //       })
-    //     });
-    //     this.meals.push(...meals)
-    //     this.addTwoMealsPerDay(this.meals);
-    //   })
-    // }
-
-    this.mealService.getAllMealForThisWeek(3).subscribe((meals: Meal[]) => {
-      meals.forEach((meal: Meal, index: number) => {
-        this.mealService.getMealImageByID(meal.id!).subscribe((image: Image) => {
-          meal.imagePath = `${this.url}/${image.imagePath!}`;
-        });
-      });
-      this.meals.push(...meals);
+    for(let i=0; i<this.weekDays.length; i++) {
       
-      this.addTwoMealsPerDay(this.meals);
-    });
+      console.log(this.allDayMeals);
+      
+    }
+
+    // this.mealService.getAllMealForThisWeek(3).subscribe((meals: Meal[]) => {
+    //   meals.forEach((meal: Meal, index: number) => {
+    //     this.mealService.getMealImageByID(meal.id!).subscribe((image: Image) => {
+    //       meal.imagePath = `${this.url}/${image.imagePath!}`;
+    //     });
+    //   });
+    //   this.meals.push(...meals);
+      
+    //   this.addTwoMealsPerDay(this.meals);
+    // });
   }
 
   /**
