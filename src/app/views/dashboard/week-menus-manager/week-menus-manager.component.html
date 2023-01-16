@@ -1,1 +1,59 @@
-<p>week-menus-manager works!</p>
+<form (ngSubmit)="saveMeals()" [formGroup]="selectedMeals">
+    <div class="day">
+        <label>Lundi</label>
+        <select formControlName="lundiMeal1" name="Plat1">
+            <label>Sélectionner un plat</label>
+            <option *ngFor="let meal of meals" [value]="meal.id">{{meal.label}}</option>
+        </select>
+        <select formControlName="lundiMeal2" name="Plat1">
+            <label>Sélectionner un plat</label>
+            <option *ngFor="let meal of meals" [value]="meal.id">{{meal.label}}</option>
+        </select>
+    </div>
+    <div class="day">
+        <label>Mardi</label>
+        <select formControlName="mardiMeal1" name="Plat1">
+            <label>Sélectionner un plat</label>
+            <option *ngFor="let meal of meals" [value]="meal.id">{{meal.label}}</option>
+        </select>
+        <select formControlName="mardiMeal2" name="Plat1">
+            <label>Sélectionner un plat</label>
+            <option *ngFor="let meal of meals" [value]="meal.id">{{meal.label}}</option>
+        </select>
+    </div>
+    <div class="day">
+        <label>Mercredi</label>
+        <select formControlName="mercrediMeal1" name="Plat1">
+            <label>Sélectionner un plat</label>
+            <option *ngFor="let meal of meals" [value]="meal.id">{{meal.label}}</option>
+        </select>
+        <select formControlName="mercrediMeal2" name="Plat1">
+            <label>Sélectionner un plat</label>
+            <option *ngFor="let meal of meals" [value]="meal.id">{{meal.label}}</option>
+        </select>
+    </div>
+    <div class="day">
+        <label>Jeudi</label>
+        <select formControlName="jeudiMeal1" name="Plat1">
+            <label>Sélectionner un plat</label>
+            <option *ngFor="let meal of meals" [value]="meal.id">{{meal.label}}</option>
+        </select>
+        <select formControlName="jeudiMeal2" name="Plat1">
+            <label>Sélectionner un plat</label>
+            <option *ngFor="let meal of meals" [value]="meal.id">{{meal.label}}</option>
+        </select>
+    </div>
+    <div class="day">
+        <label>Vendredi</label>
+        <select formControlName="vendrediMeal1" name="Plat1">
+            <label>Sélectionner un plat</label>
+            <option *ngFor="let meal of meals" [value]="meal.id">{{meal.label}}</option>
+        </select>
+        <select formControlName="vendrediMeal2" name="Plat1">
+            <label>Sélectionner un plat</label>
+            <option *ngFor="let meal of meals" [value]="meal.id">{{meal.label}}</option>
+        </select>
+    </div>
+    
+    <button type="submit">Valider</button>
+</form>
