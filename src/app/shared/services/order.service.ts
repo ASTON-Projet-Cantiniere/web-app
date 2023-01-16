@@ -8,8 +8,7 @@ import {newOrder, Order, Quantity} from '../models/order.model';
 @Injectable({providedIn: 'root'})
 export class OrderService {
 
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient) {}
   /**
    * Affiche toutes les commandes
    * @returns Observable

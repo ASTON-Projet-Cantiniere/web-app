@@ -2,7 +2,7 @@ import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {Image} from '@shared/models/image.model';
-import {Menu} from '@shared/models/menu.model';
+import {AddMenu, Menu} from '@shared/models/menu.model';
 
 @Injectable({providedIn: 'root'})
 export class MenuService {
@@ -75,7 +75,18 @@ export class MenuService {
    * Ajoute un menu
    * @return { Menu }
    */
-  addMenu(menu: Menu): Observable<Menu> {
-    return this.http.post<Menu>('/menu/add', menu);
+  addMenu(menu: AddMenu): Observable<Menu> {
+    console.log(menu);
+    
+    return this.http.put<Menu>('/menu/add', menu);
+  }
+
+  /**
+   * Supprime un menu de la base de données selon son id
+   * @param menuId 
+   * @returns 
+   */
+  deleteMenu(menuId: number){
+    return this.http.delete<Menu>(`/menu/delete/${menuId}`);
   }
 }
