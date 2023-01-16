@@ -7,6 +7,7 @@ import {OrdersComponent} from "./profile/orders/orders.component";
 import {AuthGuard} from '@core/guards/auth.guard';
 import {EditComponent} from "@views/auth/profile/edit/edit.component";
 import {SignoutComponent} from "@views/auth/signout/signout.component";
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 export const AuthRoutes: Routes = [
   {
@@ -15,7 +16,8 @@ export const AuthRoutes: Routes = [
       {path: 'signin',component: SigninComponent},
       {path: 'signup',component: SignupComponent},
       {path: 'signout',component: SignoutComponent},
-      {path: '**',redirectTo: 'signin'}
+      {path: '**',redirectTo: 'signin'},
+      {path: 'password',component: ForgotPasswordComponent},
     ],
     canActivateChild: [AuthGuard]
   },

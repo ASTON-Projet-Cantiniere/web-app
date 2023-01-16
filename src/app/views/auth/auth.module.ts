@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule} from '@angular/router';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import {AuthRoutes} from './auth.routing';
 import {SharedModule} from '@shared/shared.module';
 import {SigninComponent} from './signin/signin.component';

@@ -131,6 +131,11 @@ export class UserService {
   public checkPassword(id: number, password: string): Observable<any> {
     return this.http.get<any>('/user/checkpassword/' + id + '?password=' + password);
   }
+
+
+  public sendMailPassword(mail: string): Observable<any> {
+    return this.http.post<any>(`forgotpassword?email=${mail}`,null);
+  }
 }
 
   
