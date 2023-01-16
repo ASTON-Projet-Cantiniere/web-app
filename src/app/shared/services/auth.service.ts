@@ -2,8 +2,8 @@ import {Injectable, OnDestroy} from '@angular/core';
 import {HttpClient, HttpResponse} from "@angular/common/http";
 import Credential from "@shared/models/credentials.model";
 import {RegisterCredentials} from "@shared/models/register-credentials.model";
-import {catchError, Observable, Subject, Subscription, takeUntil, tap} from 'rxjs';
-import {TokenService} from "./token.service";
+import {Observable, Subject, Subscription, takeUntil, tap} from 'rxjs';
+import {TokenService} from "@core/services/token.service";
 import {BroadcasterService} from "@core/services/broadcaster.service";
 import {CONSTANTS} from "@core/constants";
 import {User} from "@shared/models/user.model";
@@ -35,11 +35,14 @@ export class AuthService implements OnDestroy {
    * @return {Observable<HttpResponse<Object>>}
    */
   public signUp(registerCredential: RegisterCredentials): Subscription {
-    return this.http.post<RegisterCredentials>('/register', registerCredential).pipe(
-      catchError((error) => {
-          throw new Error('Error while signing up ' + error);
-        },
-      )).subscribe();
+    return this.http.post<HttpResponse<RegisterCredentials>>('/user/register', registerCredential).pipe(
+      tap((res: HttpResponse<RegisterCredentials>) => {
+        // Redirect the user to the login page
+        this.router.navigate(['/account/login']);
+        // Display a success message
+        this.toastr.success('Inscription réussie');
+      })
+    ).subscribe();
   }
 
   /**
@@ -62,11 +65,9 @@ export class AuthService implements OnDestroy {
           this.emitUserState(token);
           // We redirect the user to the home page
           this.router.navigate(['/']);
+          // We display a success message
           this.toastr.success('Vous-êtes connecté');
         }
-      }),
-      catchError((error) => {
-        throw new Error('Error while signing in ' + error);
       }),
     ).subscribe();
   }
@@ -148,10 +149,32 @@ export class AuthService implements OnDestroy {
     return decodedToken.exp! < Date.now() / 1000; // convert to seconds
   }
 
+  /**
+   * This method is used to update the user state with the new user
+   * @param user
+   */
+  public updateUserInfo(user: User) {
+    this.user = user;
+    this.emitUserState();
+  }
+
+  public gotoSignIn() {
+    this.router.navigate(['account/login']);
+  }
+
+  public gotoSignUp() {
+    this.router.navigate(['account/signup']);
+  }
+
+  /**
+   * This method is used to init the user state at the launch of the service
+   * @private
+   */
   private initUserState() {
     const token = TokenService.getToken();
     if (token) {
       if (this.tokenIsExpired(token)) {
+        this.toastr.warning('Votre session a expiré');
         this.signOut();
       } else {
         this.emitUserState(token);
@@ -167,4 +190,3 @@ export class AuthService implements OnDestroy {
     this.broadcaster.broadcast(CONSTANTS.USER_STATE, undefined);
   }
 }
-

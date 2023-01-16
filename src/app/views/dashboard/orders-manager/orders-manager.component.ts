@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {OrderInterface} from "@shared/models/order.model";
+import {newOrder, Order, Quantity} from "@shared/models/order.model";
 import {Meal} from "@shared/models/meal.model";
 import {Menu} from "@shared/models/menu.model";
-import {OrderService} from "@shared/services/manager/order.service";
-import {MealService} from "@shared/services/manager/meal.service";
-import {MenuService} from "@shared/services/manager/menu.service";
+import {OrderService} from "@shared/services/order.service";
+import {MealService} from "@shared/services/meal.service";
+import {MenuService} from "@shared/services/menu.service";
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {FormControl} from "@angular/forms";
 
@@ -15,10 +15,10 @@ import {FormControl} from "@angular/forms";
   styleUrls: ['./orders-manager.component.scss']
 })
 export class OrdersManagerComponent implements OnInit {
-  
+
   public selected: string = 'meals';
-  
-  orders: OrderInterface[] = [];
+
+  orders: Order[] = [];
   meals: Meal[] = [];
   menus: Menu[] = [];
 
@@ -26,7 +26,7 @@ export class OrdersManagerComponent implements OnInit {
   public formAdd!: FormGroup;
 
   constructor(private orderService: OrderService, private mealService: MealService, private menuService: MenuService, private fb: FormBuilder){}
-  
+
   ngOnInit(): void {
     this.formSearchByDate = new FormGroup({
       status: new FormControl(),
@@ -77,22 +77,18 @@ export class OrdersManagerComponent implements OnInit {
       control.removeAt(0)
     }
     console.log(this.quantity);
-    
+
   }
   /**
    * Créer une commande
    */
   public addOrder(){
     console.log(this.formAdd);
-    this.orderService.createOrder(this.formAdd.value.userId, this.formAdd.value.constraintId, ...this.formAdd.value.quantity).subscribe();
-    console.log({
-      "userId": this.formAdd.value.userId,
-      "constraintId": this.formAdd.value.constraintId,
-      "quantity": [
-        ...this.formAdd.value.quantity
-      ]
-    });
-    
+    this.orderService.createOrder({
+      userId: this.formAdd.value.userId,
+      constraintId: this.formAdd.value.constraintId,
+      quantity: this.formAdd.value.quantity
+    } as newOrder).subscribe();
   }
 
   /**
@@ -115,7 +111,7 @@ export class OrdersManagerComponent implements OnInit {
     this.orders = [];
     console.log("j'ai cliqué");
     console.log(orderId);
-    
+
     this.orderService.findOrder(orderId).subscribe(
       r => {
         this.orders.push(r);
@@ -130,6 +126,6 @@ export class OrdersManagerComponent implements OnInit {
   public cancelOrder(id: number){
     this.orderService.cancelOrder(id).subscribe();
     console.log(id);
-    
+
   }
 }

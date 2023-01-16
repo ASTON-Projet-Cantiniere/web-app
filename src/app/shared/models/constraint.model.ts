@@ -1,4 +1,4 @@
-export interface ConstraintInterface {
+export interface Constraint {
   id?: number,
   orderTimeLimit: string,
   maximumOrderPerDay: number,

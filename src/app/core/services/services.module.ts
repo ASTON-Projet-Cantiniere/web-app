@@ -1,7 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {BroadcasterService} from "./broadcaster.service";
-import {AuthService} from "./auth.service";
 import {TokenService} from "./token.service";
 
 @NgModule({
@@ -11,7 +10,6 @@ import {TokenService} from "./token.service";
   ],
   providers: [
     BroadcasterService,
-    AuthService,
     TokenService
   ]
 })

@@ -14,7 +14,7 @@ import {ToastrModule} from "ngx-toastr";
     BrowserAnimationsModule,
     ToastrModule.forRoot({
       timeOut: 2000,
-      positionClass: 'toast-bottom-full-width',
+      positionClass: 'toast-top-full-width',
     }),
   ],
   exports: [

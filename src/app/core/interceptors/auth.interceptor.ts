@@ -8,7 +8,7 @@ import {
   HttpRequest
 } from '@angular/common/http';
 import {catchError, Observable, throwError} from 'rxjs';
-import {AuthService} from "@core/services/auth.service";
+import {AuthService} from "@shared/services/auth.service";
 import {ToastrService} from "ngx-toastr";
 
 /**
@@ -52,8 +52,15 @@ class AuthInterceptor implements HttpInterceptor {
       } else {
         switch (error.status) {
           case 401: // Unautorized
-            this.toastr.error('Authorization Error');
-            this.authService.signOut();
+            if (!req.url.endsWith('/login')) {
+              this.authService.signOut();
+              this.toastr.error('Vous n\'êtes pas autorisé à accéder à cette page');
+            } else {
+              this.toastr.error('Identifiant ou mot de passe incorrect');
+            }
+            break;
+          case 400: // Bad request
+            this.toastr.error('Le formulaire n\'est pas valide');
             break;
           case 403: // Forbidden
             this.toastr.error('Erreur. Vous n\'avez pas les droits pour accéder à cette ressource');
@@ -61,11 +68,20 @@ class AuthInterceptor implements HttpInterceptor {
           case 404: // Not found
             this.toastr.error('Erreur. La ressource demandée n\'existe pas');
             break;
-          case 503: // Server error
-            this.toastr.error('Erreur. Le serveur est indisponible');
-            break;
           case 408: // Timeout handling
             this.toastr.error('Erreur. Le serveur ne répond pas');
+            break;
+          case 412: // Precondition failed
+            if (req.url.endsWith('/register')) {
+              this.toastr.error('Erreur. Un utilisateur avec cet email existe déjà');
+            } else {
+            }
+            break;
+          case 500: // Internal server error
+            this.toastr.error('Erreur. Une erreur est survenue sur le serveur');
+            break;
+          case 503: // Server error
+            this.toastr.error('Erreur. Le serveur est indisponible');
             break;
           default: // Other errors
             break;
@@ -74,7 +90,7 @@ class AuthInterceptor implements HttpInterceptor {
     } else {
       console.log('An error occurred');
     }
-    return throwError(() => new Error(error.statusText));
+    return throwError(() => new Error(error));
   }
 }
 

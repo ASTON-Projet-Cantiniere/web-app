@@ -1,0 +1,46 @@
+
+.grid {
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  flex: 1;
+}
+
+.card {
+  position: relative;
+  vertical-align: top;
+  align-self: center;
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 5px;
+  padding: 10px;
+  width: 280px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+  rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  animation: show 0.4s ease;
+}
+
+img {
+  border-radius: 10px;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
