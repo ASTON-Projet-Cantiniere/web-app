@@ -39,7 +39,7 @@ export class CartComponent {
   }
 
   public days(): WeekDay[] {
-    return ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'] as WeekDay[];
+    return [...Object.values(WeekDay)];
   }
 
   private round2Decimals(value: number): number {
@@ -55,6 +55,7 @@ export class CartComponent {
     // if user is not logged in, redirect to login page
     if (!this.authService.isAuthentified()) {
       this.authService.gotoSignIn();
+      this.toastr.error('Vous devez être connecté pour valider votre commande');
       return;
     }
     // if cart is empty, show a message
@@ -63,7 +64,7 @@ export class CartComponent {
       return;
     }
     // if user wallet is not enough, show a message
-    const user = this.authService.getUser();
+    let user = this.authService.getUser();
     if (user) {
       if (user.wallet < this.getTotalPrice()) {
         this.toastr.warning('Votre porte-monnaie est insuffisant');
