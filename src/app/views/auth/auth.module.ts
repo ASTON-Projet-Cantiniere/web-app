@@ -11,6 +11,7 @@ import {EditComponent} from './profile/edit/edit.component';
 import {CommonModule} from "@angular/common";
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {SignoutComponent} from './signout/signout.component';
+import { PasswordComponent } from './profile/password/password.component';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import {SignoutComponent} from './signout/signout.component';
     OrdersComponent,
     EditComponent,
     SignoutComponent,
+    PasswordComponent,
   ],
   providers: [],
 })

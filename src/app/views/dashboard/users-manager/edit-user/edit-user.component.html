@@ -1,6 +1,6 @@
 <div class="card">
     <form [formGroup]="form_user" (ngSubmit)="onClickSubmit(form_user.value)">
-        <h2>Modifier mon profil</h2>
+        <h2>Modifier le profil de {{user.firstname}}</h2>
         <div class="container">
             <label for="email">Email</label>
             <input type="email" class="form-control" id="email" placeholder="{{user.email}}" formControlName="email">
@@ -15,8 +15,9 @@
 
             <br>
             <label for="phone">Téléphone</label>
-            <input type="text" class="form-control" id="phone" placeholder="{{user.firstname}}" formControlName="phone">
-            <button class="submit" type="submit">Modifier</button><br>
+            <input type="text"  class="form-control" id="phone" placeholder="{{user.phone}}" formControlName="phone" >
+            
+            <button class="submit" type="submit" [disabled]="!form_user.valid">Modifier</button><br>
         </div>
     </form>
     <button class='retour' [routerLink]="['../']">Retour</button>
@@ -26,9 +27,9 @@
     <h2>Wallet</h2>
     <div class="container">
         <p>Le wallet : {{user.wallet}}</p>
-        <input type="number" [(ngModel)]="montant" placeholder="Montant">
-        <button class="submit" (click)="addMoney(montant)">Ajouter</button>
-        <button class="submit" (click)="removeMoney(montant)">Retirer</button>
+        <input type="number" [(ngModel)]="montant" placeholder="Montant" pattern="">
+        <button class="credit" (click)="addMoney(montant)">Ajouter</button>
+        <button class="debit" (click)="removeMoney(montant)">Retirer</button>
     </div>
 
 </div>

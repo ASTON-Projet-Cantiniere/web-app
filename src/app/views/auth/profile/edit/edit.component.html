@@ -15,7 +15,20 @@
         <br>
         <label for="phone">Téléphone</label>
         <input type="text" class="form-control" id="phone" placeholder="Téléphone" formControlName="phone">
-    <button class="submit" type="submit">Enregistrer</button><br>
+
+
+    <!-- <div class="container">
+      <h3>Mon adresse</h3>
+      <label for="address">Adresse</label>
+      <input type="text" class="form-control" id="address" placeholder="Adresse" formControlName="address">
+      <br>
+      <label for="city">Ville</label>
+      <input type="text" class="form-control" id="city" placeholder="Ville" formControlName="city">
+      <br>
+      <label for="postalCode">Code postal</label>
+      <input type="text" class="form-control" id="postalCode" placeholder="Code postal" formControlName="postalCode">
+    </div> -->
+    <button class="submit" type="submit" [disabled]="!userProfileForm.valid">Enregistrer</button><br>
   </div>
 </form>
 

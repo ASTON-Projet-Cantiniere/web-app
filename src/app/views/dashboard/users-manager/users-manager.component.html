@@ -2,15 +2,14 @@
   <h2>Dashboard</h2>
   <form (ngSubmit)="getUserById(id)">
     <input type="text" name="id" [(ngModel)]="id" placeholder="id">
-    <button type="submit">Chercher</button>
+    <button  class="chercher" type="submit" >Chercher</button>
   </form>
-  <button (click)="getUsers()">Afficher tous les utilisateurs</button>
 </div>
 
 
 <div class="array">
-<table class="array_crud">
-  <tr>
+<table>
+  <tr class="head">
     <th>id</th>
     <th>nom</th>
     <th>prenom</th>
@@ -19,14 +18,14 @@
   </tr>
 
 <!-- TODO : AFFICHER QUE LES USER QUI ONT UN STATUT N'ETANT PAS = 2 -->
-  <tr *ngFor="let user of users">
+  <tr class="user"*ngFor="let user of users">
     <td>{{user.id}}</td>
     <td>{{user.name}}</td>
     <td>{{user.firstname}}</td>
     <td>{{user.wallet}}</td>
     <td>
-      <button [routerLink]="[user.id]">modifier</button>
-      <button (click)="deleteUser(user.id)">supprimer</button>
+      <button class="modifier"[routerLink]="[user.id]">modifier</button>
+      <button class="supprimer"(click)="deleteUser(user.id)">supprimer</button>
     </td>
   </tr>
 </table>

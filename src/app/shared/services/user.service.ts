@@ -91,7 +91,7 @@ export class UserService {
    * @returns Les informations de l'utilisateurs
    */
   public postUserCredit(id: number, amount: number): Observable<User | HttpError> {
-    return this.http.post<User | HttpError>('/user/credit/' + id, amount);
+    return this.http.post<User>(`/user/credit/${id}?amount=${amount}`,null);
   }
 
   /**
@@ -101,7 +101,7 @@ export class UserService {
    * @returns Les informations de l'utilisateurs
    */
   public postUserDebit(id: number, amount: number): Observable<User | HttpError> {
-    return this.http.post<User | HttpError>('/user/debit/' + id, amount);
+    return this.http.post<User | HttpError>(`/user/debit/${id}?amount=${amount}`,null);
   }
 
   /**
@@ -121,4 +121,17 @@ export class UserService {
   public putregisterUser(user: any): Observable<any> {
     return this.http.put<any>('/user/register', user);
   }
+
+  /**
+   * Permet de vérifier le mot de passe de l'utilisateur
+   * @param id number, id de l'utilisateur
+   * @param password string, le mot de passe de l'utilisateur
+   * @returns Les informations de l'utilisateurs
+    */
+  public checkPassword(id: number, password: string): Observable<any> {
+    return this.http.get<any>('/user/checkpassword/' + id + '?password=' + password);
+  }
 }
+
+  
+
