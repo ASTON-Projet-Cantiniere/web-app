@@ -3,7 +3,7 @@ import {Menu} from "@shared/models/menu.model";
 import {BroadcasterService} from "@core/services/broadcaster.service";
 import {map, Observable, Subject, takeUntil} from "rxjs";
 import {CONSTANTS} from "@core/constants";
-import {WeekDay, CartItem} from "@shared/models/cart-item.model";
+import {CartItem, WeekDay} from "@shared/models/cart-item.model";
 
 @Injectable({providedIn: 'root'})
 export class CartService implements OnDestroy {
@@ -85,12 +85,19 @@ export class CartService implements OnDestroy {
   }
 
   /**
-   * Remove a menu from the cart.
+   * Remove a item from the cart.
    * @param item
    */
   removeItemFromCart(item: CartItem) {
     const cart = this.readCartInLocalStorage();
-    const index = cart.findIndex((cartItem) => cartItem.menu.id === item.menu.id);
+    const index = cart.findIndex((cartItem) => {
+      if (cartItem.menu) {
+        return cartItem.menu.id === item.menu?.id ?? -1;
+      } else if (cartItem.meal) {
+        return cartItem.meal.id === item.meal?.id ?? -1;
+      }
+      return null;
+    });
     cart.splice(index, 1);
     this.writeCartInLocalStorage(cart);
   }
@@ -100,16 +107,31 @@ export class CartService implements OnDestroy {
    * @return {number}
    */
   getTotalPrice(): number {
-    return this.cart.reduce((total, cartItem) => total + cartItem.menu.priceDF * cartItem.quantity, 0);
+    // check for each item if it is a menu or a meal and calculate the price accordingly
+    return this.cart.reduce((total, cartItem) => {
+      if (cartItem.menu) {
+        return total + cartItem.menu.priceDF * cartItem.quantity;
+      } else if (cartItem.meal) {
+        return total + cartItem.meal!.priceDF * cartItem.quantity;
+      }
+      return total;
+    }, 0);
   }
 
   /**
    * Get the total quantity of a menu in the cart.
-   * @param menu
+   * @param item
    * @return {number}
    */
   getTotalQuantity(item: CartItem): number {
-    return this.readCartInLocalStorage().filter((cartItem) => cartItem.menu.id === item.menu.id).length;
+    return this.cart.reduce((total, cartItem) => {
+      if (cartItem.menu) {
+        return cartItem.menu.id === item.menu?.id ? total + cartItem.quantity : total;
+      } else if (cartItem.meal) {
+        return cartItem.meal.id === item.meal?.id ? total + cartItem.quantity : total;
+      }
+      return total;
+    }, 0);
   }
 
   /**
@@ -117,7 +139,8 @@ export class CartService implements OnDestroy {
    * @param day
    * @return {Menu[]}
    */
-  getItemsByDay(day: WeekDay): CartItem[] {
+  getItemsByDay(day: WeekDay):
+    CartItem[] {
     return this.cart.filter((cartItem) => cartItem.day === day);
   }
 

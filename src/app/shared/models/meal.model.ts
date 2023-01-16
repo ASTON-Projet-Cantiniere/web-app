@@ -1,3 +1,5 @@
+import {WeekDay} from "@shared/models/cart-item.model";
+
 export interface Meal {
   id?: number;
   label: string;
@@ -31,8 +33,6 @@ export type DayMeal = {
 }
 
 export type WeekMeals = {
-  day: string,
+  day: WeekDay,
   meals: Meal[]
 }
-
-export const WeekDays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];

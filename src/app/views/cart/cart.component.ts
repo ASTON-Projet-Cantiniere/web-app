@@ -19,8 +19,7 @@ export class CartComponent {
     private toastr: ToastrService,
     private authService: AuthService,
     private orderService: OrderService) {
-    this.cartService.listenCartState().subscribe((cart: CartItem[]) => this.cart = cart);
-
+    this.cart = this.cartService.getCart();
   }
 
   public removeItemFromCart(item: CartItem) {
@@ -28,7 +27,7 @@ export class CartComponent {
   }
 
   public getTotalPrice(): number {
-    return this.cartService.getTotalPrice();
+    return this.round2Decimals(this.cartService.getTotalPrice());
   }
 
   public getTotalQuantity(item: CartItem): number {
@@ -40,12 +39,16 @@ export class CartComponent {
   }
 
   public days(): WeekDay[] {
-    return [...Object.values(WeekDay)]
+    return ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi'] as WeekDay[];
+  }
+
+  private round2Decimals(value: number): number {
+    return Math.round(value * 100) / 100;
   }
 
   public wallet(): number {
     const user = this.authService.getUser();
-    return user ? user.wallet : 0;
+    return user ? this.round2Decimals(user.wallet) : 0;
   }
 
   public validOrder() {
@@ -72,8 +75,8 @@ export class CartComponent {
         constraintId: -1,
         quantity: this.cart.map((item: CartItem) => {
           return {
-            // mealId: item.meal.id,
-            menuId: item.menu.id,
+            mealId: item.meal?.id,
+            menuId: item.menu?.id,
             quantity: item.quantity
           }
         })} as newOrder).subscribe(() => {
