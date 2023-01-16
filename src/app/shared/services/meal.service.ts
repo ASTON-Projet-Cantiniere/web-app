@@ -1,8 +1,8 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/internal/Observable';
-import {Image} from '../models/image.model';
-import {Meal} from '../models/meal.model';
+import {Image} from '@shared/models/image.model';
+import {Meal} from '@shared/models/meal.model';
 
 @Injectable({providedIn: 'root'})
 export class MealService {
@@ -40,7 +40,7 @@ export class MealService {
    * @return { Meal } le plat ajouté
    */
   addMeal(meal: Meal): Observable<Meal> {
-    return this.http.post<Meal>(`/meal/add`, meal);
+    return this.http.put<Meal>(`/meal/add`, meal);
   }
 
   /**
@@ -67,5 +67,40 @@ export class MealService {
    */
   getAllMealAvailableForToday(): Observable<Meal[]> {
     return this.http.get<Meal[]>('/meal/findallavailablefortoday');
+  }
+
+  /**
+   * récupère tous les plats disponible par le jour de la semaine dans l'année
+   * @param {numer} week number of the week
+   * @param {number} day number of the day in the week
+   * @returns
+   */
+  getMealAvailableForWeekAndDay(week: number, day: number, category?: number): Observable<Meal[]> {
+    if(category) {
+      return this.http.get<Meal[]>('/meal/findallavailableforweekandday/'+week+'/'+day+'?category='+category);
+    }
+    return this.http.get<Meal[]>('/meal/findallavailableforweekandday/'+week+'/'+day);
+  }
+
+  /**
+   * récupère les plats disponibles pout la semaine
+   * @param {number} week number of the week
+   * @returns
+   */
+  getAllMealAvailableForWeek(week: number, category?: number): Observable<Meal[]> {
+    if(category) {
+      return this.http.get<Meal[]>('/meal/findallavailableforweek/'+week+'?category=' + category);
+    }
+    return this.http.get<Meal[]>('/meal/findallavailableforweek/'+week);
+  }
+
+  /**
+   * met à jour un plat
+   * @param {number} id l'id du plat à mettre à jour
+   * @param {Meal} meal le plat modifié
+   * @returns
+   */
+  updateMeal(id: number, meal: Meal): Observable<Meal> {
+    return this.http.patch<Meal>('/meal/update/'+id, meal);
   }
 }
