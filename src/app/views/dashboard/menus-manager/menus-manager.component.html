@@ -46,11 +46,11 @@
                 <div class="formRow">
                     <div class="tiny-column">
                         <label for="week">Week: </label>
-                        <input id="week" type="number" formControlName="week"> 
+                        <input id="week" type="number" formControlName="week">
                     </div>
                     <div class="tiny-column">
                         <label for="day">Day: </label>
-                        <input id="day" type="number" formControlName="day"> 
+                        <input id="day" type="number" formControlName="day">
                     </div>
                 </div>
             </div>
@@ -58,11 +58,11 @@
 
 
         <div formArrayName="mealIds">
-            <div class="column" *ngFor="let mealIds of mealIds.controls; let i=index" [formGroupName]="i">
+            <div class="column" *ngFor="let mealId of mealIds.controls; let i=index" [formGroupName]="i">
                 <div class="formRow">
                     <div class="tiny-column">
                         <label for="meal">Meal: </label>
-                        <select name="" id="meal">
+                        <select name="" id="meal" formControlName="id">
                             <option *ngFor="let meal of mealList" value="{{meal.id}}">{{meal.label}}</option>
                         </select> 
                     </div>
@@ -71,6 +71,10 @@
         </div>
         
     </form>
+
+
+
+
     <h2>Menus:</h2>
     <div class="list">
         <div *ngFor="let menu of menus">

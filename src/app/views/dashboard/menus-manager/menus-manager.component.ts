@@ -5,6 +5,7 @@ import { Meal } from '@shared/models/meal.model';
 import { MealService } from '@shared/services/meal.service';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {FormControl} from "@angular/forms";
+import { tap } from 'rxjs';
 @Component({
   selector: 'app-menus-manager',
   templateUrl: './menus-manager.component.html',
@@ -55,11 +56,14 @@ export class MenusManagerComponent implements OnInit{
     this.availableForWeeksAndDays.push(availableForm);
     console.log(availableForm);
   }
+  
   /**
    * Ajoute un plat au menu en cours de création
    */
   public addMeals() {
-    const ids = this.fb.group([]);
+    const ids = this.fb.group({
+        id: [1]
+      });
     this.mealIds.push(ids);
     console.log(ids);
   }
@@ -68,6 +72,8 @@ export class MenusManagerComponent implements OnInit{
    * Ajoute un menu à la base de données
    */
   public addMenu(){
+    console.log(...this.formAdd.value.mealIds);
+    
     this.menuService.addMenu({
       "description": this.formAdd.value.description,
       "label": this.formAdd.value.label,
@@ -80,7 +86,7 @@ export class MenusManagerComponent implements OnInit{
       "availableForWeeksAndDays": {
         "values": [...this.formAdd.value.availableForWeeksAndDays]
       },
-      "mealIds": this.formAdd.value.mealIds.value
+      "mealIds": [...this.formAdd.value.mealIds]
     }).subscribe();
   }
 
@@ -89,6 +95,10 @@ export class MenusManagerComponent implements OnInit{
    * @param menuId number
    */
   public removeMenu(menuId: number){
-    this.menuService.deleteMenu(menuId).subscribe();
+    this.menuService.deleteMenu(menuId).pipe(
+      tap(() => {
+        this.menus = this.menus.filter(menu => menu.id !== menuId);
+      }
+    )).subscribe();
   }
 }
