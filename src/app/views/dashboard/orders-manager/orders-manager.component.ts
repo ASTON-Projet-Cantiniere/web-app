@@ -128,4 +128,8 @@ export class OrdersManagerComponent implements OnInit {
     console.log(id);
 
   }
+
+  deliverOrder(id: number) {
+    this.orderService.deliverOrder(id).subscribe();
+  }
 }

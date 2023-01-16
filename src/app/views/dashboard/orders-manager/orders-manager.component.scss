@@ -107,7 +107,7 @@ form {
   border-radius: 1rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
   position: relative;
-  margin: 5px 0;
+  margin: 1rem 0;
 }
 
 .topInfos {
@@ -176,4 +176,15 @@ form {
     flex-direction: column;
     gap: 0.5rem;
   }
+}
+
+.deliver-btn {
+  background-color: rgb(0, 0, 0, .6);
+  color: white;
+  padding: 5pt 10pt;
+  border-radius: 1rem;
+  border: none;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

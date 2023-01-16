@@ -169,7 +169,6 @@
                           <a class="cancelButton" (click)="cancelOrder(order.id)">x</a>
                           <p>Aucun plat commandé</p>
                       </section>
-
                   </ng-template>
 
 
@@ -181,8 +180,7 @@
                           At: {{ order.creationTime }} // {{ order.creationDate }}
                       </span>
                   </section>
-
-
+                <button class="deliver-btn" (click)="deliverOrder(order.id)">Livré</button>
               </div>
             </div>
       </section>
