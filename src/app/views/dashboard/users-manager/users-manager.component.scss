@@ -1,68 +1,121 @@
 .horizontal-card {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    transition: 0.3s;
-    border-radius: 5px;
-    /* 5px rounded corners */
-    height: 100px;
-    width: 400px;
+  transition: 0.3s;
+  max-width: 80rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border-radius: 2rem;
+  border: 2px solid rgba(48, 29, 9, 0.05);
+  box-shadow: 0 0 10px 0 rgba(48, 29, 9, 0.05);
+  display: flex;
+  flex-direction: column;
+  h2 {
+    text-align: center;
+  }
 
-    h2 {
-        text-align: center;
-    }
+  label {
+    font-size: 12px;
+  }
 
-    label {
-        font-size: 12px;
-    }
+  input {
+    margin-top: 25px;
+  }
 
-    input {
-        margin-top: 25px;
-    }
-
-    margin : auto;
-    margin-top: 35px;
-    
-
+  margin: auto;
+  margin-top: 35px;
 }
 
-/* Effet Simple */
-.horizontal-card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-}
-
-.array{
+.array {
   margin-top: 25px;
 
 }
 
-.modifier{
-    color: white;
-    background-color: rgb(0, 255, 42);
-    padding: 7px 16px;
-    margin-right: 10px;
-    border-radius: 5px;
-}
-.supprimer{
-    color: white;
-    background-color: rgb(255, 0, 0);
-    padding: 7px 16px;
-    border-radius: 5px;
+.modifier {
+  background-color: rgba(143, 143, 143, 0.12);
+  color: #575757;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: rgba(143, 143, 143, 0.12);
+    color: #575757;
+  }
 }
 
-.chercher{
-    color: white;
-    background-color: rgba(0, 85, 255, 0.813);
-    padding: 5px 8px;
-    margin-left: 10px;
-    border-radius: 5px;
+.supprimer {
+  background-color: rgba(246, 97, 97, 0.12);
+  color: #f66161;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: rgba(246, 97, 97, 0.08);
+    color: rgba(246, 97, 97, 0.68);
+  }
 }
 
-.refresh{
-    color: white;
-    background-color: rgba(26, 200, 188, 0.813);
-    padding: 5px 8px;
-    margin-left: 10px;
-    border-radius: 5px;
+input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  padding: 8px;
+  margin-right: 10px;
 }
 
+.chercher {
+  background-color: rgba(97, 167, 246, 0.22);
+  color: #61a7f6;
+  border: none;
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  padding:8px;
+
+  &:hover {
+    background-color: rgba(97, 167, 246, 0.14);
+    color: rgb(97, 167, 246);
+  }
+}
+
+.btn-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  gap: 1rem;
+}
+
+.refresh {
+  color: white;
+  background-color: rgba(26, 200, 188, 0.813);
+  padding: 5px 8px;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 90%;
+  margin-top: 25px;
+  // center
+  margin-left: auto;
+  margin-right: auto;
+
+  th, td {
+    text-align: left;
+    padding: 4px;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f27f;
+  }
+}
 
 

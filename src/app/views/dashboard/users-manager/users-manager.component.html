@@ -1,34 +1,33 @@
 <div class="horizontal-card">
-  <h2>Dashboard</h2>
+  <h2>Utilisateurs</h2>
   <form (ngSubmit)="getUserById(id)">
     <input type="text" name="id" [(ngModel)]="id" placeholder="id">
-    <button  class="chercher" type="submit" >Chercher</button>
+    <button class="chercher" type="submit">Chercher</button>
   </form>
+
+  <div class="array">
+    <table>
+      <tr class="head">
+        <th>id</th>
+        <th>nom</th>
+        <th>prenom</th>
+        <th>Wallet</th>
+        <th>Action</th>
+      </tr>
+      <!-- TODO : AFFICHER QUE LES USER QUI ONT UN STATUT N'ETANT PAS = 2 -->
+      <tr class="user" *ngFor="let user of users">
+        <td>{{user.id}}</td>
+        <td>{{user.name}}</td>
+        <td>{{user.firstname}}</td>
+        <td>{{user.wallet}}</td>
+        <td class="btn-container">
+          <button class="modifier" [routerLink]="[user.id]">modifier</button>
+          <button class="supprimer" (click)="deleteUser(user.id)">supprimer</button>
+        </td>
+      </tr>
+    </table>
+
+  </div>
 </div>
 
-
-<div class="array">
-<table>
-  <tr class="head">
-    <th>id</th>
-    <th>nom</th>
-    <th>prenom</th>
-    <th>Wallet</th>
-    <th>Action</th>
-  </tr>
-
-<!-- TODO : AFFICHER QUE LES USER QUI ONT UN STATUT N'ETANT PAS = 2 -->
-  <tr class="user"*ngFor="let user of users">
-    <td>{{user.id}}</td>
-    <td>{{user.name}}</td>
-    <td>{{user.firstname}}</td>
-    <td>{{user.wallet}}</td>
-    <td>
-      <button class="modifier"[routerLink]="[user.id]">modifier</button>
-      <button class="supprimer"(click)="deleteUser(user.id)">supprimer</button>
-    </td>
-  </tr>
-</table>
-
-</div>
 
